@@ -25,10 +25,10 @@ jobs:
       - name: 🔐 シークレットから認証ファイルを作成
         working-directory: app
         run: |
-          echo "${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}" > credentials.prod.json
+          echo "${{ secrets.GOOGLE_CREDENTIALS_PATH_PROD }}" > credentials.prod.json
 
       - name: 📊 天気データを記録
-        working-directory: app
+        working-directory: app    
         env:
           APP_ENV: prod
           OPENWEATHER_API_KEY_PROD: ${{ secrets.OPENWEATHER_API_KEY_PROD }}
