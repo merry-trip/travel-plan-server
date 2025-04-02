@@ -1,0 +1,26 @@
+# node_modules（インストールされたライブラリ）
+node_modules/
+
+# 環境変数ファイル（APIキーなど）
+.env
+
+# ログや一時ファイル
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code の設定（個人差があるので除外）
+.vscode/
+
+# WordPress バックアップ・プラグイン関係
+public/wp-content/uploads/backwpup/
+public/wp-content/uploads/backwpup-restore/
+public/wp-content/languages/plugins/backwpup-ja.*
+public/wp-content/plugins/backwpup/
+
+# WordPressの機密ファイル（誤って追加防止）
+public/wp-config.php
+
+# 認証情報（重要）
+credentials*.json
