@@ -48,6 +48,56 @@ const auth = new google.auth.GoogleAuth({
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
+// スプレッドシートから既存の日時リストを取得（A列のみ）
+async function getExistingTimestampsWithRowNumbers() {
+  const client = await auth.getClient();
+  const sheets = google.sheets({ version: 'v4', auth: client });
+
+  const res = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `${sheetName}!A2:A`,  // A列だけ（ヘッダーは除く）
+  });
+
+  const values = res.data.values || [];
+
+  // 戻り値：{ "2025-04-04 03:00:00": 2, ... }
+  const map = {};
+  values.forEach((row, index) => {
+    const dt = row[0];
+    if (dt) {
+      map[dt] = index + 2; // +2 → スプレッドシートは1行目がヘッダー、+1で2行目以降
+    }
+  });
+
+  return map;
+}
+
+// 特定の行番号を削除（複数行一気に削除）
+async function deleteRows(rowNumbers) {
+  if (rowNumbers.length === 0) return;
+
+  const client = await auth.getClient();
+  const sheets = google.sheets({ version: 'v4', auth: client });
+
+  const requests = rowNumbers.sort((a, b) => b - a).map(row => ({
+    deleteDimension: {
+      range: {
+        sheetId: 0, // NOTE: 通常は最初のシートID = 0（固定でOK）で動きます
+        dimension: 'ROWS',
+        startIndex: row - 1,  // 0-based index
+        endIndex: row
+      }
+    }
+  }));
+
+  await sheets.spreadsheets.batchUpdate({
+    spreadsheetId,
+    requestBody: { requests }
+  });
+
+  console.log(`🧹 古いデータ（${rowNumbers.length}件）を削除しました`);
+}
+
 // 複数行の天気データをスプレッドシートに追加
 async function appendWeatherRows(rows) {
   const client = await auth.getClient();
