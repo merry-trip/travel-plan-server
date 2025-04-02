@@ -115,4 +115,9 @@ async function appendWeatherRows(rows) {
   console.log(`✅ スプレッドシートに ${rows.length} 行の天気データを追加しました！（環境: ${appEnv}）`);
 }
 
-module.exports = { appendWeatherRows };
+module.exports = {
+  appendWeatherRows,
+  getExistingTimestampsWithRowNumbers,
+  deleteRows
+};
+
