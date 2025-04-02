@@ -8,7 +8,7 @@ const appEnv = process.env.APP_ENV || 'dev';
 
 // 認証ファイルのパスを切り替え
 const keyFilePath = appEnv === 'prod'
-  ? process.env.GOOGLE_CREDENTIALS_PATH_PROD
+  ? process.env.GOOGLE_CREDENTIALS_JSON_PROD
   : process.env.GOOGLE_CREDENTIALS_PATH_DEV;
 
 // スプレッドシートのIDとシート名を切り替え
