@@ -28,7 +28,7 @@ const sheetName = appEnv === 'prod'
 
 // 認証の設定（Google公式）
 const auth = new google.auth.GoogleAuth({
-  keyFile: keyFilePath
+  keyFile: keyFilePath,
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
