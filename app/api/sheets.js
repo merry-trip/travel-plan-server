@@ -11,10 +11,26 @@ let keyFilePath;
 
 if (appEnv === 'prod') {
   const jsonContent = process.env.GOOGLE_CREDENTIALS_JSON_PROD;
+
+  // 🔍 ログを追加（先頭だけ安全に表示）
+  console.log('🧪 GOOGLE_CREDENTIALS_JSON_PROD の先頭20文字：');
+  console.log(jsonContent ? jsonContent.substring(0, 20) : '❌ undefined です');
+
+  // ❗ もし jsonContent が undefined なら明示的にエラーを出す
+  if (!jsonContent) {
+    throw new Error('❌ GOOGLE_CREDENTIALS_JSON_PROD が取得できませんでした（undefined）');
+  }
+
   const tempPath = path.resolve(__dirname, '../credentials.prod.json');
   fs.writeFileSync(tempPath, jsonContent);
   keyFilePath = tempPath;
-} else {
+}
+
+  //一時的 const tempPath = path.resolve(__dirname, '../credentials.prod.json');
+  //一時的 fs.writeFileSync(tempPath, jsonContent);
+  //一時的 keyFilePath = tempPath;
+//一時的 } 
+ else {
   keyFilePath = path.resolve(process.env.GOOGLE_CREDENTIALS_PATH_DEV);
 }
 // スプレッドシートのIDとシート名を切り替え

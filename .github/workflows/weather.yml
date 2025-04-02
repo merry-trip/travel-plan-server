@@ -34,4 +34,5 @@ jobs:
           OPENWEATHER_API_KEY_PROD: ${{ secrets.OPENWEATHER_API_KEY_PROD }}
           SHEET_ID_WEATHER_PROD: ${{ secrets.SHEET_ID_WEATHER_PROD }}
           SHEET_NAME_WEATHER_PROD: ${{ secrets.SHEET_NAME_WEATHER_PROD }}
+          GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }} 
         run: node test-write-to-sheet.js
