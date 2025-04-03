@@ -98,6 +98,37 @@ async function deleteRows(rowNumbers) {
   console.log(`🧹 古いデータ（${rowNumbers.length}件）を削除しました`);
 }
 
+// 今日より前の日付の行を削除
+async function deleteOldRowsBeforeToday() {
+  const client = await auth.getClient();
+  const sheets = google.sheets({ version: 'v4', auth: client });
+
+  const res = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `${sheetName}!A2:A`,  // A列のみ（ヘッダー除く）
+  });
+
+  const values = res.data.values || [];
+
+  const todayStr = new Date().toISOString().slice(0, 10); // 例: "2025-04-04"
+
+  const rowNumbersToDelete = [];
+
+  values.forEach((row, index) => {
+    const dt_txt = row[0]; // 例: "2025-04-03 06:00:00"
+    if (dt_txt && dt_txt.slice(0, 10) < todayStr) {
+      rowNumbersToDelete.push(index + 2); // +2 はヘッダー除いて2行目以降
+    }
+  });
+
+  if (rowNumbersToDelete.length > 0) {
+    await deleteRows(rowNumbersToDelete);
+    console.log(`🗑 過去のデータ（${rowNumbersToDelete.length}件）を削除しました`);
+  } else {
+    console.log('✅ 過去のデータはありませんでした');
+  }
+}
+
 // 複数行の天気データをスプレッドシートに追加
 async function appendWeatherRows(rows) {
   const client = await auth.getClient();
@@ -118,6 +149,7 @@ async function appendWeatherRows(rows) {
 module.exports = {
   appendWeatherRows,
   getExistingTimestampsWithRowNumbers,
-  deleteRows
+  deleteRows,
+  deleteOldRowsBeforeToday,
 };
 
