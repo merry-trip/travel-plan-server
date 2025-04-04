@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anime Spot Map</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #map {
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Google Maps JavaScript API 読み込み -->
+  <script
+    //※注意API戻す、language=en追加
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeghy24NA6qjegH_-chFWBWrUqqo_nCuQ&callback=initMap&language=en" 
+    async
+    defer
+  ></script>
+
+  <script>
+    let map;
+
+    // ✅ 初期化：マップ表示＋スポット取得
+    async function initMap() {
+      // 1. 地図を初期化（東京中心、ズーム13）
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 35.6804, lng: 139.7690 }, // 東京駅あたり
+        zoom: 13,
+        mapTypeControl: false,
+        fullscreenControl: false,
+      });
+
+      try {
+        // 2. スプレッドシートからスポット情報を取得
+        const response = await fetch('/api/spots');
+        const spots = await response.json();
+
+        console.log("📦 Fetched spots:", spots); // ✅ ログ設計（後で確認しやすい）
+
+        // 3. 各スポットにマーカー＆infoWindowを追加
+        spots.forEach((spot) => {
+          addMarkerWithInfo(spot);
+        });
+      } catch (error) {
+        console.error("❌ Failed to fetch spots:", error);
+      }
+    }
+
+    // ✅ 関数：マーカーと吹き出しを追加
+    function addMarkerWithInfo(spot) {
+      const marker = new google.maps.Marker({
+        position: { lat: spot.lat, lng: spot.lng },
+        map: map,
+        title: spot.name,
+      });
+
+      const infoWindow = new google.maps.InfoWindow({
+        content: `
+          <div style="max-width:200px;">
+            <strong>${spot.name}</strong><br/>
+            <span>${spot.description}</span>
+          </div>
+        `,
+      });
+
+      marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+      });
+    }
+  </script>
+</body>
+</html>

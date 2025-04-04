@@ -2,42 +2,48 @@
 
 // 必要なライブラリを読み込む
 const express = require('express'); // サーバーを作るためのメイン道具
-const dotenv = require('dotenv');   // .env という秘密メモ帳を読み込む道具
 const cors = require('cors');       // 外からのアクセスを許可する鍵の道具
+const path = require('path');       // 静的ファイル用のパスを扱う道具
 
-// 天気APIの関数を読み込む（ファイルパスに注意）
-const { getWeatherByCoords } = require('./api/test-weather'); //名前を指定して、関数だけ取り出す
+// 🔁 スポット取得用の関数（Google Sheets API）
+const getSpotList = require('./api/get-spots');
 
-// .env ファイルの内容を読み込む
-dotenv.config();
+// ✅ ロガーの読み込み（日本時間でINFO / ERROR出力）
+const { logInfo, logError } = require('./utils/logger');
 
 // Expressアプリを作成
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // CORSを許可（ブラウザなどからアクセスできるように）
 app.use(cors());
 
-// 天気APIのルート設定
-app.get('/api/test-weather', async (req, res) => {
-  const { lat, lon, units = 'metric', lang = 'en' } = req.query;
+// ✅ ここで静的パスをログに出す（原因の絞り込み用）
+const staticPath = path.join(__dirname, 'public');
+console.log('[DEBUG] 静的ファイルの公開パス:', staticPath);
 
-  // 入力チェック
-  if (!lat || !lon) {
-    return res.status(400).json({ error: 'lat（緯度）とlon（経度）は必須です' });
-  }
+// public フォルダの中身（test-map.html など）を公開
+app.use(express.static(path.join(__dirname, 'public')));
+
+// ✅ /api/spots：Googleスプレッドシートからアニメスポット一覧を取得
+app.get('/api/spots', async (req, res) => {
+  const context = 'GET /api/spots'; // ログ用文脈ラベル
 
   try {
-    // 天気データ取得
-    const data = await getWeatherByCoords(lat, lon, units, lang);
-    res.json(data);
+    const spots = await getSpotList();
+    logInfo(context, `Spot list retrieved: ${spots.length} items`);
+    res.status(200).json(spots);
   } catch (error) {
-    console.error('天気APIエラー:', error.message);
-    res.status(500).json({ error: '天気情報の取得に失敗しました' });
+    logError(context, error);
+    res.status(500).json({ error: 'Failed to retrieve spot list' });
   }
+});
+
+app.get('/test-map', (req, res) => {
+  res.redirect('/test-map.html');
 });
 
 // サーバーを起動
 app.listen(PORT, () => {
-  console.log(`✅ サーバー起動中 → http://localhost:${PORT}`);
+  logInfo('server', `✅ サーバー起動中 → http://localhost:${PORT}`);
 });
