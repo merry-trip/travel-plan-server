@@ -1,17 +1,38 @@
-// logger.js（日本時間でログを出力）
+const fs = require('fs');
+const path = require('path');
 
-function logInfo(context, message) {
-    const now = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
-    console.log(`[${now}] [INFO] [${context}] ${message}`);
+// logs フォルダの作成（なければ作る）
+const logDir = path.join(__dirname, '../logs');
+if (!fs.existsSync(logDir)) {
+  fs.mkdirSync(logDir);
+}
+
+// ログファイルパス（1つに集約）
+const logFilePath = path.join(logDir, 'update.log');
+
+function formatLog(level, context, message) {
+  const now = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+  return `[${now}] [${level}] [${context}] ${message}`;
+}
+
+function writeLog(level, context, message) {
+  const formatted = formatLog(level, context, message);
+
+  // コンソール出力
+  if (level === 'ERROR') {
+    console.error(formatted);
+  } else {
+    console.log(formatted);
   }
-  
-  function logError(context, error) {
-    const now = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
-    console.error(`[${now}] [ERROR] [${context}] ${error.message}`);
+
+  // ファイル出力
+  fs.appendFileSync(logFilePath, formatted + '\n', 'utf8');
+}
+
+module.exports = {
+  logInfo: (context, message) => writeLog('INFO', context, message),
+  logError: (context, messageOrError) => {
+    const msg = messageOrError instanceof Error ? messageOrError.stack : messageOrError;
+    writeLog('ERROR', context, msg);
   }
-  
-  module.exports = {
-    logInfo,
-    logError,
-  };
-  
+};

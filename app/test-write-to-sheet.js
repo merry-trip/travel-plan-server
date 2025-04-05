@@ -1,66 +1,69 @@
+// app/test-write-to-sheet.js
+
+require('dotenv').config();
+const { logInfo, logError } = require('./utils/logger'); // ✅ logger導入！
+
 const { getForecastByCoords } = require('./api/forecast');
 const {
   appendWeatherRows,
   getExistingTimestampsWithRowNumbers,
   deleteRows,
-  deleteOldRowsBeforeToday  // ✅ ←追加！
+  deleteOldRowsBeforeToday
 } = require('./api/sheets');
-const { sendMail } = require('./api/send-mail'); // ✅ 通知用関数
 
-require('dotenv').config();
+const { sendMail } = require('./api/send-mail');
 
 const appEnv = process.env.APP_ENV || 'dev';
 
 async function main() {
-  try {
-    const lat = 35.6895;
-    const lon = 139.6917;
-    const lang = 'en';
-    const units = 'metric';
+  const context = 'test-write-to-sheet';
 
-    // ✅ 今日より前のデータを削除！
+  try {
+    // ✅ 古いデータを削除
+    logInfo(context, '🧹 古い天気データの削除を開始');
     await deleteOldRowsBeforeToday();
 
-    console.log(`🌤️ 天気情報を取得中...（環境: ${appEnv}）`);
-    const forecast = await getForecastByCoords(lat, lon, units, lang);
+    logInfo(context, `🌤️ 天気情報を取得中...（環境: ${appEnv}）`);
+    const forecast = await getForecastByCoords(35.6895, 139.6917, 'metric', 'en');
 
-    const rows = forecast.list.map(entry => {
-      return [
-        entry.dt_txt,
-        'Tokyo',
-        entry.main.temp,
-        entry.weather[0].description,
-        entry.main.humidity,
-        entry.wind.speed,
-        entry.main.pressure
-      ];
-    });
+    const rows = forecast.list.map(entry => [
+      entry.dt_txt,
+      'Tokyo',
+      entry.main.temp,
+      entry.weather[0].description,
+      entry.main.humidity,
+      entry.wind.speed,
+      entry.main.pressure
+    ]);
 
-    // ✅ 重複行の削除処理（上書き対策）
+    // ✅ 重複チェック＆削除
     const existingMap = await getExistingTimestampsWithRowNumbers();
     const overlappingRows = rows.map(row => existingMap[row[0]]).filter(Boolean);
-    await deleteRows(overlappingRows);
+    if (overlappingRows.length > 0) {
+      logInfo(context, `⚠️ 重複行 ${overlappingRows.length} 件を削除します`);
+      await deleteRows(overlappingRows);
+    }
 
-    console.log(`📝 スプレッドシートに ${rows.length} 行を書き込みます...`);
+    logInfo(context, `📝 スプレッドシートに ${rows.length} 行を書き込みます...`);
     await appendWeatherRows(rows);
 
-    // ✅ 通知メール（成功時）
+    // ✅ 成功通知メール
     await sendMail({
       subject: '✅ 天気ログ完了',
       text: `スプレッドシートに ${rows.length} 件の天気データを記録しました。\n環境: ${appEnv}`
     });
-    console.log('📧 通知メールを送信しました！');
+    logInfo(context, '📧 通知メールを送信しました（成功）');
 
   } catch (err) {
-    console.error('❌ 書き込みエラー:', err.message);
+    logError(context, `❌ 書き込みエラー: ${err.message}`);
+    logError(context, err.stack);
 
-    // ✅ 通知メール（エラー時）
+    // ✅ エラー通知メール
     await sendMail({
       subject: '❌ 天気ログ失敗',
       text: `エラーが発生しました：${err.message}`
     });
-
-    console.log('📧 エラー通知メールを送信しました');
+    logInfo(context, '📧 エラー通知メールを送信しました（失敗）');
   }
 }
 

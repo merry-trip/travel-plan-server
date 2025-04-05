@@ -24,3 +24,6 @@ public/wp-config.php
 
 # 認証情報（重要）
 credentials*.json
+
+# ログファイル除外
+logs/
