@@ -27,3 +27,8 @@ credentials*.json
 
 # ログファイル除外
 logs/
+
+# 一時テストファイル（手動実行専用）
+test-*.js
+app/tools/test-*.js
+app/tools/path-log.txt
