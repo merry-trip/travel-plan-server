@@ -36,22 +36,31 @@ async function main() {
       entry.main.pressure
     ]);
 
-    // ✅ 重複チェック＆削除
-    const existingMap = await getExistingTimestampsWithRowNumbers();
-    const overlappingRows = rows.map(row => existingMap[row[0]]).filter(Boolean);
-    if (overlappingRows.length > 0) {
+      // ✅ 追加: 今日より前のデータは除外する（今日0時未満の行は保存しない）
+      const now = new Date();
+      const jstNow = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // JST 0:00
+      now.setHours(0, 0, 0, 0); // 今日の0:00
+      const filteredRows = rows.filter(row => {
+      const dt = new Date(row[0]);
+      return dt >= now;
+     });
+
+      // ✅ 重複チェック＆削除（filteredRows に対して）
+      const existingMap = await getExistingTimestampsWithRowNumbers();
+      const overlappingRows = filteredRows.map(row => existingMap[row[0]]).filter(Boolean);
+      if (overlappingRows.length > 0) {
       logInfo(context, `⚠️ 重複行 ${overlappingRows.length} 件を削除します`);
       await deleteRows(overlappingRows);
     }
 
-    logInfo(context, `📝 スプレッドシートに ${rows.length} 行を書き込みます...`);
-    await appendWeatherRows(rows);
+    logInfo(context, `📝 スプレッドシートに ${filteredRows.length} 行を書き込みます...`);
+    await appendWeatherRows(filteredRows);
 
-    // ✅ 成功通知メール
+    // ✅ 成功通知メール（filteredRows に変更）
     await sendMail({
-      subject: '✅ 天気ログ完了',
-      text: `スプレッドシートに ${rows.length} 件の天気データを記録しました。\n環境: ${appEnv}`
-    });
+        subject: '✅ 天気ログ完了',
+        text: `スプレッドシートに ${filteredRows.length} 件の天気データを記録しました。\n環境: ${appEnv}`
+      });
     logInfo(context, '📧 通知メールを送信しました（成功）');
 
   } catch (err) {
