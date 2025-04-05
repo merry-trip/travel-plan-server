@@ -35,4 +35,8 @@ jobs:
           SHEET_ID_WEATHER_PROD: ${{ secrets.SHEET_ID_WEATHER_PROD }}
           SHEET_NAME_WEATHER_PROD: ${{ secrets.SHEET_NAME_WEATHER_PROD }}
           GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }} 
+
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          GMAIL_TO: ${{ secrets.GMAIL_TO }}
         run: node test-write-to-sheet.js
