@@ -1,5 +1,7 @@
 // server.js
 
+require('dotenv').config();
+
 // 必要なライブラリを読み込む
 const express = require('express'); // サーバーを作るためのメイン道具
 const cors = require('cors');       // 外からのアクセスを許可する鍵の道具
@@ -8,12 +10,19 @@ const path = require('path');       // 静的ファイル用のパスを扱う�
 // 🔁 スポット取得用の関数（Google Sheets API）
 const getSpotList = require('./api/get-spots');
 
+// 🔁 検索ログ保存APIの読み込み
+const logSearch = require('./api/log-search');
+
 // ✅ ロガーの読み込み（日本時間でINFO / ERROR出力）
 const { logInfo, logError } = require('./utils/logger');
 
 // Expressアプリを作成
 const app = express();
 const PORT = 3000;
+
+// ✅EJS をテンプレートエンジンとして使用宣言
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views')); // viewsフォルダからHTMLを生成
 
 // CORSを許可（ブラウザなどからアクセスできるように）
 app.use(cors());
@@ -39,8 +48,17 @@ app.get('/api/spots', async (req, res) => {
   }
 });
 
+// ✅ /api/log-search：検索条件をスプレッドシートに記録（POST）
+app.post('/api/log-search', express.json(), logSearch);
+
 app.get('/test-map', (req, res) => {
   res.redirect('/test-map.html');
+});
+
+// ✅ /map：APIキーを.envから読み込み、EJSテンプレートに渡す
+app.get('/map', (req, res) => {
+  const googleMapsApiKey = process.env.GOOGLE_API_KEY_DEV;
+  res.render('map', { googleMapsApiKey });
 });
 
 // サーバーを起動

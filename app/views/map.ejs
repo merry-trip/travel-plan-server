@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Anime Spot Map</title>
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- ✅ APIキーを .env から安全に埋め込む -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&callback=initMap&language=en" async defer></script>
+
+  <script>
+    function initMap() {
+      const center = { lat: 35.681236, lng: 139.767125 }; // 東京駅を中心に
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: center,
+        zoom: 12,
+      });
+
+      // ✅ スポット情報をAPI経由で取得してマーカー表示
+      fetch('/api/spots')
+        .then(response => response.json())
+        .then(spots => {
+          spots.forEach(spot => {
+            const marker = new google.maps.Marker({
+              position: { lat: spot.lat, lng: spot.lng },
+              map: map,
+              title: spot.name
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+              content: `<h3>${spot.name}</h3><p>${spot.description}</p>`
+            });
+
+            marker.addListener('click', () => {
+              infoWindow.open(map, marker);
+            });
+          });
+        })
+        .catch(error => {
+          console.error('Failed to fetch spots:', error);
+        });
+    }
+  </script>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const postSearchLog = async () => {
+      const body = {
+        search_params: {
+          origin: "Akihabara",
+          destination: "Ghibli Museum",
+          travel_date: "2025-04-10",
+          travel_days: 3,
+          travelers: 2,
+          budget: {
+            amount: 50000,
+            base_currency: "JPY",
+            user_currency: "USD"
+          },
+          purpose: "anime tour",
+          experiences: ["pilgrimage", "shopping"],
+          must_visit: ["Nakano Broadway"],
+          transport_mode: "train",
+          accommodation: "ryokan",
+          food_preference: "vegetarian"
+        }
+      };
+
+      try {
+        const res = await fetch("/api/log-search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+
+        const result = await res.json();
+        console.log("✅ 検索ログ送信結果:", result);
+      } catch (err) {
+        console.error("❌ 検索ログ送信エラー:", err);
+      }
+    };
+
+    postSearchLog();
+  });
+</script>
+
+<small>
+  Budget: 50,000 JPY (≈ <%= (process.env.EXCHANGE_RATE_USD * 50000).toFixed(2) %> USD)<br>
+  <em>Rate as of <%= process.env.EXCHANGE_TIMESTAMP %></em>
+</small>
+
+</body>
+</html>
