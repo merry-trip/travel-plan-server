@@ -48,12 +48,9 @@ app.get('/api/spots', async (req, res) => {
   }
 });
 
-// ✅ /api/log-search：検索条件をスプレッドシートに記録（POST）
-app.post('/api/log-search', express.json(), logSearch);
-
-app.get('/test-map', (req, res) => {
-  res.redirect('/test-map.html');
-});
+// ✅ 検索ログルーティングを登録
+const logSearchRouter = require('./routes/log-search');
+app.use('/api', express.json(), logSearchRouter);
 
 // ✅ /map：APIキーを.envから読み込み、EJSテンプレートに渡す
 app.get('/map', (req, res) => {

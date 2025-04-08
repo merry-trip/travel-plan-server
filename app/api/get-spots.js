@@ -26,7 +26,7 @@ async function getSpotList() {
 
     const res = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: `${sheetName}!A2:E`, // name, lat, lng, description, placeId
+      range: `${sheetName}!A2:H`, // name, lat, lng, description, placeId, types, source_type, category_for_map
     });
 
     const values = res.data.values || [];
@@ -46,7 +46,11 @@ async function getSpotList() {
       lng: parseFloat(row[2]),
       description: row[3],
       placeId: row[4],
+      types: row[5],
+      source_type: row[6],
+      category_for_map: row[7], // ←これが漏れていると category: unknown になります！
     }));
+    
   } catch (error) {
     // ❌ エラーログ（原因明示）
     logError(context, error);

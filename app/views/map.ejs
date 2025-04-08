@@ -13,89 +13,71 @@
 <body>
   <div id="map"></div>
 
-  <!-- ✅ APIキーを .env から安全に埋め込む -->
+  <!-- ✅ Search log confirmation message (for users) -->
+  <div id="log-message" style="display: none; margin-top: 10px; padding: 10px; background-color: #e0ffe0; border: 1px solid #00aa00; border-radius: 5px; font-weight: bold; color: #006600;">
+    ✅ Your travel preferences have been saved successfully.
+  </div>
+
+  <!-- ✅ Google Maps APIを .env から安全に読み込む（callbackで initMap を呼ぶ） -->
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&callback=initMap&language=en" async defer></script>
 
+  <!-- ✅ カスタムマップ描画ロジックを分離モジュールから読み込む -->
+  <script type="module" src="/js/map-init.js"></script>
+
+  <!-- ✅ 検索ログ送信用スクリプト -->
   <script>
-    function initMap() {
-      const center = { lat: 35.681236, lng: 139.767125 }; // 東京駅を中心に
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center: center,
-        zoom: 12,
-      });
+    window.addEventListener("DOMContentLoaded", () => {
+      const postSearchLog = async () => {
+        const body = {
+          search_params: {
+            origin: "Akihabara",
+            destination: "Ghibli Museum",
+            travel_date: "2025-04-10",
+            travel_days: 3,
+            travelers: 2,
+            budget: {
+              amount: 50000,
+              base_currency: "JPY",
+              user_currency: "USD"
+            },
+            purpose: "anime tour",
+            experiences: ["pilgrimage", "shopping"],
+            must_visit: ["Nakano Broadway"],
+            transport_mode: "train",
+            accommodation: "ryokan",
+            food_preference: "vegetarian"
+          }
+        };
 
-      // ✅ スポット情報をAPI経由で取得してマーカー表示
-      fetch('/api/spots')
-        .then(response => response.json())
-        .then(spots => {
-          spots.forEach(spot => {
-            const marker = new google.maps.Marker({
-              position: { lat: spot.lat, lng: spot.lng },
-              map: map,
-              title: spot.name
-            });
-
-            const infoWindow = new google.maps.InfoWindow({
-              content: `<h3>${spot.name}</h3><p>${spot.description}</p>`
-            });
-
-            marker.addListener('click', () => {
-              infoWindow.open(map, marker);
-            });
+        try {
+          const res = await fetch("/api/log-search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
           });
-        })
-        .catch(error => {
-          console.error('Failed to fetch spots:', error);
-        });
-    }
-  </script>
 
-<script>
-  window.addEventListener("DOMContentLoaded", () => {
-    const postSearchLog = async () => {
-      const body = {
-        search_params: {
-          origin: "Akihabara",
-          destination: "Ghibli Museum",
-          travel_date: "2025-04-10",
-          travel_days: 3,
-          travelers: 2,
-          budget: {
-            amount: 50000,
-            base_currency: "JPY",
-            user_currency: "USD"
-          },
-          purpose: "anime tour",
-          experiences: ["pilgrimage", "shopping"],
-          must_visit: ["Nakano Broadway"],
-          transport_mode: "train",
-          accommodation: "ryokan",
-          food_preference: "vegetarian"
+          const result = await res.json();
+          console.log("✅ 検索ログ送信結果:", result);
+
+          const msg = document.getElementById("log-message");
+          msg.style.display = "block";
+          setTimeout(() => {
+            msg.style.display = "none";
+          }, 3000);
+        } catch (err) {
+          console.error("❌ 検索ログ送信エラー:", err);
         }
       };
 
-      try {
-        const res = await fetch("/api/log-search", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body)
-        });
+      postSearchLog();
+    });
+  </script>
 
-        const result = await res.json();
-        console.log("✅ 検索ログ送信結果:", result);
-      } catch (err) {
-        console.error("❌ 検索ログ送信エラー:", err);
-      }
-    };
-
-    postSearchLog();
-  });
-</script>
-
-<small>
-  Budget: 50,000 JPY (≈ <%= (process.env.EXCHANGE_RATE_USD * 50000).toFixed(2) %> USD)<br>
-  <em>Rate as of <%= process.env.EXCHANGE_TIMESTAMP %></em>
-</small>
+  <!-- ✅ 通貨表示情報（補足） -->
+  <small>
+    Budget: 50,000 JPY (≈ <%= (process.env.EXCHANGE_RATE_USD * 50000).toFixed(2) %> USD)<br>
+    <em>Rate as of <%= process.env.EXCHANGE_TIMESTAMP %></em>
+  </small>
 
 </body>
 </html>

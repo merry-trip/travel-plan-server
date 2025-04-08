@@ -2,17 +2,15 @@
 const { google } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
-const { logInfo, logError } = require('../utils/logger'); // ✅ 追加
+const { logInfo, logError } = require('../utils/logger');
 require('dotenv').config();
 
-const context = 'sheets'; // ✅ 全関数共通のログ文脈
-
+const context = 'sheets';
 const appEnv = process.env.APP_ENV || 'dev';
 
 let keyFilePath;
 if (appEnv === 'prod') {
   const jsonContent = process.env.GOOGLE_CREDENTIALS_JSON_PROD;
-
   logInfo(context, `🧪 GOOGLE_CREDENTIALS_JSON_PROD の先頭20文字：${jsonContent ? jsonContent.substring(0, 20) : '❌ undefined'}`);
 
   if (!jsonContent) {
@@ -41,8 +39,8 @@ const auth = new google.auth.GoogleAuth({
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
-// A列だけ取得 → { timestamp: rowNum } mapを返す
-async function getExistingTimestampsWithRowNumbers() {
+// ✅ すべてのデータ行（A2以降）を削除
+async function deleteAllDataRows() {
   const client = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: client });
 
@@ -51,29 +49,13 @@ async function getExistingTimestampsWithRowNumbers() {
     range: `${sheetName}!A2:A`,
   });
 
-  const values = res.data.values || [];
-
-  const map = {};
-  values.forEach((row, index) => {
-    const dt = row[0];
-    if (dt) {
-      map[dt] = index + 2;
-    }
-  });
-
-  logInfo(context, `📌 既存タイムスタンプ取得：${Object.keys(map).length} 件`);
-  return map;
-}
-
-// 指定行番号を削除（複数）
-async function deleteRows(rowNumbers) {
-  if (rowNumbers.length === 0) {
-    logInfo(context, '🟡 削除対象なし');
+  const rowCount = res.data.values?.length || 0;
+  if (rowCount === 0) {
+    logInfo(context, '🟡 削除対象のデータ行がありません（A2以降）');
     return;
   }
 
-  const client = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: client });
+  const rowNumbers = Array.from({ length: rowCount }, (_, i) => i + 2);
 
   const requests = rowNumbers.sort((a, b) => b - a).map(row => ({
     deleteDimension: {
@@ -91,72 +73,10 @@ async function deleteRows(rowNumbers) {
     requestBody: { requests }
   });
 
-  logInfo(context, `🧹 古いデータ ${rowNumbers.length} 件を削除しました`);
+  logInfo(context, `🧹 既存データ ${rowCount} 行をすべて削除しました`);
 }
 
-// 過去のデータ行を削除（今日より前）
-async function deleteOldRowsBeforeToday() {
-  const client = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: client });
-
-  const res = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${sheetName}!A2:A`,
-  });
-
-  const values = res.data.values || [];
-  const todayStr = new Date().toISOString().slice(0, 10);
-
-  const rowNumbersToDelete = [];
-
-  values.forEach((row, index) => {
-    const dt_txt = row[0];
-    if (dt_txt && dt_txt.slice(0, 10) < todayStr) {
-      rowNumbersToDelete.push(index + 2);
-    }
-  });
-
-  if (rowNumbersToDelete.length > 0) {
-    await deleteRows(rowNumbersToDelete);
-    logInfo(context, `🗑 過去データ ${rowNumbersToDelete.length} 行を削除しました`);
-  } else {
-    logInfo(context, '✅ 過去のデータはありませんでした');
-  }
-}
-
-// 📌 追記：最新40件のみに絞り込む
-async function keepLatestRowsOnly(maxRows = 40) {
-  const client = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: client });
-
-  // A列（日時）を取得
-  const res = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${sheetName}!A2:A`,
-  });
-
-  const values = res.data.values || [];
-
-  // ソート用に { rowNum, timestamp } を作る
-  const datedRows = values.map((row, index) => ({
-    rowNum: index + 2,
-    timestamp: row[0],
-  }));
-
-  // 日時で新しい順にソート
-  datedRows.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-  // 最新40件を残し、それ以外を削除
-  const rowsToDelete = datedRows.slice(maxRows).map(r => r.rowNum);
-  if (rowsToDelete.length > 0) {
-    await deleteRows(rowsToDelete);
-    logInfo(context, `🧹 最新${maxRows}件を残し、古い${rowsToDelete.length}行を削除しました`);
-  } else {
-    logInfo(context, '✅ 行数制限により削除対象なし（最新40件以内）');
-  }
-}
-
-// 天気データを追記
+// ✅ 天気データを追記（A1から追加）
 async function appendWeatherRows(rows) {
   const client = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: client });
@@ -168,13 +88,10 @@ async function appendWeatherRows(rows) {
     requestBody: { values: rows },
   });
 
-  logInfo(context, `✅ ${rows.length} 行の天気データをスプレッドシートに追加（env: ${appEnv}）`);
+  logInfo(context, `✅ ${rows.length} 行の天気データをスプレッドシートに追加しました（env: ${appEnv}）`);
 }
 
 module.exports = {
+  deleteAllDataRows,
   appendWeatherRows,
-  getExistingTimestampsWithRowNumbers,
-  deleteRows,
-  deleteOldRowsBeforeToday,
-  keepLatestRowsOnly, // ✅ この行を追加！
 };

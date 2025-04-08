@@ -3,7 +3,7 @@ name: Daily Weather Logger
 on:
   schedule:
     - cron: '0 21 * * *' # JST 6:00（UTC 21:00）
-  workflow_dispatch: # 手動実行も可能
+  workflow_dispatch: # ✅ 手動実行も可能
 
 jobs:
   log-weather:
@@ -13,29 +13,28 @@ jobs:
       - name: 📦 リポジトリをチェックアウト
         uses: actions/checkout@v3
 
-      - name: 🟢 Node.js をセットアップ
+      - name: 🟢 Node.js をセットアップ（v20）
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: 📦 依存関係をインストール
+      - name: 📦 依存パッケージをインストール（appディレクトリ）
         working-directory: app
         run: npm install
 
-      - name: 🔐 シークレットから認証ファイルを作成
+      - name: 🔐 Google認証ファイル（credentials.prod.json）を生成
         working-directory: app
         run: |
           echo "${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}" > credentials.prod.json
 
-      - name: 📊 天気データを記録
-        working-directory: app    
+      - name: ☁️ 天気データをスプレッドシートに記録
+        working-directory: app
         env:
           APP_ENV: prod
           OPENWEATHER_API_KEY_PROD: ${{ secrets.OPENWEATHER_API_KEY_PROD }}
           SHEET_ID_WEATHER_PROD: ${{ secrets.SHEET_ID_WEATHER_PROD }}
           SHEET_NAME_WEATHER_PROD: ${{ secrets.SHEET_NAME_WEATHER_PROD }}
-          GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }} 
-
+          GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           GMAIL_TO: ${{ secrets.GMAIL_TO }}
