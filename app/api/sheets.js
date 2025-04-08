@@ -176,4 +176,5 @@ module.exports = {
   getExistingTimestampsWithRowNumbers,
   deleteRows,
   deleteOldRowsBeforeToday,
+  keepLatestRowsOnly, // ✅ この行を追加！
 };
