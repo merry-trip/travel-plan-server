@@ -177,4 +177,29 @@ public/js/category-style.js	各カテゴリごとの表示スタイル（色・�
 UIデザイン調整（色・絵文字）を category-style.js のみで変更可能
 map-init.js はAPI取得と地図描画のみに集中
 map.ejs にはHTML構造とスクリプト読み込みだけ記述し、保守性向上
+
+### ✅ v1.1.0（2025/04/08）
+
+OpenWeather API（forecast）を使った5日間天気データ取得処理を改良
+スプレッドシートの常時40行キープ方式に仕様変更
+既存の天気データをすべて削除 → 最新40件を追加するシンプル構成に刷新
+Gmail通知の件名・本文もそのまま運用
+GitHub Actions による自動実行スケジュール（毎日6:00 JST）も継続
+
+### ✅ 処理の流れ v1.1.0（2025/04/08）
+1. スプレッドシートの既存データをすべて削除
+2. OpenWeather API から forecast（40件）取得
+3. スプレッドシートに全件追加（常に最新40件のみが残る）
+4. Gmail にて成功 / 失敗通知を送信
+
+### ✅ フォルダ構成の変更点なし（v1.0.1と同じ）
+app/
+├── api/
+│   ├── forecast.js            # 🌤 OpenWeather API 呼び出し
+│   ├── sheets.js              # 📄 スプレッドシート操作（全削除・追加）
+│   └── send-mail.js           # 📧 Gmail通知
+├── utils/
+│   └── logger.js              # 📝 ログ出力（日本時間・context付き）
+├── weather-write-to-sheet.js # 🎯 メイン実行スクリプト（本番用）
+
 ---
