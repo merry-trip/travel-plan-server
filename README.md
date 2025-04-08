@@ -105,4 +105,76 @@ git commit -m "📝 ドキュメント更新：v1.2.0 地図表示フェーズ�
 - 過去の天気ログ（今日以前）を削除するクリーニング処理を実装
 - Gmail による実行結果通知（成功 / エラー）を送信（send-mail.js）
 - GitHub Actions による毎日6:00 JSTの自動実行（.github/workflows/weather.yml）
+
+###  処理フロー（map.ejs → log-search）」検索ログが保存されるまでの流れ
+
+📍 map.ejs（UI画面）
+└─ fetch("/api/log-search", {
+      method: "POST",
+      body: JSON.stringify({ search_params }),
+      headers: { "Content-Type": "application/json" }
+   });
+
+↓（サーバーにリクエストが届く）
+
+🧠 server.js
+   └─ app.use("/api", logSearchRouter)
+
+↓（/log-search にマッチ）
+
+🛣️ routes/log-search.js
+└─ router.post("/log-search", logSearch);
+
+↓（ログ保存処理を呼び出す）
+
+🧠 api/log-search.js
+└─ Google Sheets に timestamp + search_params を記録
+     - JSTでの日時を記録
+     - 為替情報（USD → JPY）もJSONに含めて記録
+
+### ✅ 実行ログ（サーバーコンソール出力）
+
+```bash
+[2025/4/07 15:54:08] [INFO] [server] ✅ サーバー起動中 → http://localhost:3000
+[2025/4/07 15:54:31] [INFO] [log-search] 📌 STEP① リクエスト受信
+[2025/4/07 15:54:31] [INFO] [log-search] 📌 STEP①-1 search_params = {...}
+[2025/4/07 15:54:31] [INFO] [log-search] 📌 STEP② GoogleAuth 準備OK
+[2025/4/07 15:54:31] [INFO] [log-search] 📌 STEP③ JST timestamp = 2025-04-07 15:54:31
+[2025/4/07 15:54:31] [INFO] [log-search] 📌 STEP④ row構築完了: [...]
+[2025/4/07 15:54:32] [INFO] [log-search] ✅ Logged search at 2025-04-07 15:54:31
+
+### ✅ 動作確認日：2025/04/07
+POST による /api/log-search 成功確認済み（ステータス200）
+スプレッドシート anime_search_logs に1行追加されたことを確認
+JST時刻でのタイムスタンプ、および為替情報も正しく記録された
+logger.js による全ステップログも出力確認済み
+
+###  ✅ 実装ステータス：完了（v1.3.0）
+ /api/log-search に対応するルーティングを server.js 経由で登録
+ routes/log-search.js にて POST ルート定義
+ api/log-search.js で Sheets API による保存処理実行
+ logger によりステップ別にログ出力（JST対応）
+
+###  🧾 使用している環境変数（.env）
+
+SHEET_NAME_LOGS_DEV=log_sheet_dev
+SPREADSHEET_ID=xxxxxxxxxxxxxxxxxx
+EXCHANGE_RATE_USD=147.2
+EXCHANGE_TIMESTAMP=2025-04-05 10:00:00
+※ .env.production に切り替えることで、本番用シートに保存可能。
+
+### 🧰 プロ仕様：地図描画ロジックの分離構成（v1.3.1〜）:2025/04/08
+
+地図表示処理において、責務ごとにロジックを分割することで、保守性・再利用性・テスト性を高めた構成を採用しています。
+
+### ✅ ファイル構成（フロントエンド）
+views/map.ejs	地図表示用のテンプレートHTML（Google Maps APIの読み込み・callback）
+public/js/map-init.js	地図初期化処理・マーカー表示（ピン色・絵文字も含む）
+public/js/category-style.js	各カテゴリごとの表示スタイル（色・アイコン）を定義するマップ
+
+### ✅ メリット（運用観点）
+表示ロジックとデータロジックが完全に分離
+UIデザイン調整（色・絵文字）を category-style.js のみで変更可能
+map-init.js はAPI取得と地図描画のみに集中
+map.ejs にはHTML構造とスクリプト読み込みだけ記述し、保守性向上
 ---
