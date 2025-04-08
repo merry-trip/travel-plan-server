@@ -124,6 +124,38 @@ async function deleteOldRowsBeforeToday() {
   }
 }
 
+// 📌 追記：最新40件のみに絞り込む
+async function keepLatestRowsOnly(maxRows = 40) {
+  const client = await auth.getClient();
+  const sheets = google.sheets({ version: 'v4', auth: client });
+
+  // A列（日時）を取得
+  const res = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `${sheetName}!A2:A`,
+  });
+
+  const values = res.data.values || [];
+
+  // ソート用に { rowNum, timestamp } を作る
+  const datedRows = values.map((row, index) => ({
+    rowNum: index + 2,
+    timestamp: row[0],
+  }));
+
+  // 日時で新しい順にソート
+  datedRows.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+  // 最新40件を残し、それ以外を削除
+  const rowsToDelete = datedRows.slice(maxRows).map(r => r.rowNum);
+  if (rowsToDelete.length > 0) {
+    await deleteRows(rowsToDelete);
+    logInfo(context, `🧹 最新${maxRows}件を残し、古い${rowsToDelete.length}行を削除しました`);
+  } else {
+    logInfo(context, '✅ 行数制限により削除対象なし（最新40件以内）');
+  }
+}
+
 // 天気データを追記
 async function appendWeatherRows(rows) {
   const client = await auth.getClient();

@@ -5,7 +5,8 @@ const {
   appendWeatherRows,
   getExistingTimestampsWithRowNumbers,
   deleteRows,
-  deleteOldRowsBeforeToday
+  deleteOldRowsBeforeToday,
+  keepLatestRowsOnly, // ✅ 追加：最新40件のみに保つ処理
 } = require('./api/sheets');
 const { sendMail } = require('./api/send-mail');
 
@@ -60,6 +61,10 @@ async function main() {
     // ✅ フィルタ後の行を追記
     logInfo(context, `📝 スプレッドシートに ${filteredRows.length} 行を書き込みます...`);
     await appendWeatherRows(filteredRows);
+
+    // ✅ 行数制限：最新40件のみに制限
+    logInfo(context, '🧹 行数制限チェックを開始（最新40件を残す）');
+    await keepLatestRowsOnly(40);
 
     // ✅ 成功通知メール（件数に注意）
     await sendMail({
