@@ -11,6 +11,7 @@
   </style>
 </head>
 <body>
+
   <div id="map"></div>
 
   <!-- ✅ Search log confirmation message (for users) -->
@@ -18,66 +19,64 @@
     ✅ Your travel preferences have been saved successfully.
   </div>
 
-  <!-- ✅ Google Maps APIを .env から安全に読み込む（callbackで initMap を呼ぶ） -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&callback=initMap&language=en" async defer></script>
+  <!-- ✅ callbackなしでMaps APIを読み込む -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&language=en" async defer></script>
 
-  <!-- ✅ カスタムマップ描画ロジックを分離モジュールから読み込む -->
+  <!-- ✅ モジュール構成でmap-init.jsを読み込む -->
   <script type="module" src="/js/map-init.js"></script>
 
   <!-- ✅ 検索ログ送信用スクリプト -->
-  <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      const postSearchLog = async () => {
-        const body = {
-          search_params: {
-            origin: "Akihabara",
-            destination: "Ghibli Museum",
-            travel_date: "2025-04-10",
-            travel_days: 3,
-            travelers: 2,
-            budget: {
-              amount: 50000,
-              base_currency: "JPY",
-              user_currency: "USD"
-            },
-            purpose: "anime tour",
-            experiences: ["pilgrimage", "shopping"],
-            must_visit: ["Nakano Broadway"],
-            transport_mode: "train",
-            accommodation: "ryokan",
-            food_preference: "vegetarian"
-          }
-        };
-
-        try {
-          const res = await fetch("/api/log-search", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
-          });
-
-          const result = await res.json();
-          console.log("✅ 検索ログ送信結果:", result);
-
-          const msg = document.getElementById("log-message");
-          msg.style.display = "block";
-          setTimeout(() => {
-            msg.style.display = "none";
-          }, 3000);
-        } catch (err) {
-          console.error("❌ 検索ログ送信エラー:", err);
+  <script type="module">
+    async function postSearchLog() {
+      const body = {
+        search_params: {
+          origin: "Akihabara",
+          destination: "Ghibli Museum",
+          travel_date: "2025-04-10",
+          travel_days: 3,
+          travelers: 2,
+          budget: {
+            amount: 50000,
+            base_currency: "JPY",
+            user_currency: "USD"
+          },
+          purpose: "anime tour",
+          experiences: ["pilgrimage", "shopping"],
+          must_visit: ["Nakano Broadway"],
+          transport_mode: "train",
+          accommodation: "ryokan",
+          food_preference: "vegetarian"
         }
       };
 
-      postSearchLog();
-    });
+      try {
+        const res = await fetch("/api/log-search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+
+        const result = await res.json();
+        console.log("✅ 検索ログ送信結果:", result);
+
+        const msg = document.getElementById("log-message");
+        msg.style.display = "block";
+        setTimeout(() => {
+          msg.style.display = "none";
+        }, 4000);
+      } catch (err) {
+        console.error("❌ 検索ログ送信エラー:", err);
+      }
+    }
+
+    // postSearchLog(); ← 自動送信を止める
   </script>
 
-  <!-- ✅ 通貨表示情報（補足） -->
-  <small>
-    Budget: 50,000 JPY (≈ <%= (process.env.EXCHANGE_RATE_USD * 50000).toFixed(2) %> USD)<br>
-    <em>Rate as of <%= process.env.EXCHANGE_TIMESTAMP %></em>
-  </small>
+<!-- ✅ 通貨表示情報（補足） -->
+<small>
+  Budget: 50,000 JPY (≈ <%= (process.env.EXCHANGE_RATE_USD * 50000).toFixed(2) %> USD)<br>
+  <em>Rate as of <%= process.env.EXCHANGE_TIMESTAMP %></em>
+</small>
 
 </body>
 </html>

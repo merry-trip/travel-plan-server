@@ -31,7 +31,7 @@ app.use(cors());
 const staticPath = path.join(__dirname, 'public');
 console.log('[DEBUG] 静的ファイルの公開パス:', staticPath);
 
-// public フォルダの中身（test-map.html など）を公開
+// public フォルダの中身（map.ejs）を公開
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ✅ /api/spots：Googleスプレッドシートからアニメスポット一覧を取得
