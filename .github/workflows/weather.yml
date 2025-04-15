@@ -38,4 +38,5 @@ jobs:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           GMAIL_TO: ${{ secrets.GMAIL_TO }}
-        run: node app/domains/weather/writeToSheet.js
+        run: node domains/weather/writeToSheet.js
+
