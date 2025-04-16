@@ -3,7 +3,7 @@ name: Monthly Spot Batch Write
 on:
   schedule:
     - cron: '0 21 1 * *'  # 毎月1日 06:00 JST
-  workflow_dispatch:      # 手動実行も許可
+  workflow_dispatch:
 
 jobs:
   batch-write:
@@ -13,12 +13,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Print working directory
-        run: pwd
-
-      - name: List files (for debugging)
-        run: ls -R
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -26,10 +20,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: travel-plan-server
 
       - name: Run batch spot writer
         run: node test-scripts/batch-write-spots.js
-
+        working-directory: travel-plan-server
         env:
           GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
           GOOGLE_SHEET_ID_PROD: ${{ secrets.GOOGLE_SHEET_ID_PROD }}
