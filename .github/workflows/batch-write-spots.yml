@@ -9,18 +9,14 @@ jobs:
   batch-write:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./travel-plan-server  # ✅ ここをログに基づき正確に修正！
+    # ✅ これを削除 or コメントアウト！
+    # defaults:
+    #   run:
+    #     working-directory: ./  ← ここが逆に誤解を生む！
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
-      - name: Print working dir for debug
-        run: |
-          pwd
-          ls -al
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -28,7 +24,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install  # ← デフォルトのままでOK！
 
       - name: Run batch spot writer
         run: node test-scripts/batch-write-spots.js
