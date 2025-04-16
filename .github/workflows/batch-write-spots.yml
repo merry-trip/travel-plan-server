@@ -13,6 +13,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Print working directory
+        run: pwd
+
+      - name: List files (for debugging)
+        run: ls -R
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -20,11 +26,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./  # ← ここを明示的に指定！
 
       - name: Run batch spot writer
         run: node test-scripts/batch-write-spots.js
-        working-directory: ./  # ← こちらにもあればなお良し
 
         env:
           GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
