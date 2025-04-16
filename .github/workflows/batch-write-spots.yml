@@ -11,11 +11,16 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./  # 🔥 ここをルートに固定！
+        working-directory: ./travel-plan-server  # ✅ ここをログに基づき正確に修正！
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+
+      - name: Print working dir for debug
+        run: |
+          pwd
+          ls -al
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
