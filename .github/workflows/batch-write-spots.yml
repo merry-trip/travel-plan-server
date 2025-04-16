@@ -9,6 +9,10 @@ jobs:
   batch-write:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./  # 🔥 ここをルートに固定！
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -20,11 +24,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        # working-directory: ./ ← ★この行を削除！
 
       - name: Run batch spot writer
         run: node test-scripts/batch-write-spots.js
-        # working-directory: ./ ← ★この行も削除！
 
         env:
           GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
