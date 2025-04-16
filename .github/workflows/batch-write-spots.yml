@@ -9,27 +9,26 @@ jobs:
   batch-write:
     runs-on: ubuntu-latest
 
-    # ✅ これを削除 or コメントアウト！
-    # defaults:
-    #   run:
-    #     working-directory: ./  ← ここが逆に誤解を生む！
-
     steps:
-      - name: Checkout repo
+      - name: 📦 リポジトリをチェックアウト
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: 🟢 Node.js をセットアップ（v20）
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install  # ← デフォルトのままでOK！
+      - name: 📦 依存パッケージをインストール（ルートディレクトリ）
+        run: npm install
 
-      - name: Run batch spot writer
-        run: node test-scripts/batch-write-spots.js
+      - name: 🔐 Google認証ファイル（credentials.prod.json）を生成
+        run: |
+          echo "${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}" > ./app/credentials.prod.json
 
+      - name: 📍 スポット情報をバッチ書き込み
         env:
-          GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
-          GOOGLE_SHEET_ID_PROD: ${{ secrets.GOOGLE_SHEET_ID_PROD }}
+          APP_ENV: prod
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_SHEET_ID_PROD: ${{ secrets.GOOGLE_SHEET_ID_PROD }}
+          GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
+        run: node test-scripts/batch-write-spots.js
