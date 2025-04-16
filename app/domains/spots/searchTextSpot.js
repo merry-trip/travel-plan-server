@@ -54,6 +54,5 @@ async function searchTextSpot(query) {
   }
 }
 
-module.exports = {
-  searchTextSpot,
-};
+// ✅ これで「requireしたら関数」になる
+module.exports = searchTextSpot;

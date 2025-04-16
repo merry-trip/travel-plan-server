@@ -64,6 +64,4 @@ async function enrichSpotDetails(spot) {
   }
 }
 
-module.exports = {
-  enrichSpotDetails,
-};
+module.exports = enrichSpotDetails;

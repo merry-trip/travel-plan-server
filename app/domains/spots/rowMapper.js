@@ -22,12 +22,20 @@ function mapSpotToRow(spot) {
       return '';
     }
 
+    // ✅ 配列はカンマ区切りの文字列に変換
+    if (Array.isArray(value)) {
+      return value.join(', ');
+    }
+
+    // ✅ オブジェクトはJSON文字列化（tags_jsonなどを想定）
+    if (typeof value === 'object') {
+      return JSON.stringify(value);
+    }
+
     return value;
   });
 
   return row;
 }
 
-module.exports = {
-  mapSpotToRow,
-};
+module.exports = mapSpotToRow;
