@@ -18,12 +18,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 📦 依存パッケージをインストール（ルートディレクトリ）
-        run: npm install
+      - name: 📦 依存パッケージをインストール
+        run: npm install  # ✅ ← working-directory は書かない！
 
       - name: 🔐 Google認証ファイル（credentials.prod.json）を生成
-        run: |
-          echo "${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}" > ./app/credentials.prod.json
+        run: echo "${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}" > ./app/credentials.prod.json
 
       - name: 📍 スポット情報をバッチ書き込み
         env:
