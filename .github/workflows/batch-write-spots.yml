@@ -2,7 +2,7 @@ name: Monthly Spot Batch Write
 
 on:
   schedule:
-    - cron: '0 21 1 * *'  # JST 6:00 毎月1日
+    - cron: '0 21 1 * *'  # 毎月1日 06:00 JST
   workflow_dispatch:      # 手動実行も許可
 
 jobs:
@@ -20,9 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./  # ← ここを明示的に指定！
 
       - name: Run batch spot writer
         run: node test-scripts/batch-write-spots.js
+        working-directory: ./  # ← こちらにもあればなお良し
+
         env:
           GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
           GOOGLE_SHEET_ID_PROD: ${{ secrets.GOOGLE_SHEET_ID_PROD }}
