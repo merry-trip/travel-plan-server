@@ -1,0 +1,120 @@
+[
+    {
+      "name": "Akihabara",
+      "bounds": {
+        "lat_min": 35.6970,
+        "lat_max": 35.7055,
+        "lng_min": 139.7685,
+        "lng_max": 139.7775
+      }
+    },
+    {
+      "name": "Nakano",
+      "bounds": {
+        "lat_min": 35.7040,
+        "lat_max": 35.7150,
+        "lng_min": 139.6600,
+        "lng_max": 139.6700
+      }
+    },
+    {
+      "name": "Ikebukuro",
+      "bounds": {
+        "lat_min": 35.7240,
+        "lat_max": 35.7360,
+        "lng_min": 139.7050,
+        "lng_max": 139.7170
+      }
+    },
+    {
+      "name": "Shibuya",
+      "bounds": {
+        "lat_min": 35.6560,
+        "lat_max": 35.6625,
+        "lng_min": 139.6950,
+        "lng_max": 139.7050
+      }
+    },
+    {
+      "name": "Shinjuku",
+      "bounds": {
+        "lat_min": 35.6880,
+        "lat_max": 35.6975,
+        "lng_min": 139.6900,
+        "lng_max": 139.7080
+      }
+    },
+    {
+      "name": "Asakusa",
+      "bounds": {
+        "lat_min": 35.7080,
+        "lat_max": 35.7170,
+        "lng_min": 139.7900,
+        "lng_max": 139.8050
+      }
+    },
+    {
+      "name": "Ueno",
+      "bounds": {
+        "lat_min": 35.7080,
+        "lat_max": 35.7165,
+        "lng_min": 139.7700,
+        "lng_max": 139.7800
+      }
+    },
+    {
+      "name": "Ochanomizu",
+      "bounds": {
+        "lat_min": 35.6965,
+        "lat_max": 35.7005,
+        "lng_min": 139.7590,
+        "lng_max": 139.7680
+      }
+    },
+    {
+      "name": "Kanda",
+      "bounds": {
+        "lat_min": 35.6900,
+        "lat_max": 35.6970,
+        "lng_min": 139.7650,
+        "lng_max": 139.7730
+      }
+    },
+    {
+      "name": "Mitaka",
+      "bounds": {
+        "lat_min": 35.6930,
+        "lat_max": 35.6990,
+        "lng_min": 139.5650,
+        "lng_max": 139.5750
+      }
+    },
+    {
+      "name": "Ginza",
+      "bounds": {
+        "lat_min": 35.6660,
+        "lat_max": 35.6710,
+        "lng_min": 139.7600,
+        "lng_max": 139.7700
+      }
+    },
+    {
+      "name": "Roppongi",
+      "bounds": {
+        "lat_min": 35.6600,
+        "lat_max": 35.6670,
+        "lng_min": 139.7260,
+        "lng_max": 139.7350
+      }
+    },
+    {
+      "name": "Odaiba",
+      "bounds": {
+        "lat_min": 35.6200,
+        "lat_max": 35.6350,
+        "lng_min": 139.7700,
+        "lng_max": 139.7900
+      }
+    }
+  ]
+  

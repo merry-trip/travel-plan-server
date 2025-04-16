@@ -5,12 +5,13 @@ const { enrichSpotDetails } = require('./enrichSpotDetails.js');
 const { completeWithDeepSeek } = require('./completeWithDeepSeek.js');
 const { writeSpot } = require('./writeSpot.js');
 const { getPrimaryCategory, getCategoriesFromTypes } = require('./categorizeSpot.js');
+const { getRegionTagByLatLng } = require('./getRegionTagByLatLng.js'); // ← region_tag 自動判定を追加
 const { logInfo, logError } = require('../../utils/logger.js');
 
 const CONTEXT = 'completeFullSpotInfo';
 
 /**
- * スポット補完フロー（Google + DeepSeek + カテゴリ分類）
+ * スポット補完フロー（Google + DeepSeek + カテゴリ分類 + 地域タグ）
  * @param {string} keyword - シートから取得した検索キーワード（例: "Akihabara Animate"）
  */
 async function completeFullSpotInfo(keyword) {
@@ -36,19 +37,23 @@ async function completeFullSpotInfo(keyword) {
     // ✅ ログ出力（カテゴリ確認）
     logInfo(CONTEXT, `📦 カテゴリ分類: category="${category}" / tags=${JSON.stringify(tags)}`);
 
-    // Step 5: 統合データの生成
+    // Step 5: 地域タグを緯度経度から判定
+    const regionTag = getRegionTagByLatLng(enrichedSpot.lat, enrichedSpot.lng);
+
+    // Step 6: 統合データの生成
     const fullyCompletedSpot = {
       ...enrichedSpot,
       description: typeof deepSeekResult.description === 'string' ? deepSeekResult.description : '',
       short_tip_en: typeof deepSeekResult.tip === 'string' ? deepSeekResult.tip : '',
 
-      // ✅ カテゴリ情報を追加
+      // ✅ 補足情報
       category_for_map: category,
       tags_json: JSON.stringify(tags),
-      source_type: "api" // 明示
+      source_type: "api",
+      region_tag: regionTag
     };
 
-    // Step 6: スプレッドシートに保存
+    // Step 7: スプレッドシートに保存
     await writeSpot(fullyCompletedSpot);
 
     logInfo(CONTEXT, `✅ 完了: keyword="${keyword}" → placeId=${fullyCompletedSpot.placeId}`);
