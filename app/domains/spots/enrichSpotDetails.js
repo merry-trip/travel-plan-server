@@ -13,7 +13,14 @@ const FIELDS = [
   'userRatingCount',
   'businessStatus',
   'currentOpeningHours.openNow',
-  'regularOpeningHours.weekdayDescriptions'
+  'regularOpeningHours.weekdayDescriptions',
+  'formattedAddress',
+  'primaryTypeDisplayName',
+  'displayName.text',
+  'priceLevel',
+  'internationalPhoneNumber',
+  'editorialSummary.text',
+  'location'
 ].join(',');
 
 /**
@@ -28,7 +35,7 @@ async function enrichSpotDetails(spot) {
   }
 
   const url = `${BASE_URL}/${spot.placeId}?fields=${FIELDS}&key=${API_KEY}`;
-  logger.logInfo(context, `Request URL: ${url}`); // ★追加
+  logger.logInfo(context, `Request URL: ${url}`);
 
   try {
     const res = await fetch(url);
@@ -42,7 +49,7 @@ async function enrichSpotDetails(spot) {
       throw new Error(`Places API error: ${errorMsg}`);
     }
 
-    const place = json.place || {};
+    const place = json;
 
     const enriched = {
       ...spot,
@@ -54,6 +61,12 @@ async function enrichSpotDetails(spot) {
       opening_hours: Array.isArray(place.regularOpeningHours?.weekdayDescriptions)
         ? place.regularOpeningHours.weekdayDescriptions.join(', ')
         : '',
+      formatted_address: place.formattedAddress || '',
+      primary_type: place.primaryTypeDisplayName?.text || '',
+      display_name: place.displayName?.text || '',
+      price_level: place.priceLevel ?? null,
+      phone: place.internationalPhoneNumber || '',
+      summary: place.editorialSummary?.text || '',
     };
 
     logger.logInfo(context, `Details enriched for ${spot.name || spot.placeId}`);

@@ -22,13 +22,15 @@ function mapSpotToRow(spot) {
       return '';
     }
 
-    // ✅ 配列はカンマ区切りの文字列に変換
     if (Array.isArray(value)) {
       return value.join(', ');
     }
 
-    // ✅ オブジェクトはJSON文字列化（tags_jsonなどを想定）
+    // ✅ オブジェクトが { text: '...' } の場合だけ中身を返す
     if (typeof value === 'object') {
+      if ('text' in value && typeof value.text === 'string') {
+        return value.text;
+      }
       return JSON.stringify(value);
     }
 
@@ -38,4 +40,4 @@ function mapSpotToRow(spot) {
   return row;
 }
 
-module.exports = mapSpotToRow;
+module.exports = { mapSpotToRow }; // ✅ ここを追加！

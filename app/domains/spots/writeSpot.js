@@ -1,6 +1,6 @@
 // app/domains/spots/writeSpot.js
 const validateSpot = require('./validateSpot');
-const mapSpotToRow = require('./rowMapper');
+const { mapSpotToRow } = require('./rowMapper');
 const appendRow = require('../../utils/appendRow');
 const logger = require('../../utils/logger');
 

@@ -1,14 +1,13 @@
 // test-scripts/enrichSpotDetails.test.js
 require('dotenv').config();
-const { enrichSpotDetails } = require('../app/domains/spots/enrichSpotDetails');
+const enrichSpotDetails = require('../app/domains/spots/enrichSpotDetails'); // ← 修正済
 const logger = require('../app/utils/logger');
 
 (async () => {
   const context = 'enrichSpotDetails.test';
 
-  // ✅ テスト用の最小データ（placeIdのみでOK）
   const spot = {
-    placeId: 'ChIJkQEWLm2OGGAR9SSyRMpV5cw', // ✅例：Google SydneyのplaceId（またはToshiさんの手元の本物でOK）
+    placeId: 'ChIJU9ZPE2-NGGARwiJyx0Id61E', // 任意のplaceId
     name: '',
     lat: 0,
     lng: 0

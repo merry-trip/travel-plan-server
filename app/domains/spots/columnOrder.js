@@ -19,6 +19,10 @@ module.exports = [
     'business_status',
     'open_now',
     'opening_hours',
+    'primary_type',       
+    'price_level',        
+    'phone',               
+    'summary', 
   
     // ③ DeepSeek自動生成
     'description',

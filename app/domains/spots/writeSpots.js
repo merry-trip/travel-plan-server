@@ -1,5 +1,5 @@
 const validateSpot = require('./validateSpot');
-const mapSpotToRow = require('./rowMapper');
+const { mapSpotToRow } = require('./rowMapper');
 const appendRows = require('../../utils/appendRows'); // 複数行対応ユーティリティ
 const logger = require('../../utils/logger');
 
