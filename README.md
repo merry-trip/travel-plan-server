@@ -468,4 +468,39 @@ placeId をスプレッドシートなどに保存
 APIの書き換えチェック
 定期的に fieldMask の構造や仕様変更をチェックし、更新すること
 
+# 🗺 Travel Plan Server
 
+## 📌 概要
+訪日外国人向けアニメ・マンガ旅行プラン自動生成サービスのバックエンド。
+
+## 🗂 ディレクトリ構成
+
+app/ ├── domains/spots/ # API/DB連携ロジック ├── scripts/ # GitHub Actions実行ファイル ├── utils/ # 汎用ツール（logger 等） test-scripts/ # ローカルテスト用
+
+
+## 🧪 セットアップ手順
+- Node.js v20 以上
+- `.env` に以下を定義：
+
+```env
+APP_ENV=dev
+GOOGLE_API_KEY_DEV=...
+DEESEEK_API_KEY_DEV=...
+SPREADSHEET_ID_SPOTS=...
+📘 API・運用方針
+Google Places API → v1 のみ使用（旧版禁止）
+
+DeepSeek API → deepseek-chat 使用、OpenAI互換
+
+🪵 ログ設計
+app/utils/logger.js にて日本時間 / context 付きで出力
+
+レベル：INFO / ERROR / DEBUG 対応
+
+🪜 Step進行表（最新版：v1.6.3）
+
+Step	内容	状況
+Step 6	GitHub Actions構築	✅ 完了
+Step 7	DeepSeek補完実装	✅ 完了
+Step 8	description 上書き保存	✅ 完了
+Step 9	status制御（次ステップ）	⏳ 開始予定
