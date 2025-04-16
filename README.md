@@ -504,3 +504,12 @@ Step 6	GitHub Actions構築	✅ 完了
 Step 7	DeepSeek補完実装	✅ 完了
 Step 8	description 上書き保存	✅ 完了
 Step 9	status制御（次ステップ）	⏳ 開始予定
+
+## v1.6.12-batch-keywords
+
+- 🔄 目的：未完了スポットのキーワードステータスを一括で「完了済み（done）」に更新
+- 🧪 テスト済み：`test-updateKeywordStatus.js`
+- 📁 主要ファイル：
+  - `app/scripts/batchCompleteReadySpots.js`
+  - `app/domains/spots/updateKeywordStatus.js`
+- 📝 補足：Google Sheets との連携前の内部処理用。今後、検索ログと統合予定。
