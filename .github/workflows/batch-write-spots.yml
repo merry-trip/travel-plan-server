@@ -18,12 +18,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies in app/  # ✅ 修正ポイント
+      - name: Install dependencies in app/
         working-directory: app
         run: npm install
 
-      - name: Run batch spot writer from root
-        run: node test-scripts/batch-write-spots.js
+      - name: Run batch spot writer (本番用スクリプトを実行)
+        working-directory: app
+        run: node scripts/batchWriteSpots.js
         env:
           APP_ENV: prod
           GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
