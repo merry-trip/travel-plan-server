@@ -217,3 +217,255 @@ app/
 - 為替レート表示（例：JPY → USD）UIを `<small>` で表示
 
 ---
+# 📘 Spot Data 管理方針（v1.5.3）
+
+## 🚫 Places API のバージョン方針
+
+本プロジェクトでは **Google Places API（旧版）を一切使用せず、新版（v1）のみを使用する**。
+
+### ✅ 採用API：Places API New（v1）
+
+- 利用するAPIはすべて `https://places.googleapis.com/v1/...` に統一
+- 使用API：
+  - `places:searchText`
+  - `places/{placeId}`
+  - `places:searchNearby`（将来的に）
+  - `places:autocomplete`（将来的に）
+- 呼び出し形式：**POST + JSON ボディ**
+- 必ず `X-Goog-FieldMask` ヘッダーで **取得フィールドを明示**
+- APIキーは `.env` の `GOOGLE_API_KEY_DEV` を使用（開発時）
+
+### ❌ 非採用：旧版 API の禁止リスト
+
+| URL形式 | 理由 |
+|---------|------|
+| `https://maps.googleapis.com/maps/api/place/details/json?...` | 旧版：サポート終了予定、互換性なし |
+| `https://maps.googleapis.com/maps/api/place/search/json?...` | 検索精度／構造が新版と異なる |
+| `embed maps` 経由での Place ID 抽出 | 形式が非推奨・安定しない |
+
+### 🧠 運用ルール
+
+- `placeId` は **SearchText API (v1)** で毎回取得する
+- 保存した `placeId` がエラーとなった場合は再取得する（自動／手動）
+- `enrichSpotDetails.js` では **新版の Place ID のみ対応**
+- logger によって、失敗ログ・エラー内容は常時記録される
+
+---
+
+## 📌 補足
+
+Places API v1 は **fieldMask が必須**であり、不要なフィールドを省略できる点で料金対策にも有効です。
+
+📘  Spot Data Summary（v1.5.3）
+
+✅ ここまでの成果（完了済）
+項目
+内容
+.env による環境分岐
+APP_ENV=dev により、開発時はローカル／スプレッドシートは本番IDに書き込む設計
+スプレッドシート管理
+.env に SPREADSHEET_ID_SPOTS を追加し、APIキー切替と構成を統一
+シート名の統一
+本番用スプレッドシートのタブ名は spots に統一
+ログ設計
+logger.js により、INFO / ERROR / DEBUG ログを出力＆記録（日本時間、context付き）
+SearchText API 導入
+searchTextSpot.js により、検索語から有効な placeId を取得可能に
+GetPlaceDetails 補完処理
+enrichSpotDetails.js により、API経由で詳細情報を補完・整形可能に
+
+
+🚀 これからやるべきこと（v1.5.3 以降）
+ステップ
+内容
+⏳ カラム順の定義
+columnOrder.js：A1行と完全一致を維持
+⏳ データ整形
+rowMapper.js：columnOrderに準拠
+⏭ バリデーション処理
+validateSpot.js による必須項目／型チェック
+⏭ 書き込み処理（1件）
+writeSpot.js によるバリデーション＋行変換＋appendRow
+⏭ 複数件書き込み
+writeSpots.js によるバッチ書き込み（appendRows()）
+⏭ 自動補完
+DeepSeek による自然文補完（v1.6.0〜）
+⏭ GitHub Actions
+spots-write.yml による定期処理＋通知
+
+
+📁 ディレクトリ構成（v1.5.3時点）
+cpp
+コピーする編集する
+app/
+├── domains/
+│   └── spots/
+│       ├── columnOrder.js
+│       ├── rowMapper.js
+│       ├── validateSpot.js
+│       ├── writeSpot.js
+│       ├── writeSpots.js
+│       ├── enrichSpotDetails.js   // ✅ 詳細補完API処理
+│       ├── searchTextSpot.js      // ✅ 検索 → placeId取得
+│       └── completeSpotInfo.js    // DeepSeek補完（予定）
+└── utils/
+    └── logger.js                  // ✅ logInfo, logError, logDebug を提供
+
+test-scripts/
+├── enrichSpotDetails.test.js      // ✅ GetPlaceDetails動作確認済
+└── searchTextSpot.test.js         // ✅ SearchText API動作確認済
+
+
+💡 よくあるミスと改善策（再掲）
+問題点
+改善策
+placeIdが無効になる
+必ず SearchText API で最新版を取得する設計に
+logger.debug is not a function
+logger.logDebug() に統一し、logger.jsに関数を追加
+fieldMask の未指定
+SearchText API呼び出し時に X-Goog-FieldMask を明示的に指定する
+
+
+📦 スポットデータ構成（v1.5.2時点）
+①【基本情報（Places API new）】
+placeId [必須]
+name [必須]
+lat [必須]
+lng [必須]
+formatted_address [使用中]
+types [Google分類]
+source_type [使用中]
+category_for_map [手動分類]
+display_name [補完予定]
+region_tag [補完予定]
+
+
+②【詳細情報（GetPlaceDetails）】
+website_url [使用中]
+rating [使用中]
+ratings_count [使用中]
+business_status [使用中]
+open_now [補完予定]
+opening_hours [補完予定]
+③【DeepSeek 自動生成】
+description [DeepSeek予定]
+short_tip_en [DeepSeek予定]
+best_time [DeepSeek予定]
+photo_ok [DeepSeek予定]
+english_menu [DeepSeek予定]
+cash_only [DeepSeek予定]
+
+
+④【レビュー加工（DeepSeek）】
+short_review_summary [DeepSeek]
+tags [DeepSeek/UI表示]
+tags_json [DeepSeek/JSON]
+⑤【周辺・移動・利便性】
+nearest_station [補完予定]
+walking_time_from_station [補完予定]
+related_spots [未使用]
+has_foreign_currency_atm [補完予定]
+has_free_wifi [補完予定]
+rental_cycle_nearby [補完予定]
+
+
+⑥【UX・人気分析】
+search_count [ログ集計]
+search_popularity [ログ集計]
+visit_feedback_score [ユーザー投稿]
+user_tags [ユーザー投稿]
+verified [確認用]
+note [備考]
+last_updated_at [自動記録]
+
+
+
+🧠 運用ルール（READMEにも記載予定）
+項目
+ルール
+カラム構成の管理
+app/domains/spots/columnOrder.js に記述し、A1行と完全一致に保つ
+バリデーション処理
+validateSpot.js に定義し、writeSpot.js 内で毎回通す設計
+テストコード配置
+test-scripts/ や .dev/ に一時保存。本番対象は domains/ 配下に統一
+
+
+🪜 Step形式進行管理（最新版）
+Step
+内容
+状況
+✅ Step 0
+前提構築（.env, logger, シート構成）
+完了
+✅ Step 1
+カラム定義・整形・バリデーション・1件書き込み
+完了
+✅ Step 2
+複数件の書き込み（writeSpots + appendRows）
+完了
+✅ Step 3
+enrichSpotDetails による詳細補完
+完了 ✅
+✅ Step 4
+SearchText によるplaceId取得（新版）
+完了 ✅
+⏳ Step 5
+search → enrich → write の統合 or 自動化
+次ステップ！
+⏭ Step 6
+GitHub Actionsによるバッチ実行＋通知
+未着手
+⏭ Step 7
+DeepSeekによる自動生成・補完フェーズ
+v1.6.0〜予定
+
+
+🚫 旧版 Places API の非採用方針（明示）
+❗ 利用禁止：旧版の Places API（place/details/json など）
+今後の本番・開発環境すべてにおいて、旧版（v1.0以前）のPlaces APIエンドポイントは一切使用しないことを明記します。
+
+✅ 採用API：Google Places API New（v1）
+項目
+内容
+API ベースURL
+https://places.googleapis.com/v1/...
+利用API一覧
+places:searchText, places/{placeId}, places:searchNearby, places:autocomplete
+呼び出し形式
+POST + JSONボディ、X-Goog-FieldMask ヘッダー付きリクエスト
+バージョン固定
+v1 明記必須（/v1/places/...）
+使用ライブラリ
+すべて node-fetch ベースのカスタム実装（SDK未使用）
+APIキー管理
+.env 経由で GOOGLE_API_KEY_DEV を統一利用（開発環境）
+データ取得制限
+必ず fieldMask 指定で取得フィールドを明示する（API最適化）
+
+
+🚫 使用禁止とする旧API例
+非推奨エンドポイント
+理由
+https://maps.googleapis.com/maps/api/place/details/json?...
+旧版：今後サポート終了予定／新版と互換性なし
+https://maps.googleapis.com/maps/api/place/search/json?...
+SearchTextの新版で代替可能
+place_id 取得に embed maps などを使用
+取得精度・形式が不安定。SearchTextで統一する方針
+
+
+🎯 設計上の保証
+ポイント
+運用ルール
+placeId の取得元
+SearchText API（v1） のみ
+placeId が無効化された場合
+再検索・再取得処理（SearchText）で常に最新化
+placeId をスプレッドシートなどに保存
+保存可。ただし長期キャッシュは禁止／更新前提で使用すること
+APIの書き換えチェック
+定期的に fieldMask の構造や仕様変更をチェックし、更新すること
+
+
