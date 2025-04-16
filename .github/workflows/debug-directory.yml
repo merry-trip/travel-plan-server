@@ -1,0 +1,29 @@
+name: Debug Directory Structure
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Show working directory
+        run: pwd
+
+      - name: List top-level files
+        run: ls -al
+
+      - name: List project root contents (1階層下)
+        run: ls -al travel-plan-server || echo "travel-plan-server not found"
+
+      - name: Show location of package.json
+        run: |
+          find . -name package.json || echo "package.json not found"
+
+      - name: Show location of test scripts
+        run: |
+          find . -type f -name "*.js" | grep test-scripts || echo "No test scripts found"
