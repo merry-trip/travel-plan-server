@@ -4,12 +4,13 @@ const { searchTextSpot } = require('./searchTextSpot.js');
 const { enrichSpotDetails } = require('./enrichSpotDetails.js');
 const { completeWithDeepSeek } = require('./completeWithDeepSeek.js');
 const { writeSpot } = require('./writeSpot.js');
+const { getPrimaryCategory, getCategoriesFromTypes } = require('./categorizeSpot.js');
 const { logInfo, logError } = require('../../utils/logger.js');
 
 const CONTEXT = 'completeFullSpotInfo';
 
 /**
- * スポット補完フロー（Google + DeepSeek）
+ * スポット補完フロー（Google + DeepSeek + カテゴリ分類）
  * @param {string} keyword - シートから取得した検索キーワード（例: "Akihabara Animate"）
  */
 async function completeFullSpotInfo(keyword) {
@@ -28,26 +29,26 @@ async function completeFullSpotInfo(keyword) {
     // Step 3: DeepSeek で description / tip を補完
     const deepSeekResult = await completeWithDeepSeek(enrichedSpot);
 
-    // Step 4: 統合データの生成（DeepSeekの description を強制優先）
+    // Step 4: カテゴリ分類（Google types[] から）
+    const category = getPrimaryCategory(enrichedSpot.types);
+    const tags = getCategoriesFromTypes(enrichedSpot.types);
+
+    // ✅ ログ出力（カテゴリ確認）
+    logInfo(CONTEXT, `📦 カテゴリ分類: category="${category}" / tags=${JSON.stringify(tags)}`);
+
+    // Step 5: 統合データの生成
     const fullyCompletedSpot = {
       ...enrichedSpot,
+      description: typeof deepSeekResult.description === 'string' ? deepSeekResult.description : '',
+      short_tip_en: typeof deepSeekResult.tip === 'string' ? deepSeekResult.tip : '',
 
-      // ✅ DeepSeekの出力で必ず上書きする（objectやtext混入を防ぐ）
-      description:
-        typeof deepSeekResult.description === 'string'
-          ? deepSeekResult.description
-          : '',
-
-      short_tip_en:
-        typeof deepSeekResult.tip === 'string'
-          ? deepSeekResult.tip
-          : ''
+      // ✅ カテゴリ情報を追加
+      category_for_map: category,
+      tags_json: JSON.stringify(tags),
+      source_type: "api" // 明示
     };
 
-    // ✅ ログで中身確認
-    logInfo(CONTEXT, `🧪 description = ${JSON.stringify(fullyCompletedSpot.description)}`);
-
-    // Step 5: スプレッドシートに保存（placeId が存在すれば上書き）
+    // Step 6: スプレッドシートに保存
     await writeSpot(fullyCompletedSpot);
 
     logInfo(CONTEXT, `✅ 完了: keyword="${keyword}" → placeId=${fullyCompletedSpot.placeId}`);
