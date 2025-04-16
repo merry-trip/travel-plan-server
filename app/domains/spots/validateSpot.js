@@ -40,6 +40,4 @@ function validateSpot(spot) {
   return true;
 }
 
-module.exports = {
-  validateSpot,
-};
+module.exports = validateSpot; 

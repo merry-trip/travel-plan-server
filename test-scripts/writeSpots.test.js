@@ -1,38 +1,25 @@
-// test-scripts/writeSpots.test.js
-require('dotenv').config(); // .env 読み込み
-const { writeSpots } = require('../app/domains/spots/writeSpots');
-const logger = require('../app/utils/logger');
+require('dotenv').config();
+const writeSpots = require('../app/domains/spots/writeSpots');
 
 (async () => {
-  const context = 'writeSpots.test';
-
-  // ✅ 複数スポットデータ（最低限の4項目）
-  const spots = [
+  const testSpots = [
     {
-      placeId: 'test001',
-      name: 'Test Spot A',
-      lat: 35.6895,
-      lng: 139.6917,
+      placeId: 'test-123-akiba',
+      name: 'Test Animate Akiba',
+      lat: 35.7,
+      lng: 139.77,
+      formatted_address: 'Test address',
+      types: ['store', 'book_store']
     },
     {
-      placeId: 'test002',
-      name: 'Test Spot B',
-      lat: 34.6937,
-      lng: 135.5023,
-    },
-    {
-      placeId: 'test003',
-      name: 'Test Spot C',
-      lat: 43.0642,
-      lng: 141.3469,
-    },
+      placeId: 'test-456-nakano',
+      name: 'Test Nakano Broadway',
+      lat: 35.707,
+      lng: 139.665,
+      formatted_address: 'Test address 2',
+      types: ['shopping_mall', 'point_of_interest']
+    }
   ];
 
-  try {
-    logger.logInfo(context, '🧪 writeSpots テスト開始');
-    await writeSpots(spots);
-    logger.logInfo(context, '✅ writeSpots テスト成功');
-  } catch (err) {
-    logger.logError(context, `❌ writeSpots テスト失敗: ${err.message}`);
-  }
+  await writeSpots(testSpots);
 })();
