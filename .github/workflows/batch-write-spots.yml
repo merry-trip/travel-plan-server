@@ -20,11 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: travel-plan-server
+        # working-directory: ./ ← ★この行を削除！
 
       - name: Run batch spot writer
         run: node test-scripts/batch-write-spots.js
-        working-directory: travel-plan-server
+        # working-directory: ./ ← ★この行も削除！
+
         env:
           GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
           GOOGLE_SHEET_ID_PROD: ${{ secrets.GOOGLE_SHEET_ID_PROD }}
