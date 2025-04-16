@@ -30,4 +30,4 @@ async function writeSpot(spot) {
   }
 }
 
-module.exports = writeSpot;
+module.exports = { writeSpot };

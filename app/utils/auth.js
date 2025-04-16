@@ -30,4 +30,4 @@ function getAuthClient() {
   }
 }
 
-module.exports = getAuthClient();
+module.exports = { getAuthClient };

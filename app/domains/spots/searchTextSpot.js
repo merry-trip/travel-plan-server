@@ -1,3 +1,6 @@
+// 🔧 searchTextSpot.js の先頭にこれを追加！
+require('dotenv').config();
+
 const fetch = require('node-fetch');
 const logger = require('../../utils/logger');
 
@@ -55,4 +58,4 @@ async function searchTextSpot(query) {
 }
 
 // ✅ これで「requireしたら関数」になる
-module.exports = searchTextSpot;
+module.exports = { searchTextSpot };
