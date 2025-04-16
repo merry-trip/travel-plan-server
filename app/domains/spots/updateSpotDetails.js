@@ -35,7 +35,7 @@ async function updateSpotDetails(updatedSpot) {
     const rowIndexInSheet = targetRowIndex + 2; // シートは1始まり＋ヘッダー行
     logger.logInfo(context, `📝 上書き対象行: ${rowIndexInSheet} (${updatedSpot.name || updatedSpot.placeId})`);
 
-    const fieldsToUpdate = ['description', 'short_tip_en', 'ai_description_status'];
+    const fieldsToUpdate = ['description', 'short_tip_en', 'ai_description_status', 'status'];
     const valueArray = fieldsToUpdate.map(field => updatedSpot[field] || '');
 
     const columnIndexes = fieldsToUpdate.map(field => header.indexOf(field));
