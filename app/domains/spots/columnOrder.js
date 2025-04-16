@@ -48,5 +48,6 @@ module.exports = [
   'user_tags',
   'verified',
   'note',
+  'status',
   'last_updated_at',
 ];

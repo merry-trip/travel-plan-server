@@ -8,7 +8,8 @@ const context = 'updateSpotDetails';
 
 /**
  * スプレッドシート上の既存スポット（placeId一致）に対して、
- * description / tip / status を上書き保存する
+ * description / tip / ai_description_status などを上書き保存する。
+ * status や last_updated_at も必要に応じて更新。
  * @param {Object} updatedSpot - 補完済みのスポットオブジェクト
  * @returns {Promise<void>}
  */
@@ -17,7 +18,7 @@ async function updateSpotDetails(updatedSpot) {
     const sheets = await getSheetClient();
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SPREADSHEET_ID_SPOTS,
-      range: `${SHEET_NAME}`
+      range: SHEET_NAME,
     });
 
     const rows = response.data.values;
@@ -32,17 +33,31 @@ async function updateSpotDetails(updatedSpot) {
       return;
     }
 
-    const rowIndexInSheet = targetRowIndex + 2; // シートは1始まり＋ヘッダー行
+    const rowIndexInSheet = targetRowIndex + 2; // 1始まり + ヘッダー行
     logger.logInfo(context, `📝 上書き対象行: ${rowIndexInSheet} (${updatedSpot.name || updatedSpot.placeId})`);
 
-    const fieldsToUpdate = ['description', 'short_tip_en', 'ai_description_status', 'status'];
-    const valueArray = fieldsToUpdate.map(field => updatedSpot[field] || '');
+    // 🔧 更新対象フィールド（存在していれば更新）
+    const candidateFields = [
+      'description',
+      'short_tip_en',
+      'ai_description_status',
+      'status',
+      'last_updated_at'
+    ];
 
+    const fieldsToUpdate = candidateFields.filter(field => updatedSpot[field] !== undefined);
+
+    if (fieldsToUpdate.length === 0) {
+      logger.logInfo(context, `ℹ️ 更新対象フィールドなし: ${updatedSpot.placeId}`);
+      return;
+    }
+
+    const valueArray = fieldsToUpdate.map(field => updatedSpot[field] || '');
     const columnIndexes = fieldsToUpdate.map(field => header.indexOf(field));
 
     const requests = columnIndexes.map((colIndex, i) => ({
       range: `${SHEET_NAME}!${columnToLetter(colIndex + 1)}${rowIndexInSheet}`,
-      values: [[valueArray[i]]]
+      values: [[valueArray[i]]],
     }));
 
     for (const req of requests) {
@@ -50,11 +65,11 @@ async function updateSpotDetails(updatedSpot) {
         spreadsheetId: process.env.SPREADSHEET_ID_SPOTS,
         range: req.range,
         valueInputOption: 'USER_ENTERED',
-        requestBody: { values: req.values }
+        requestBody: { values: req.values },
       });
     }
 
-    logger.logInfo(context, `✅ 上書き完了: ${updatedSpot.placeId}`);
+    logger.logInfo(context, `✅ 上書き完了: ${updatedSpot.placeId} → [${fieldsToUpdate.join(', ')}]`);
   } catch (err) {
     logger.logError(context, `❌ updateSpotDetails 失敗: ${err.message}`);
     throw err;
@@ -63,6 +78,8 @@ async function updateSpotDetails(updatedSpot) {
 
 /**
  * 数字 → Excel列記号（例：1 → A, 27 → AA）
+ * @param {number} col
+ * @returns {string}
  */
 function columnToLetter(col) {
   let letter = '';
@@ -74,6 +91,4 @@ function columnToLetter(col) {
   return letter;
 }
 
-// ✅ 修正後（推奨）
 module.exports = { updateSpotDetails };
-

@@ -20,14 +20,12 @@ function formatLog(level, context, message) {
 function writeLog(level, context, message) {
   const formatted = formatLog(level, context, message);
 
-  // コンソール出力（エラーは赤、他は通常）
   if (level === 'ERROR') {
     console.error(formatted);
   } else {
     console.log(formatted);
   }
 
-  // ファイル出力（全レベル記録）
   fs.appendFileSync(logFilePath, formatted + '\n', 'utf8');
 }
 
@@ -38,5 +36,6 @@ module.exports = {
     const msg = messageOrError instanceof Error ? messageOrError.stack : messageOrError;
     writeLog('ERROR', context, msg);
   },
-  logDebug: (context, message) => writeLog('DEBUG', context, message) // ←追加された関数
+  logDebug: (context, message) => writeLog('DEBUG', context, message),
+  logWarn: (context, message) => writeLog('WARN', context, message) // ← ✅ これも今追加しましょう！
 };
