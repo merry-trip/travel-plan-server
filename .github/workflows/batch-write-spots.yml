@@ -1,0 +1,29 @@
+name: Monthly Spot Batch Write
+
+on:
+  schedule:
+    - cron: '0 21 1 * *'  # JST 6:00 毎月1日
+  workflow_dispatch:      # 手動実行も許可
+
+jobs:
+  batch-write:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run batch spot writer
+        run: node test-scripts/batch-write-spots.js
+        env:
+          GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
+          GOOGLE_SHEET_ID_PROD: ${{ secrets.GOOGLE_SHEET_ID_PROD }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
