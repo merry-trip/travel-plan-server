@@ -74,4 +74,6 @@ function columnToLetter(col) {
   return letter;
 }
 
-module.exports = updateSpotDetails;
+// ✅ 修正後（推奨）
+module.exports = { updateSpotDetails };
+

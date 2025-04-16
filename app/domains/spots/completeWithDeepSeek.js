@@ -66,4 +66,5 @@ Return in this format:
   }
 }
 
-module.exports = completeWithDeepSeek;
+module.exports = { completeWithDeepSeek };
+
