@@ -1,3 +1,10 @@
+// app/domains/spots/columnOrder.js
+
+/**
+ * スプレッドシートへの出力列順を定義
+ * 必須：writeSpot.js / mapSpotToRow() などで使用
+ * 補足：列の追加・削除時は必ずこの配列を更新すること！
+ */
 module.exports = [
   // ① 基本情報
   'placeId',
@@ -19,8 +26,7 @@ module.exports = [
   'open_now',
   'opening_hours',
 
-  // ↓↓ ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-  // ✅ ここから「DeepSeek + カスタム列」たち
+  // ③ DeepSeek + カスタム列
   'description',
   'short_tip_en',
   'best_time',
@@ -33,7 +39,7 @@ module.exports = [
   'tags',
   'tags_json',
 
-  // ⑤ 周辺・移動・利便性
+  // ④ 周辺・移動・利便性
   'nearest_station',
   'walking_time_from_station',
   'related_spots',
@@ -41,7 +47,7 @@ module.exports = [
   'has_free_wifi',
   'rental_cycle_nearby',
 
-  // ⑥ UX・人気分析
+  // ⑤ UX・人気分析
   'search_count',
   'search_popularity',
   'visit_feedback_score',

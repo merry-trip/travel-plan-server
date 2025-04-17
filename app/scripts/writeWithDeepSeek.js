@@ -1,9 +1,10 @@
-// scripts/writeWithDeepSeek.js
+// app/scripts/writeWithDeepSeek.js
 
 const { getKeywordsFromSheet } = require('../domains/spots/getKeywordsFromSheet.js');
 const { completeWithDeepSeek } = require('../domains/spots/completeWithDeepSeek.js');
 const { updateSpotDetails } = require('../domains/spots/updateSpotDetails.js');
 const { logInfo, logError } = require('../utils/logger.js');
+const config = require('../config'); // ✅ 今後の統一運用に備えて導入
 
 const CONTEXT = 'writeWithDeepSeek';
 

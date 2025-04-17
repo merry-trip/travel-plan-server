@@ -1,26 +1,26 @@
-// getRoute.js（プロ仕様：logger付き）
-const axios = require('axios');
-const { logInfo, logError } = require('./utils/logger'); // ✅ logger導入
-require('dotenv').config();
+// test-scripts/getRoute.js
 
-const apiKey = process.env.GOOGLE_API_KEY;
+process.env.APP_ENV = 'test'; // ✅ テスト環境明示（APIキー安全）
+
+const axios = require('axios');
+const { logInfo, logError } = require('../app/utils/logger');
+const config = require('../app/config');
+
+const context = 'getRoute';
 
 async function getUserCountry() {
-  const context = 'getUserCountry';
   try {
     const res = await axios.get('https://ipapi.co/json/');
     const countryCode = res.data.country;
-    logInfo(context, `🌍 検出された国コード: ${countryCode}`);
+    logInfo('getUserCountry', `🌍 検出された国コード: ${countryCode}`);
     return countryCode;
   } catch (error) {
-    logError(context, `❌ 国コード取得失敗: ${error.message}`);
+    logError('getUserCountry', `❌ 国コード取得失敗: ${error.message}`);
     return 'JP';
   }
 }
 
 async function getRoute() {
-  const context = 'getRoute';
-
   try {
     const userCountry = await getUserCountry();
     const imperialCountries = ['US', 'LR', 'MM'];
@@ -33,7 +33,7 @@ async function getRoute() {
     const languageCode = 'en';
 
     const departureTime = {
-      seconds: Math.floor((Date.now() + 30 * 60 * 1000) / 1000) // 30分後
+      seconds: Math.floor((Date.now() + 30 * 60 * 1000) / 1000)
     };
 
     const requestBody = {
@@ -49,13 +49,14 @@ async function getRoute() {
     };
 
     logInfo(context, '🚦 Routes API リクエスト開始...');
+
     const response = await axios.post(
       'https://routes.googleapis.com/directions/v2:computeRoutes',
       requestBody,
       {
         headers: {
           'Content-Type': 'application/json',
-          'X-Goog-Api-Key': apiKey,
+          'X-Goog-Api-Key': config.GOOGLE_API_KEY,
           'X-Goog-FieldMask': '*'
         }
       }
@@ -70,7 +71,10 @@ async function getRoute() {
       logInfo(context, JSON.stringify(data.routes[0], null, 2));
     }
   } catch (error) {
-    logError(context, error);
+    logError(context, `❌ API呼び出し失敗: ${error.message}`);
+    if (error.response) {
+      logError(context, `❗ 応答詳細: ${JSON.stringify(error.response.data, null, 2)}`);
+    }
   }
 }
 

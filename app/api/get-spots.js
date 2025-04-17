@@ -1,25 +1,28 @@
-// api/get-spots.js
+// app/api/get-spots.js
+
 const { google } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
-const { logInfo, logError } = require('../utils/logger'); // ✅ ロガーを追加
-require('dotenv').config(); // .env読み込み
+const { logInfo, logError } = require('../utils/logger');
+const config = require('../config'); // ✅ configで一元管理
 
-// 🔧 環境情報（dev固定でOK）
-const keyFilePath = path.resolve(process.env.GOOGLE_CREDENTIALS_PATH_DEV);
-const spreadsheetId = process.env.SHEET_ID_WEATHER_DEV;
-const sheetName = process.env.SHEET_NAME_SPOTS_DEV;
+// 🔧 環境情報の取得
+const context = 'get-spots';
 
-// ✅ Google Sheets API 認証設定
+const keyFilePath = path.resolve(config.GOOGLE_CREDENTIALS_PATH);
+const spreadsheetId = config.SPREADSHEET_ID_SPOTS;
+const sheetName = config.SHEET_NAME_SPOTS;
+
 const auth = new google.auth.GoogleAuth({
   keyFile: keyFilePath,
   scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
 });
 
-// ✅ 関数：anime_spot_db からスポット一覧を取得
+/**
+ * Google Sheets（anime_spot_db）からスポット一覧を取得し整形する
+ * @returns {Promise<Array<Object>>}
+ */
 async function getSpotList() {
-  const context = 'get-spots'; // ログ用の処理名
-
   try {
     const client = await auth.getClient();
     const sheets = google.sheets({ version: 'v4', auth: client });
@@ -31,15 +34,12 @@ async function getSpotList() {
 
     const values = res.data.values || [];
 
-    // ✅ 成功ログ（件数表示）
-    logInfo(context, `スポット取得成功：${values.length}件`);
+    logInfo(context, `✅ スポット取得成功：${values.length}件`);
 
-    // ✅ 先頭1件をテスト表示（開発用）
     if (values[0]) {
-      logInfo(context, `先頭データ: ${JSON.stringify(values[0])}`);
+      logInfo(context, `📌 先頭データ: ${JSON.stringify(values[0])}`);
     }
 
-    // ✅ オブジェクト形式に整形して返す
     return values.map((row) => ({
       name: row[0],
       lat: parseFloat(row[1]),
@@ -48,12 +48,11 @@ async function getSpotList() {
       placeId: row[4],
       types: row[5],
       source_type: row[6],
-      category_for_map: row[7], // ←これが漏れていると category: unknown になります！
+      category_for_map: row[7],
     }));
-    
+
   } catch (error) {
-    // ❌ エラーログ（原因明示）
-    logError(context, error);
+    logError(context, `❌ スポット取得失敗: ${error.message}`);
     throw error;
   }
 }

@@ -1,10 +1,12 @@
 // app/domains/spots/writeSpot.js
+
 const validateSpot = require('./validateSpot');
 const { mapSpotToRow } = require('./rowMapper');
 const appendRow = require('../../utils/appendRow');
 const logger = require('../../utils/logger');
+const config = require('../../config'); // ✅ config導入
 
-const SHEET_NAME = 'spots';
+const SHEET_NAME = config.SHEET_NAME_SPOTS;
 const context = 'writeSpot';
 
 /**
@@ -23,9 +25,9 @@ async function writeSpot(spot) {
     // ✅ 3. スプレッドシートに追記
     await appendRow(row, SHEET_NAME);
 
-    logger.logInfo(context, `Spot written: ${spot.name}`);
+    logger.logInfo(context, `✅ Spot written: ${spot.name}`);
   } catch (err) {
-    logger.logError(context, `Failed to write spot: ${err.message}`);
+    logger.logError(context, `❌ Failed to write spot: ${err.message}`);
     throw err;
   }
 }

@@ -1,12 +1,12 @@
 // app/scripts/batchCompleteReadySpots.js
 
-require('dotenv').config();
-
 const { getSheetClient } = require('../libs/sheets');
 const { completeFullSpotInfo } = require('../domains/spots/completeFullSpotInfo');
 const { logInfo, logError } = require('../utils/logger');
+const config = require('../config'); // ✅ config導入
 
-const SHEET_NAME = 'anime_keywords';
+const SPREADSHEET_ID = config.SPREADSHEET_ID_KEYWORDS;
+const SHEET_NAME = config.SHEET_NAME_KEYWORDS;
 const CONTEXT = 'batchCompleteReadySpots';
 
 (async () => {
@@ -15,7 +15,7 @@ const CONTEXT = 'batchCompleteReadySpots';
   try {
     const sheets = await getSheetClient();
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.SPREADSHEET_ID_KEYWORDS,
+      spreadsheetId: SPREADSHEET_ID,
       range: SHEET_NAME
     });
 

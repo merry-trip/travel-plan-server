@@ -1,10 +1,12 @@
 // app/domains/spots/validateSpot.js
+
 const logger = require('../../utils/logger');
 
 /**
  * スポットオブジェクトの必須チェックを行う
  * @param {Object} spot - 検証対象のスポットデータ
  * @throws {Error} - 不正なデータがある場合
+ * @returns {boolean} - 有効な場合は true を返す
  */
 function validateSpot(spot) {
   const context = 'validateSpot';
@@ -35,9 +37,8 @@ function validateSpot(spot) {
     }
   }
 
-  // ✔️ OK
-  logger.logInfo(context, `Spot validation passed for: ${spot.name}`);
+  logger.logInfo(context, `✅ Spot validation passed for: ${spot.name}`);
   return true;
 }
 
-module.exports = validateSpot; 
+module.exports = validateSpot;

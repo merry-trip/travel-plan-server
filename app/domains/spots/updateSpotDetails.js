@@ -1,9 +1,13 @@
 // app/domains/spots/updateSpotDetails.js
+
 const { getSheetClient } = require('../../libs/sheets'); // 認証＆API操作
 const columnOrder = require('./columnOrder');
 const logger = require('../../utils/logger');
+const config = require('../../config'); // ✅ config導入
 
-const SHEET_NAME = 'spots';
+const SHEET_NAME = config.SHEET_NAME_SPOTS; // ✅ config参照に変更
+const SPREADSHEET_ID = config.SPREADSHEET_ID_SPOTS;
+
 const context = 'updateSpotDetails';
 
 /**
@@ -17,7 +21,7 @@ async function updateSpotDetails(updatedSpot) {
   try {
     const sheets = await getSheetClient();
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.SPREADSHEET_ID_SPOTS,
+      spreadsheetId: SPREADSHEET_ID,
       range: SHEET_NAME,
     });
 
@@ -62,7 +66,7 @@ async function updateSpotDetails(updatedSpot) {
 
     for (const req of requests) {
       await sheets.spreadsheets.values.update({
-        spreadsheetId: process.env.SPREADSHEET_ID_SPOTS,
+        spreadsheetId: SPREADSHEET_ID,
         range: req.range,
         valueInputOption: 'USER_ENTERED',
         requestBody: { values: req.values },

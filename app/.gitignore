@@ -3,6 +3,8 @@ node_modules/
 
 # 環境変数ファイル（APIキーなど）
 .env
+.env.*
+!.env.test.example
 
 # ログや一時ファイル
 *.log

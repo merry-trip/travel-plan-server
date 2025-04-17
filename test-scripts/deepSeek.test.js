@@ -1,8 +1,11 @@
 // test-scripts/deepSeek.test.js
-require('dotenv').config();
+
+process.env.APP_ENV = 'test'; // ✅ テスト環境明示
+
 const completeWithDeepSeek = require('../app/domains/spots/completeWithDeepSeek');
 const updateSpotDetails = require('../app/domains/spots/updateSpotDetails');
 const logger = require('../app/utils/logger');
+const config = require('../app/config'); // ✅ 環境確認用
 
 (async () => {
   const context = 'deepSeek.test';
@@ -15,7 +18,7 @@ const logger = require('../app/utils/logger');
   };
 
   try {
-    logger.logInfo(context, '🧪 DeepSeek補完テスト開始');
+    logger.logInfo(context, `🧪 DeepSeek補完テスト開始（env=${config.env}）`);
     const enriched = await completeWithDeepSeek(testSpot);
 
     logger.logInfo(context, '✅ 補完結果:');

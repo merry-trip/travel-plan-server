@@ -1,8 +1,12 @@
 // app/domains/keywords/updateKeywordStatus.js
+
 const { getSheetClient } = require('../../libs/sheets');
 const logger = require('../../utils/logger');
+const config = require('../../config'); // ✅ config導入
 
-const SHEET_NAME = 'anime_keywords';
+const SHEET_NAME = config.SHEET_NAME_KEYWORDS;
+const SPREADSHEET_ID = config.SPREADSHEET_ID_KEYWORDS;
+
 const context = 'updateKeywordStatus';
 
 /**
@@ -20,7 +24,7 @@ async function updateKeywordStatus(keyword, status) {
 
     const sheets = await getSheetClient();
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.SPREADSHEET_ID_KEYWORDS,
+      spreadsheetId: SPREADSHEET_ID,
       range: SHEET_NAME,
     });
 
@@ -46,7 +50,7 @@ async function updateKeywordStatus(keyword, status) {
     const statusRange = `${SHEET_NAME}!${columnToLetter(statusIndex + 1)}${rowIndexInSheet}`;
 
     await sheets.spreadsheets.values.update({
-      spreadsheetId: process.env.SPREADSHEET_ID_KEYWORDS,
+      spreadsheetId: SPREADSHEET_ID,
       range: statusRange,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
@@ -60,6 +64,11 @@ async function updateKeywordStatus(keyword, status) {
   }
 }
 
+/**
+ * 列番号（1始まり）を列記号（A, B, ..., AA）に変換
+ * @param {number} col
+ * @returns {string}
+ */
 function columnToLetter(col) {
   let letter = '';
   while (col > 0) {

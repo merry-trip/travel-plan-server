@@ -513,3 +513,27 @@ Step 9	status制御（次ステップ）	⏳ 開始予定
   - `app/scripts/batchCompleteReadySpots.js`
   - `app/domains/spots/updateKeywordStatus.js`
 - 📝 補足：Google Sheets との連携前の内部処理用。今後、検索ログと統合予定。
+
+## 📦 環境変数の準備
+
+1. `.env.test.example` を参考に `.env` を作成してください：
+
+```bash
+cp .env.test.example .env
+
+---
+
+## ✅ まとめ
+
+| ファイル名             | 配置場所       | Git管理 |
+|------------------------|----------------|----------|
+| `.env`                 | プロジェクトルート | ❌ 除外する（個人／Secrets管理） |
+| `.env.test.example`    | プロジェクトルート | ✅ 含める（テンプレ配布用） |
+| `.env.production`（任意） | プロジェクトルート or Secretsのみ | ❌ or GitHub Secrets |
+
+---
+
+必要であれば `.env.test.example` の**生成スクリプト**や、  
+`.env` との差分チェックスクリプト（漏れ検知）もすぐご用意できます！
+
+次に進めたい内容があればどうぞ🔥📘

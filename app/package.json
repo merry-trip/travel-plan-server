@@ -1,14 +1,30 @@
 {
   "name": "app",
-  "version": "1.0.0",
-  "main": "test-searchText.js",
+  "version": "1.6.13",
+  "description": "アニメ聖地スポット管理 + 天気記録 + バッチ自動化プロジェクト",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+
+    "test": "jest",
+
+    "test:categorize": "APP_ENV=test jest test-scripts/categorizeSpot.test.js",
+
+    "test:batch-spots": "APP_ENV=test node test-scripts/batch-write-spots.js",
+
+    "run:weather": "APP_ENV=prod node weather-write-to-sheet.js",
+
+    "test:weather": "APP_ENV=test node test-scripts/test-weather.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "anime",
+    "weather",
+    "travel",
+    "google-sheets",
+    "openweather",
+    "batch"
+  ],
+  "author": "合同会社MerryTrip",
+  "license": "MIT",
   "dependencies": {
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
@@ -16,5 +32,12 @@
     "express": "^4.21.2",
     "googleapis": "^148.0.0",
     "nodemailer": "^6.10.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testMatch": ["**/test-scripts/**/*.test.js"],
+    "testEnvironment": "node"
   }
 }

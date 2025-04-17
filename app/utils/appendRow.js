@@ -3,9 +3,10 @@
 const { google } = require('googleapis');
 const { getAuthClient } = require('./auth'); // ✅ 認証クライアント取得関数
 const logger = require('./logger');
+const config = require('../config'); // ✅ config導入
 
 const context = 'appendRow';
-const spreadsheetId = process.env.SPREADSHEET_ID_SPOTS;
+const spreadsheetId = config.SPREADSHEET_ID_SPOTS;
 
 /**
  * 指定シートに1行追記
@@ -14,9 +15,7 @@ const spreadsheetId = process.env.SPREADSHEET_ID_SPOTS;
  */
 async function appendRow(row, sheetName) {
   try {
-    // ✅ 必要な認証クライアントを取得
     const auth = getAuthClient();
-
     const sheets = google.sheets({ version: 'v4', auth });
 
     await sheets.spreadsheets.values.append({

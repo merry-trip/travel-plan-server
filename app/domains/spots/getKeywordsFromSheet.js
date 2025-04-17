@@ -1,12 +1,16 @@
 // app/domains/spots/getKeywordsFromSheet.js
-require('dotenv').config();
+
+const config = require('../../config'); // ✅ config 導入で環境変数一元管理
 const { getRowsFromSheet } = require('../../libs/sheets');
 const logger = require('../../utils/logger');
 
-const SHEET_NAME = process.env.SHEET_NAME_KEYWORDS;
-const SPREADSHEET_ID = process.env.SPREADSHEET_ID_KEYWORDS;
+const SHEET_NAME = config.SHEET_NAME_KEYWORDS;
+const SPREADSHEET_ID = config.SPREADSHEET_ID_KEYWORDS;
 
-// ✅ 名前付きで定義
+/**
+ * スプレッドシートから status=ready のキーワード一覧を取得する
+ * @returns {Promise<Array<{ rowIndex: number, keyword: string }>>}
+ */
 async function getKeywordsFromSheet() {
   const context = 'getKeywordsFromSheet';
 
@@ -31,5 +35,4 @@ async function getKeywordsFromSheet() {
   }
 }
 
-// ✅ 明示的にオブジェクトとしてエクスポート
 module.exports = { getKeywordsFromSheet };

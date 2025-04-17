@@ -1,16 +1,19 @@
 // app/domains/spots/completeWithDeepSeek.js
+
 const fetch = require('node-fetch');
 const logger = require('../../utils/logger');
+const config = require('../../config'); // ✅ config導入
 
 const context = 'completeWithDeepSeek';
 
-const API_KEY =
-  process.env.APP_ENV === 'prod'
-    ? process.env.DEEPSEEK_API_KEY_PROD
-    : process.env.DEEPSEEK_API_KEY_DEV;
-
+const API_KEY = config.DEEPSEEK_API_KEY;
 const API_URL = 'https://api.deepseek.com/v1/chat/completions';
 
+/**
+ * DeepSeek API を使って説明文と旅行ヒントを自動生成する
+ * @param {Object} spot - 対象スポット
+ * @returns {Object} - 説明文と tip を補完したスポットオブジェクト
+ */
 async function completeWithDeepSeek(spot) {
   const prompt = `
 You are a professional travel writer.
@@ -32,6 +35,7 @@ Return in this format:
 
   try {
     logger.logInfo(context, `🔁 Requesting DeepSeek for: ${spot.name}`);
+
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: {
@@ -67,4 +71,3 @@ Return in this format:
 }
 
 module.exports = { completeWithDeepSeek };
-

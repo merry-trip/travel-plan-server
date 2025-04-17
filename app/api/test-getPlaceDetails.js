@@ -1,9 +1,10 @@
-// test-getPlaceDetails.js（logger対応）
-require("dotenv").config();
-const axios = require("axios");
-const { logInfo, logError } = require("./utils/logger"); // ✅ ロガー追加
+// test-scripts/test-getPlaceDetails.js
 
-const API_KEY = process.env.GOOGLE_API_KEY;
+process.env.APP_ENV = 'test'; // ✅ テスト環境を明示
+
+const axios = require("axios");
+const { logInfo, logError } = require("../app/utils/logger");
+const config = require("../app/config");
 
 async function testGetPlaceDetails() {
   const context = "test-getPlaceDetails";
@@ -11,14 +12,14 @@ async function testGetPlaceDetails() {
   try {
     const placeId = "ChIJF2HRSKiMGGAR1qOAPQK1yko"; // まんだらけ渋谷店
 
-    logInfo(context, `📨 placeId=${placeId} の詳細を取得中...`);
+    logInfo(context, `📨 詳細取得開始（env=${config.env}） → placeId="${placeId}"`);
 
     const response = await axios.get(
-      `https://places.googleapis.com/v1/places/${placeId}?key=${API_KEY}`,
+      `https://places.googleapis.com/v1/places/${placeId}?key=${config.GOOGLE_API_KEY}`,
       {
         headers: {
           "Content-Type": "application/json",
-          "X-Goog-FieldMask": "*"  // ← フィールド指定。実運用では必要項目のみに
+          "X-Goog-FieldMask": "*" // 実運用では必要なフィールドに絞る
         }
       }
     );
@@ -26,7 +27,10 @@ async function testGetPlaceDetails() {
     logInfo(context, "✅ PlaceDetails 結果:");
     logInfo(context, JSON.stringify(response.data, null, 2));
   } catch (error) {
-    logError(context, error);
+    logError(context, `❌ APIエラー: ${error.message}`);
+    if (error.response) {
+      logError(context, `❗ 応答内容: ${JSON.stringify(error.response.data, null, 2)}`);
+    }
   }
 }
 

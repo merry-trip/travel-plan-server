@@ -1,5 +1,5 @@
 // weather-write-to-sheet.js
-require('dotenv').config();
+
 const { logInfo, logError } = require('./utils/logger');
 const { getForecastByCoords } = require('./api/forecast');
 const {
@@ -7,19 +7,18 @@ const {
   appendWeatherRows,
 } = require('./api/sheets');
 const { sendMail } = require('./api/send-mail');
+const config = require('./config'); // ✅ config導入
 
-const appEnv = process.env.APP_ENV || 'dev';
+const context = 'weather-write-to-sheet';
 
 async function main() {
-  const context = 'weather-write-to-sheet';
-
   try {
     // ✅ 全行削除（ヘッダー除く）
     logInfo(context, '🧹 既存の天気データをすべて削除します');
     await deleteAllDataRows();
 
     // ✅ 天気APIから40件取得
-    logInfo(context, `🌤️ 天気情報を取得中...（env: ${appEnv}）`);
+    logInfo(context, `🌤️ 天気情報を取得中...（env: ${config.env}）`);
     const forecast = await getForecastByCoords(35.6895, 139.6917, 'metric', 'en');
 
     const rows = forecast.list.map(entry => [
@@ -38,7 +37,7 @@ async function main() {
     // ✅ 成功メール通知
     await sendMail({
       subject: '✅ 天気ログ完了',
-      text: `スプレッドシートに ${rows.length} 件の天気データを記録しました。\n環境: ${appEnv}`
+      text: `スプレッドシートに ${rows.length} 件の天気データを記録しました。\n環境: ${config.env}`
     });
 
     logInfo(context, '📧 通知メールを送信しました（成功）');

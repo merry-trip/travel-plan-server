@@ -1,18 +1,19 @@
-// test-searchText.js（logger対応）
-require("dotenv").config();
-const axios = require("axios");
-const { logInfo, logError } = require("./utils/logger"); // ✅ logger導入
+// test-scripts/test-searchText.js
 
-const API_KEY = process.env.GOOGLE_API_KEY;
+process.env.APP_ENV = 'test'; // ✅ テスト環境を明示
+
+const axios = require("axios");
+const { logInfo, logError } = require("../app/utils/logger");
+const config = require("../app/config");
 
 async function testSearchText() {
   const context = "test-searchText";
 
   try {
-    logInfo(context, "🔍 SearchText API リクエスト送信中...");
+    logInfo(context, `🔍 SearchText API リクエスト送信中（env=${config.env}）`);
 
     const response = await axios.post(
-      `https://places.googleapis.com/v1/places:searchText?key=${API_KEY}`,
+      `https://places.googleapis.com/v1/places:searchText?key=${config.GOOGLE_API_KEY}`,
       {
         textQuery: "Nintendo TOKYO",
         languageCode: "en",
@@ -30,7 +31,10 @@ async function testSearchText() {
     logInfo(context, JSON.stringify(response.data, null, 2));
 
   } catch (error) {
-    logError(context, error);
+    logError(context, `❌ SearchText API エラー: ${error.message}`);
+    if (error.response) {
+      logError(context, JSON.stringify(error.response.data, null, 2));
+    }
   }
 }
 

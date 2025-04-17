@@ -1,13 +1,17 @@
 // app/tools/update-category.js
 
-require('dotenv').config();
 const { google } = require('googleapis');
 const { logInfo, logError } = require('../utils/logger');
+const config = require('../config'); // ✅ config導入
 
-const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
-const SHEET_NAME = process.env.SHEET_NAME_SPOTS_DEV || 'anime_spot_db';
+const SPREADSHEET_ID = config.SPREADSHEET_ID_SPOTS;
+const SHEET_NAME = config.SHEET_NAME_SPOTS;
 
-// カテゴリ分類ロジック
+/**
+ * カテゴリ分類ルールに基づき types からカテゴリを決定
+ * @param {string[]} types
+ * @returns {string} category
+ */
 function determineCategory(types) {
   if (!types || types.length === 0) return 'unknown';
 
@@ -25,8 +29,8 @@ function determineCategory(types) {
     { key: 'shopping_mall', category: 'mall' },
     { key: 'gift_shop', category: 'gift' },
     { key: 'art_gallery', category: 'art' },
-    { key: 'store', category: 'general_shop' } // 最後の手段
-  ];  
+    { key: 'store', category: 'general_shop' }
+  ];
 
   for (const rule of PRIORITY) {
     if (types.includes(rule.key)) return rule.category;
@@ -35,30 +39,31 @@ function determineCategory(types) {
   return 'unknown';
 }
 
+/**
+ * メイン処理：カテゴリ分類結果をスプレッドシートに書き込む
+ */
 async function updateCategories() {
   logInfo('updateCategory', '📌 STEP① カテゴリ分類スクリプト開始');
 
   const auth = new google.auth.GoogleAuth({
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    keyFile: config.GOOGLE_CREDENTIALS_PATH, // ✅ 安全な認証パス指定
+    scopes: ['https://www.googleapis.com/auth/spreadsheets']
   });
   const sheets = google.sheets({ version: 'v4', auth });
 
   try {
-    // データ取得
-    const range = `${SHEET_NAME}!A2:G`; // A: name, B: lat, C: lng, D: description, E: placeId, F: types, G: source_type
+    const range = `${SHEET_NAME}!A2:G`;
     const res = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range,
+      range
     });
 
     const rows = res.data.values || [];
     logInfo('updateCategory', `📌 STEP② 取得行数: ${rows.length}`);
 
-    // 書き込みデータ準備
     const updates = [];
     for (const row of rows) {
       const name = row[0] || '(no name)';
-      const placeId = row[4] || '';
       const typesJson = row[5] || '[]';
       let types;
 
@@ -73,14 +78,11 @@ async function updateCategories() {
       updates.push([category]);
     }
 
-    // category_for_map 列に書き込み（列H）
-    const updateRes = await sheets.spreadsheets.values.update({
+    await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
       range: `${SHEET_NAME}!H2`,
       valueInputOption: 'USER_ENTERED',
-      requestBody: {
-        values: updates,
-      },
+      requestBody: { values: updates }
     });
 
     logInfo('updateCategory', `✅ STEP③ 書き込み完了（${updates.length}件）`);

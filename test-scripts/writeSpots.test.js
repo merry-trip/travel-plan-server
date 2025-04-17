@@ -1,7 +1,14 @@
-require('dotenv').config();
+// test-scripts/writeSpots.test.js
+
+process.env.APP_ENV = 'test'; // ✅ テスト環境を明示
+
 const writeSpots = require('../app/domains/spots/writeSpots');
+const logger = require('../app/utils/logger');
+const config = require('../app/config');
 
 (async () => {
+  const context = 'test-writeSpots';
+
   const enrichedSpot = {
     placeId: 'ChIJU9ZPE2-NGGARwiJyx0Id61E',
     name: 'Sunshine City',
@@ -47,5 +54,11 @@ const writeSpots = require('../app/domains/spots/writeSpots');
     last_updated_at: new Date().toISOString()
   };
 
-  await writeSpots([enrichedSpot]);
+  try {
+    logger.logInfo(context, `🧪 writeSpots テスト開始（env=${config.env}）`);
+    await writeSpots([enrichedSpot]);
+    logger.logInfo(context, `✅ writeSpots テスト成功（1件書き込み）`);
+  } catch (err) {
+    logger.logError(context, `❌ writeSpots テスト失敗: ${err.message}`);
+  }
 })();

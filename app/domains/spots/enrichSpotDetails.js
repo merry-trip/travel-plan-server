@@ -1,10 +1,12 @@
 // app/domains/spots/enrichSpotDetails.js
+
 const { default: fetch } = require('node-fetch');
 const logger = require('../../utils/logger');
+const config = require('../../config'); // ✅ configからAPIキーを取得
 
 const context = 'enrichSpotDetails';
 
-const API_KEY = process.env.GOOGLE_API_KEY_DEV;
+const API_KEY = config.GOOGLE_API_KEY;
 const BASE_URL = 'https://places.googleapis.com/v1/places';
 
 const FIELDS = [

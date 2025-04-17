@@ -1,10 +1,10 @@
-// 🔧 searchTextSpot.js の先頭にこれを追加！
-require('dotenv').config();
+// app/domains/spots/searchTextSpot.js
 
 const fetch = require('node-fetch');
-const logger = require('../../utils/logger');
+const config = require('../../config'); // ✅ config導入でAPIキー管理
+const { logInfo, logError, logDebug, logWarn } = require('../../utils/logger');
 
-const API_KEY = process.env.GOOGLE_API_KEY_DEV;
+const API_KEY = config.GOOGLE_API_KEY;
 const BASE_URL = 'https://places.googleapis.com/v1/places:searchText';
 
 /**
@@ -16,8 +16,8 @@ async function searchTextSpot(query) {
   const context = 'searchTextSpot';
   const url = `${BASE_URL}?key=${API_KEY}`;
 
-  logger.logInfo(context, `🔍 SearchText API 呼び出し: ${query}`);
-  logger.logDebug(context, `Request URL: ${url}`);
+  logInfo(context, `🔍 SearchText API 呼び出し: ${query}`);
+  logDebug(context, `Request URL: ${url}`);
 
   try {
     const res = await fetch(url, {
@@ -32,30 +32,37 @@ async function searchTextSpot(query) {
     });
 
     const json = await res.json();
-    logger.logDebug(context, `Raw response: ${JSON.stringify(json)}`);
+    logDebug(context, `Raw response: ${JSON.stringify(json)}`);
 
     if (json.places && json.places.length > 0) {
       const place = json.places[0];
+      const matchedName = place.displayName?.text || '';
 
-      logger.logInfo(context, `✅ 検索ヒット: ${place.displayName?.text} (${place.id})`);
+      logInfo(context, `✅ 検索ヒット: ${matchedName} (${place.id})`);
+
+      // ✅ 名前が完全一致しない場合は WARN を出す（ケース区別せず）
+      const normalizedQuery = query.trim().toLowerCase();
+      const normalizedName = matchedName.trim().toLowerCase();
+      if (normalizedQuery !== normalizedName) {
+        logWarn(context, `⚠️ 入力キーワードと取得スポット名が異なります: query="${query}" / matched="${matchedName}"`);
+      }
 
       return {
         placeId: place.id,
-        name: place.displayName?.text || '',
+        name: matchedName,
         formatted_address: place.formattedAddress || '',
         lat: place.location?.latitude || 0,
         lng: place.location?.longitude || 0,
         types: place.types || [],
       };
     } else {
-      logger.logInfo(context, `⚠️ 該当スポットなし: ${query}`);
+      logInfo(context, `⚠️ 該当スポットなし: ${query}`);
       return null;
     }
   } catch (err) {
-    logger.logError(context, `❌ SearchText API エラー: ${err.message}`);
+    logError(context, `❌ SearchText API エラー: ${err.message}`);
     throw err;
   }
 }
 
-// ✅ これで「requireしたら関数」になる
 module.exports = { searchTextSpot };

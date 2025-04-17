@@ -1,12 +1,15 @@
 // test-scripts/batch-write-spots.js
-require('dotenv').config();
+
+// ✅ 環境変数を明示的に test に設定（保険）
+process.env.APP_ENV = 'test';
+
 const logger = require('../app/utils/logger');
+const config = require('../app/config'); // ✅ 現在の環境確認のため
 const completeSpotInfo = require('../app/domains/spots/completeSpotInfo');
 const writeSpots = require('../app/domains/spots/writeSpots');
 
-const context = 'batch-write-spots';
+const context = 'test-scripts/batch-write-spots';
 
-// 検索キーワード一覧（本番では .env や外部ファイルから取得も可能）
 const spotKeywords = [
   'Akihabara Animate',
   'Nakano Broadway',
@@ -14,7 +17,7 @@ const spotKeywords = [
 ];
 
 (async () => {
-  logger.logInfo(context, `🚀 Batch write started with ${spotKeywords.length} keywords`);
+  logger.logInfo(context, `🚀 Test batch write started (env: ${config.env}) with ${spotKeywords.length} keywords`);
 
   const enrichedSpots = [];
 
@@ -23,7 +26,7 @@ const spotKeywords = [
       const result = await completeSpotInfo(keyword);
 
       if (result && result.placeId && result.name) {
-        enrichedSpots.push(result); // result = enriched spot object
+        enrichedSpots.push(result);
       } else {
         logger.logInfo(context, `⚠️ No spot info for "${keyword}"`);
       }
@@ -35,7 +38,7 @@ const spotKeywords = [
 
   if (enrichedSpots.length > 0) {
     await writeSpots(enrichedSpots);
-    logger.logInfo(context, `✅ Batch write completed: ${enrichedSpots.length} spot(s) written.`);
+    logger.logInfo(context, `✅ Test batch write completed: ${enrichedSpots.length} spot(s) written.`);
   } else {
     logger.logInfo(context, '❌ No valid spots to write.');
   }

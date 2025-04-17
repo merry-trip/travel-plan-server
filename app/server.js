@@ -1,46 +1,40 @@
 // server.js
 
-require('dotenv').config();
+process.env.APP_ENV = process.env.APP_ENV || 'dev'; // ✅ 安全のため明示
 
 // 必要なライブラリを読み込む
-const express = require('express'); // サーバーを作るためのメイン道具
-const cors = require('cors');       // 外からのアクセスを許可する鍵の道具
-const path = require('path');       // 静的ファイル用のパスを扱う道具
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
 
-// 🔁 スポット取得用の関数（Google Sheets API）
+// 🔁 モジュール読み込み
+const config = require('./config'); // ✅ config 統一導入
 const getSpotList = require('./api/get-spots');
-
-// 🔁 検索ログ保存APIの読み込み
-const logSearch = require('./api/log-search');
-
-// ✅ ロガーの読み込み（日本時間でINFO / ERROR出力）
+const logSearchRouter = require('./routes/log-search');
 const { logInfo, logError } = require('./utils/logger');
 
-// Expressアプリを作成
+// アプリケーション作成
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// ✅EJS をテンプレートエンジンとして使用宣言
+// ✅ テンプレートエンジン設定
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); // viewsフォルダからHTMLを生成
+app.set('views', path.join(__dirname, 'views'));
 
-// CORSを許可（ブラウザなどからアクセスできるように）
+// ✅ CORS有効化
 app.use(cors());
 
-// ✅ ここで静的パスをログに出す（原因の絞り込み用）
+// ✅ 静的ファイルパスのログ出力
 const staticPath = path.join(__dirname, 'public');
-console.log('[DEBUG] 静的ファイルの公開パス:', staticPath);
+logInfo('server', `📂 静的ファイルパス: ${staticPath}`);
+app.use(express.static(staticPath));
 
-// public フォルダの中身（map.ejs）を公開
-app.use(express.static(path.join(__dirname, 'public')));
-
-// ✅ /api/spots：Googleスプレッドシートからアニメスポット一覧を取得
+// ✅ /api/spots：スプレッドシートからアニメスポット一覧取得
 app.get('/api/spots', async (req, res) => {
-  const context = 'GET /api/spots'; // ログ用文脈ラベル
-
+  const context = 'GET /api/spots';
   try {
     const spots = await getSpotList();
-    logInfo(context, `Spot list retrieved: ${spots.length} items`);
+    logInfo(context, `📦 Spot list: ${spots.length}件取得`);
     res.status(200).json(spots);
   } catch (error) {
     logError(context, error);
@@ -48,17 +42,18 @@ app.get('/api/spots', async (req, res) => {
   }
 });
 
-// ✅ 検索ログルーティングを登録
-const logSearchRouter = require('./routes/log-search');
+// ✅ /api/log-search：検索ログ記録API
 app.use('/api', express.json(), logSearchRouter);
 
-// ✅ /map：APIキーを.envから読み込み、EJSテンプレートに渡す
+// ✅ /map：EJSテンプレートへAPIキーを渡す
 app.get('/map', (req, res) => {
-  const googleMapsApiKey = process.env.GOOGLE_API_KEY_DEV;
-  res.render('map', { googleMapsApiKey });
+  res.render('map', {
+    googleMapsApiKey: config.GOOGLE_API_KEY, // ✅ configから取得
+  });
 });
 
-// サーバーを起動
+// ✅ サーバー起動
 app.listen(PORT, () => {
-  logInfo('server', `✅ サーバー起動中 → http://localhost:${PORT}`);
+  logInfo('server', `✅ サーバー起動完了 → http://localhost:${PORT}`);
+  logInfo('server', `🌐 実行環境: ${config.env}`);
 });

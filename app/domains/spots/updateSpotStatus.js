@@ -1,8 +1,12 @@
 // app/domains/spots/updateSpotStatus.js
+
 const { getSheetClient } = require('../../libs/sheets'); // Google Sheets API認証
 const logger = require('../../utils/logger');
+const config = require('../../config'); // ✅ config導入
 
-const SHEET_NAME = 'spots';
+const SHEET_NAME = config.SHEET_NAME_SPOTS;
+const SPREADSHEET_ID = config.SPREADSHEET_ID_SPOTS;
+
 const context = 'updateSpotStatus';
 
 /**
@@ -20,7 +24,7 @@ async function updateSpotStatus(placeId, status) {
 
     const sheets = await getSheetClient();
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.SPREADSHEET_ID_SPOTS,
+      spreadsheetId: SPREADSHEET_ID,
       range: SHEET_NAME,
     });
 
@@ -50,7 +54,7 @@ async function updateSpotStatus(placeId, status) {
 
     // 更新リクエスト（2列）
     await sheets.spreadsheets.values.batchUpdate({
-      spreadsheetId: process.env.SPREADSHEET_ID_SPOTS,
+      spreadsheetId: SPREADSHEET_ID,
       requestBody: {
         valueInputOption: 'USER_ENTERED',
         data: [

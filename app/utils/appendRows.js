@@ -1,10 +1,17 @@
 // app/utils/appendRows.js
+
 const { google } = require('googleapis');
 const auth = require('./auth');
 const logger = require('./logger');
+const config = require('../config'); // ✅ config導入
 
-const spreadsheetId = process.env.SPREADSHEET_ID_SPOTS;
+const spreadsheetId = config.SPREADSHEET_ID_SPOTS;
 
+/**
+ * 複数行のデータを指定シートに追記
+ * @param {Array<Array>} rows - 追記する行の配列（例: [[...], [...]]）
+ * @param {string} sheetName - 対象シート名（例: "spots"）
+ */
 async function appendRows(rows, sheetName) {
   const sheets = google.sheets({ version: 'v4', auth });
 
@@ -17,7 +24,7 @@ async function appendRows(rows, sheetName) {
     },
   });
 
-  logger.logInfo('appendRows', `${rows.length} rows appended to sheet: ${sheetName}`);
+  logger.logInfo('appendRows', `✅ ${rows.length} row(s) appended to sheet: ${sheetName}`);
 }
 
 module.exports = appendRows;

@@ -1,12 +1,14 @@
 // test-scripts/writeSpot.test.js
-require('dotenv').config(); // .env を読み込む
+
+process.env.APP_ENV = 'test'; // ✅ テスト環境明示
+
 const { writeSpot } = require('../app/domains/spots/writeSpot');
 const logger = require('../app/utils/logger');
+const config = require('../app/config'); // ✅ 実行環境確認用
 
 (async () => {
   const context = 'writeSpot.test';
 
-  // ✅ テスト用スポットデータ（最低限の4項目）
   const spot = {
     placeId: 'test123',
     name: 'Test Spot',
@@ -15,7 +17,7 @@ const logger = require('../app/utils/logger');
   };
 
   try {
-    logger.logInfo(context, '🧪 writeSpot テスト開始');
+    logger.logInfo(context, `🧪 writeSpot テスト開始（env=${config.env}）`);
     await writeSpot(spot);
     logger.logInfo(context, '✅ writeSpot テスト成功');
   } catch (err) {

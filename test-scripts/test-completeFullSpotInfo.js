@@ -1,31 +1,45 @@
-require("dotenv").config();
-const { completeFullSpotInfo } = require("../app/domains/spots/completeFullSpotInfo");
-const { logInfo, logError } = require("../app/utils/logger");
+// test-scripts/test-completeFullSpotInfo.test.js
 
-(async () => {
-  const TEST_CONTEXT = "test-completeFullSpotInfo";
+process.env.APP_ENV = 'test'; // ✅ テスト環境を明示
 
-  logInfo(TEST_CONTEXT, "🚀 スポット補完テストを開始（開発用スプレッドシート）");
+const { completeFullSpotInfo } = require('../app/domains/spots/completeFullSpotInfo');
+const { logInfo, logError } = require('../app/utils/logger');
+const config = require('../app/config'); // ✅ 環境確認のために追加
 
-  // ✅ 成功ケース
-  const validKeyword = "Akihabara Animate";
+const TEST_CONTEXT = 'Jest-test-completeFullSpotInfo';
 
-  try {
-    logInfo(TEST_CONTEXT, `🧪 テスト：成功想定 → keyword="${validKeyword}"`);
-    await completeFullSpotInfo(validKeyword);
-  } catch (err) {
-    logError(TEST_CONTEXT, `❌ 失敗（成功テスト中）：${err.message}`);
-  }
+// ⚠️ スプレッドシートの対象 keyword は事前に status=ready にしておくこと！
 
-  // ✅ 失敗ケース
-  const invalidKeyword = "アニメイト存在しない場所XYZ";
+describe('completeFullSpotInfo()', () => {
+  jest.setTimeout(30_000); // API待機余裕（30秒）
 
-  try {
-    logInfo(TEST_CONTEXT, `🧪 テスト：失敗想定 → keyword="${invalidKeyword}"`);
-    await completeFullSpotInfo(invalidKeyword);
-  } catch (err) {
-    logError(TEST_CONTEXT, `❌ 失敗（失敗テスト中）：${err.message}`);
-  }
+  test('✅ 正常系：有効なキーワードは status=done に更新される', async () => {
+    const validKeyword = 'Akihabara Animate';
+    logInfo(TEST_CONTEXT, `🧪 テスト開始（env=${config.env}） → keyword="${validKeyword}"`);
 
-  logInfo(TEST_CONTEXT, "✅ テスト完了：loggerとスプレッドシートを確認してください");
-})();
+    try {
+      await completeFullSpotInfo(validKeyword);
+      logInfo(TEST_CONTEXT, `✅ 正常完了：status=done に更新されているかをシートで確認`);
+    } catch (err) {
+      logError(TEST_CONTEXT, `❌ エラー発生（正常系テスト中）: ${err.message}`);
+      throw err;
+    }
+  });
+
+  test('❌ 異常系：存在しないキーワードはエラーとして捕捉される', async () => {
+    const invalidKeyword = 'アニメイト存在しない場所XYZ';
+    logInfo(TEST_CONTEXT, `🧪 異常系テスト（env=${config.env}） → keyword="${invalidKeyword}"`);
+
+    let errorCaught = false;
+
+    try {
+      await completeFullSpotInfo(invalidKeyword);
+      logInfo(TEST_CONTEXT, `⚠️ 想定外：成功してしまいました（異常キーワード）`);
+    } catch (err) {
+      logInfo(TEST_CONTEXT, `✅ 想定通り：エラーを正しく捕捉`);
+      errorCaught = true;
+    }
+
+    expect(errorCaught).toBe(true);
+  });
+});

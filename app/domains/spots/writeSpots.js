@@ -1,9 +1,12 @@
+// app/domains/spots/writeSpots.js
+
 const validateSpot = require('./validateSpot');
 const { mapSpotToRow } = require('./rowMapper');
 const appendRows = require('../../utils/appendRows'); // 複数行対応ユーティリティ
 const logger = require('../../utils/logger');
+const config = require('../../config'); // ✅ config 導入
 
-const SHEET_NAME = 'spots';
+const SHEET_NAME = config.SHEET_NAME_SPOTS;
 const context = 'writeSpots';
 
 /**
@@ -23,12 +26,12 @@ async function writeSpots(spots) {
         const row = mapSpotToRow(spot);
         validRows.push(row);
       } catch (err) {
-        logger.logError(context, `Skipped invalid spot (${spot.name || 'N/A'}): ${err.message}`);
+        logger.logError(context, `⛔ Skipped invalid spot (${spot.name || 'N/A'}): ${err.message}`);
       }
     }
 
     if (validRows.length === 0) {
-      logger.logInfo(context, 'No valid spots to write.');
+      logger.logInfo(context, '⚠️ No valid spots to write.');
       return;
     }
 

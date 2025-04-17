@@ -1,15 +1,15 @@
-// api/sheets.js
+// app/api/sheets.js
+
 const { google } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
 const { logInfo, logError } = require('../utils/logger');
-require('dotenv').config();
+const config = require('../config'); // ✅ 環境統一
 
 const context = 'sheets';
-const appEnv = process.env.APP_ENV || 'dev';
 
 let keyFilePath;
-if (appEnv === 'prod') {
+if (config.isProd) {
   const jsonContent = process.env.GOOGLE_CREDENTIALS_JSON_PROD;
   logInfo(context, `🧪 GOOGLE_CREDENTIALS_JSON_PROD の先頭20文字：${jsonContent ? jsonContent.substring(0, 20) : '❌ undefined'}`);
 
@@ -23,23 +23,20 @@ if (appEnv === 'prod') {
   fs.writeFileSync(tempPath, jsonContent);
   keyFilePath = tempPath;
 } else {
-  keyFilePath = path.resolve(process.env.GOOGLE_CREDENTIALS_PATH_DEV);
+  keyFilePath = path.resolve(config.GOOGLE_CREDENTIALS_PATH);
 }
 
-const spreadsheetId = appEnv === 'prod'
-  ? process.env.SHEET_ID_WEATHER_PROD
-  : process.env.SHEET_ID_WEATHER_DEV;
-
-const sheetName = appEnv === 'prod'
-  ? process.env.SHEET_NAME_WEATHER_PROD
-  : process.env.SHEET_NAME_WEATHER_DEV;
+const spreadsheetId = config.SPREADSHEET_ID_WEATHER;
+const sheetName = config.SHEET_NAME_WEATHER;
 
 const auth = new google.auth.GoogleAuth({
   keyFile: keyFilePath,
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
-// ✅ すべてのデータ行（A2以降）を削除
+/**
+ * 天気シート内の A2 以降のすべての行を削除（ヘッダーを残す）
+ */
 async function deleteAllDataRows() {
   const client = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: client });
@@ -76,7 +73,10 @@ async function deleteAllDataRows() {
   logInfo(context, `🧹 既存データ ${rowCount} 行をすべて削除しました`);
 }
 
-// ✅ 天気データを追記（A1から追加）
+/**
+ * 天気ログをスプレッドシートに追記（A1から）
+ * @param {Array<Array>} rows - 追記する行データ
+ */
 async function appendWeatherRows(rows) {
   const client = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: client });
@@ -88,7 +88,7 @@ async function appendWeatherRows(rows) {
     requestBody: { values: rows },
   });
 
-  logInfo(context, `✅ ${rows.length} 行の天気データをスプレッドシートに追加しました（env: ${appEnv}）`);
+  logInfo(context, `✅ ${rows.length} 行の天気データをスプレッドシートに追加しました（env: ${config.env}）`);
 }
 
 module.exports = {

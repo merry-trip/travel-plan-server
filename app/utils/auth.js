@@ -1,8 +1,10 @@
 // app/utils/auth.js
+
 const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');
 const logger = require('./logger');
+const config = require('../config'); // ✅ config 導入
 
 const context = 'auth';
 
@@ -12,7 +14,7 @@ const context = 'auth';
  */
 function getAuthClient() {
   try {
-    const keyPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+    const keyPath = config.GOOGLE_APPLICATION_CREDENTIALS;
     const fullPath = path.resolve(__dirname, '../../', keyPath);
     const keyFile = fs.readFileSync(fullPath, 'utf-8');
     const credentials = JSON.parse(keyFile);
@@ -22,10 +24,10 @@ function getAuthClient() {
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
 
-    logger.logInfo(context, 'Auth client created successfully');
+    logger.logInfo(context, '✅ Auth client created successfully');
     return auth;
   } catch (error) {
-    logger.logError(context, `Failed to load Google credentials: ${error.message}`);
+    logger.logError(context, `❌ Failed to load Google credentials: ${error.message}`);
     throw error;
   }
 }

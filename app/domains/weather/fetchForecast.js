@@ -1,18 +1,23 @@
 // app/domains/weather/fetchForecast.js
 
 const axios = require('axios');
-require('dotenv').config();
-const { logInfo, logError } = require('../../utils/logger'); // ✅ 修正済み
+const { logInfo, logError } = require('../../utils/logger');
+const config = require('../../config'); // ✅ config導入
 
 const context = 'domains/weather/fetchForecast';
-const appEnv = process.env.APP_ENV || 'dev';
 
-logInfo(context, `現在の環境: ${appEnv}`);
+logInfo(context, `現在の環境: ${config.env}`);
 
-const apiKey = appEnv === 'prod'
-  ? process.env.OPENWEATHER_API_KEY_PROD
-  : process.env.OPENWEATHER_API_KEY_DEV;
+const apiKey = config.OPENWEATHER_API_KEY;
 
+/**
+ * 緯度経度に基づき天気予報を取得（5日分3時間ごと）
+ * @param {number} lat - 緯度
+ * @param {number} lon - 経度
+ * @param {string} units - 'metric' or 'imperial'
+ * @param {string} lang - 表示言語（例: 'ja'）
+ * @returns {Promise<Object>} - OpenWeather forecast response
+ */
 async function getForecastByCoords(lat, lon, units = 'metric', lang = 'en') {
   const url = `https://api.openweathermap.org/data/2.5/forecast`;
   logInfo(context, `天気APIにリクエスト送信中: lat=${lat}, lon=${lon}, units=${units}, lang=${lang}`);

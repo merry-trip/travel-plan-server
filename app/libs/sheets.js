@@ -1,7 +1,8 @@
 // app/libs/sheets.js
-require('dotenv').config();
+
 const { google } = require('googleapis');
 const logger = require('../utils/logger');
+const config = require('../config'); // ✅ config導入
 
 const context = 'sheets';
 
@@ -9,12 +10,17 @@ const context = 'sheets';
  * Google API 認証クライアントを取得
  */
 async function getAuth() {
-  const auth = new google.auth.GoogleAuth({
-    scopes: ['https://www.googleapis.com/auth/spreadsheets']
-    // ✅ 書き込みも行うため "readonly" ではなく scopes を強化
-  });
+  try {
+    const auth = new google.auth.GoogleAuth({
+      keyFile: config.GOOGLE_CREDENTIALS_PATH, // ✅ 明示的に認証ファイルを指定
+      scopes: ['https://www.googleapis.com/auth/spreadsheets']
+    });
 
-  return await auth.getClient();
+    return await auth.getClient();
+  } catch (err) {
+    logger.logError(context, `❌ 認証情報の読み込みに失敗しました: ${err.message}`);
+    throw err;
+  }
 }
 
 /**
@@ -44,7 +50,7 @@ async function getRowsFromSheet(spreadsheetId, sheetName) {
 
     const rows = response.data.values;
     if (!rows || rows.length === 0) {
-      logger.logInfo(context, '⚠️ No data found in sheet');
+      logger.logInfo(context, `⚠️ No data found in sheet "${sheetName}"`);
       return [];
     }
 
@@ -68,5 +74,5 @@ async function getRowsFromSheet(spreadsheetId, sheetName) {
 
 module.exports = {
   getRowsFromSheet,
-  getSheetClient // ✅ 追加完了
+  getSheetClient
 };
