@@ -5,8 +5,8 @@ const columnOrder = require('./columnOrder');
 const logger = require('../../utils/logger');
 const config = require('../../config'); // ✅ config導入
 
-const SHEET_NAME = config.SHEET_NAME_SPOTS; // ✅ config参照に変更
-const SPREADSHEET_ID = config.SPREADSHEET_ID_SPOTS;
+const SHEET_NAME = config.SHEET_NAME_SPOT; // ✅ config参照に変更
+const SPREADSHEET_ID = config.SHEET_ID_SPOT;
 
 const context = 'updateSpotDetails';
 

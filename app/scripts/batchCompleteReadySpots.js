@@ -5,7 +5,7 @@ const { completeFullSpotInfo } = require('../domains/spots/completeFullSpotInfo'
 const { logInfo, logWarn, logError } = require('../utils/logger');
 const config = require('../config');
 
-const SPREADSHEET_ID = config.SPREADSHEET_ID_KEYWORDS;
+const SPREADSHEET_ID = config.SHEET_ID_KEYWORDS;
 const SHEET_NAME = config.SHEET_NAME_KEYWORDS;
 const CONTEXT = 'batchCompleteReadySpots';
 

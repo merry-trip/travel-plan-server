@@ -26,7 +26,7 @@ if (config.isProd) {
   keyFilePath = path.resolve(config.GOOGLE_CREDENTIALS_PATH);
 }
 
-const spreadsheetId = config.SPREADSHEET_ID_WEATHER;
+const spreadsheetId = config.SHEET_ID_WEATHER;
 const sheetName = config.SHEET_NAME_WEATHER;
 
 const auth = new google.auth.GoogleAuth({

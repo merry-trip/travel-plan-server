@@ -4,8 +4,8 @@ const { getSheetClient } = require('../../libs/sheets'); // Google Sheets API認
 const logger = require('../../utils/logger');
 const config = require('../../config'); // ✅ config導入
 
-const SHEET_NAME = config.SHEET_NAME_SPOTS;
-const SPREADSHEET_ID = config.SPREADSHEET_ID_SPOTS;
+const SHEET_NAME = config.SHEET_NAME_SPOT;
+const SPREADSHEET_ID = config.SHEET_ID_SPOT;
 
 const context = 'updateSpotStatus';
 

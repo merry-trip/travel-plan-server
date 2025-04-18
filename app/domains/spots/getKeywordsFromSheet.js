@@ -5,7 +5,7 @@ const { getRowsFromSheet } = require('../../libs/sheets');
 const logger = require('../../utils/logger');
 
 const SHEET_NAME = config.SHEET_NAME_KEYWORDS;
-const SPREADSHEET_ID = config.SPREADSHEET_ID_KEYWORDS;
+const SPREADSHEET_ID = config.SHEET_ID_KEYWORDS;
 
 /**
  * スプレッドシートから status=ready のキーワード一覧を取得する

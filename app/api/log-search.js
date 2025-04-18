@@ -43,7 +43,7 @@ async function logSearch(req, res) {
     logInfo(context, `📌 STEP④ row構築完了: ${JSON.stringify(row)}`);
 
     await sheets.spreadsheets.values.append({
-      spreadsheetId: config.SPREADSHEET_ID_SPOTS, // 必要に応じて専用IDに分離可
+      spreadsheetId: config.SHEET_ID_SPOT, // 必要に応じて専用IDに分離可
       range: `${config.SHEET_NAME_LOGS}!A1`,
       valueInputOption: "USER_ENTERED",
       requestBody: {

@@ -5,11 +5,11 @@ const logger = require('../../utils/logger');
 const config = require('../../config');
 
 const SHEET_NAME = config.SHEET_NAME_KEYWORDS;
-const SPREADSHEET_ID = config.SPREADSHEET_ID_KEYWORDS;
+const SPREADSHEET_ID = config.SHEET_ID_KEYWORDS;
 const context = 'updateKeywordStatus';
 
 // 有効なステータス一覧（ここで制御）
-const VALID_STATUSES = ['ready', 'done', 'error', 'failed', 'skip'];
+const VALID_STATUSES = ['ready', 'done', 'error', 'failed', 'skip', 'skipped'];
 
 /**
  * 指定された keyword に一致する行の status を更新する

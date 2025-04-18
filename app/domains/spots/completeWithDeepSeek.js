@@ -16,8 +16,16 @@ const API_URL = 'https://api.deepseek.com/v1/chat/completions';
  */
 async function completeWithDeepSeek(spot) {
   const prompt = `
-You are a professional travel writer.
-Generate a concise English description (max 200 characters) and a travel tip for the following place:
+You are a professional travel writer specializing in Japanese pop culture.
+Write for international travelers who are anime fans visiting Japan.
+
+Generate:
+- a concise English *description* of the spot (max 200 characters), focusing on its appeal to anime/manga fans.
+- a practical *short travel tip* (max 200 characters), especially useful for foreign visitors.
+
+Use this format:
+- description: ...
+- short_tip_en: ...
 
 Name: ${spot.name}
 Category: ${spot.primary_type || spot.types?.[0] || 'General Spot'}

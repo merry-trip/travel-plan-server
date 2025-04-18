@@ -10,8 +10,8 @@ const config = require('../config'); // ✅ configで一元管理
 const context = 'get-spots';
 
 const keyFilePath = path.resolve(config.GOOGLE_CREDENTIALS_PATH);
-const spreadsheetId = config.SPREADSHEET_ID_SPOTS;
-const sheetName = config.SHEET_NAME_SPOTS;
+const spreadsheetId = config.SHEET_ID_SPOT;
+const sheetName = config.SHEET_NAME_SPOT;
 
 const auth = new google.auth.GoogleAuth({
   keyFile: keyFilePath,

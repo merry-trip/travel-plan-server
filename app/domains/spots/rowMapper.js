@@ -7,12 +7,14 @@ const context = 'rowMapper';
 
 /**
  * スポットオブジェクトをスプレッドシート1行分に変換する
- * @param {Object} spot - 保存対象のスポットデータ
- * @returns {Array<string>} - 対応する列順で並べられた1行分の値
+ * 列順は columnOrder.js に準拠（必ず同期を保つこと！）
+ *
+ * @param {Object} spot - 保存対象のスポットデータ（DB or API由来）
+ * @returns {Array<string>} - スプレッドシート1行分の値（列順通り）
  */
 function mapSpotToRow(spot) {
   const row = columnOrder.map((key) => {
-    // キーが存在しない場合
+    // 存在しないキー → 空文字（missingフィールドは logger で警告）
     if (!(key in spot)) {
       logger.logInfo(context, `⚠️ Missing field "${key}" in spot data`);
       return '';
@@ -20,25 +22,27 @@ function mapSpotToRow(spot) {
 
     const value = spot[key];
 
-    // null や undefined は空文字で返す
+    // null や undefined → 空欄
     if (value === null || value === undefined) {
       return '';
     }
 
-    // 配列 → カンマ区切り文字列
+    // 配列型 → カンマ区切り文字列に変換
     if (Array.isArray(value)) {
       return value.join(', ');
     }
 
-    // 特殊形式のオブジェクト（{ text: "..." }）→ 中身を取り出す
+    // 特殊なオブジェクト形式 { text: "..." } → テキスト取り出し
     if (typeof value === 'object') {
       if ('text' in value && typeof value.text === 'string') {
         return value.text;
       }
-      return JSON.stringify(value); // その他のオブジェクトはそのまま文字列化
+
+      // その他のオブジェクトは JSON 文字列化（例：tags_json など）
+      return JSON.stringify(value);
     }
 
-    // 文字列・数値など → そのまま返す
+    // 文字列 or 数値 → そのまま
     return value;
   });
 

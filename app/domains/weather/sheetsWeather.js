@@ -29,7 +29,7 @@ if (config.isProd) {
   keyFilePath = path.resolve(config.GOOGLE_CREDENTIALS_PATH); // ✅ 開発用の安全な参照
 }
 
-const spreadsheetId = config.SPREADSHEET_ID_WEATHER;
+const spreadsheetId = config.SHEET_ID_WEATHER;
 const sheetName = config.SHEET_NAME_WEATHER;
 
 const auth = new google.auth.GoogleAuth({

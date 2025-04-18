@@ -6,7 +6,7 @@ const logger = require('./logger');
 const config = require('../config'); // ✅ config導入
 
 const context = 'appendRow';
-const spreadsheetId = config.SPREADSHEET_ID_SPOTS;
+const spreadsheetId = config.SHEET_ID_SPOT;
 
 /**
  * 指定シートに1行追記
