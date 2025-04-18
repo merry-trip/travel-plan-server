@@ -4,7 +4,7 @@ const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');
 const logger = require('./logger');
-const config = require('../config'); // ✅ config 導入
+const config = require('../config');
 
 const context = 'auth';
 
@@ -14,8 +14,24 @@ const context = 'auth';
  */
 function getAuthClient() {
   try {
-    const keyPath = config.GOOGLE_APPLICATION_CREDENTIALS;
+    // ✅ 設定優先順位: config > env（将来の拡張を考慮）
+    const keyPath = config.GOOGLE_CREDENTIALS_PATH || config.GOOGLE_APPLICATION_CREDENTIALS;
+
+    // ✅ 明示的に定義されていない場合はエラー
+    if (!keyPath) {
+      logger.logError(context, '❌ 認証ファイルパスが未定義です（GOOGLE_CREDENTIALS_PATH or GOOGLE_APPLICATION_CREDENTIALS）');
+      throw new Error('認証ファイルのパスが未定義です（GOOGLE_CREDENTIALS_PATH）');
+    }
+
     const fullPath = path.resolve(__dirname, '../../', keyPath);
+
+    if (!fs.existsSync(fullPath)) {
+      logger.logError(context, `❌ 認証ファイルが存在しません: ${fullPath}`);
+      throw new Error(`認証ファイルが見つかりません: ${fullPath}`);
+    }
+
+    logger.logInfo(context, `✅ 認証ファイルパス: ${fullPath}`);
+
     const keyFile = fs.readFileSync(fullPath, 'utf-8');
     const credentials = JSON.parse(keyFile);
 

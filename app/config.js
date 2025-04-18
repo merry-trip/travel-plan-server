@@ -1,5 +1,7 @@
 // app/config.js
 
+require('dotenv').config();
+
 const APP_ENV = process.env.APP_ENV || 'dev';
 
 // ✅ バリデーション：APP_ENV の妥当性をチェック
@@ -34,32 +36,39 @@ const config = {
     ? process.env.DEEPSEEK_API_KEY_PROD
     : process.env.DEEPSEEK_API_KEY_DEV,
 
-  // 📊 Spreadsheet ID / Sheet names
-  SPREADSHEET_ID_SPOTS: process.env.SPREADSHEET_ID_SPOTS,
-  SHEET_NAME_SPOTS: isProd
+  // 📊 Google Sheets: Spot  
+  SHEET_ID_SPOT: isProd
+    ? process.env.SHEET_ID_SPOT_PROD
+    : process.env.SHEET_ID_SPOT_DEV,
+  
+  SHEET_NAME_SPOT: isProd
     ? process.env.SHEET_NAME_SPOT_PROD
     : process.env.SHEET_NAME_SPOT_DEV,
+  
+  // 📊 Google Sheets: Keywords
+  SHEET_ID_KEYWORDS: isProd
+    ? process.env.SHEET_ID_KEYWORDS_PROD
+    : process.env.SHEET_ID_KEYWORDS_DEV,
 
-  SPREADSHEET_ID_KEYWORDS: process.env.SPREADSHEET_ID_KEYWORDS,
-  SHEET_NAME_KEYWORDS: process.env.SHEET_NAME_KEYWORDS,
-
-  SPREADSHEET_ID_WEATHER: isTest
-    ? process.env.SHEET_ID_WEATHER_TEST || process.env.SHEET_ID_WEATHER_DEV
-    : isProd
+  SHEET_NAME_KEYWORDS: isProd
+    ? process.env.SHEET_NAME_KEYWORDS_PROD
+    : process.env.SHEET_NAME_KEYWORDS_DEV,
+  
+  // 📊 Google Sheets: Weather
+  SHEET_ID_WEATHER: isProd
     ? process.env.SHEET_ID_WEATHER_PROD
     : process.env.SHEET_ID_WEATHER_DEV,
 
-  SHEET_NAME_WEATHER: isTest
-    ? process.env.SHEET_NAME_WEATHER_TEST || process.env.SHEET_NAME_WEATHER_DEV
-    : isProd
+  SHEET_NAME_WEATHER: isProd
     ? process.env.SHEET_NAME_WEATHER_PROD
     : process.env.SHEET_NAME_WEATHER_DEV,
 
+  // 📊 Log Sheet（dev/testのみ）
   SHEET_NAME_LOGS: process.env.SHEET_NAME_LOGS_DEV, // logs は開発・検証のみ
 
-  // 🔐 認証情報
-  GOOGLE_CREDENTIALS_PATH: process.env.GOOGLE_CREDENTIALS_PATH_DEV, // prodはSecretsで処理
-  GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+  // 🔐 Credentials 認証情報
+  GOOGLE_CREDENTIALS_PATH: process.env.GOOGLE_CREDENTIALS_PATH_DEV, // ← dev 用の認証ファイルパス
+  GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS, // ← .envに明示的に書かれている場合用
 
   // 📧 Gmail 通知
   GMAIL_USER: process.env.GMAIL_USER,
@@ -70,8 +79,16 @@ const config = {
   EXCHANGE_RATE_USD: parseFloat(process.env.EXCHANGE_RATE_USD || '0.0065'),
   EXCHANGE_TIMESTAMP: process.env.EXCHANGE_TIMESTAMP || '',
 
-  // 🔍 その他（開発用オプションなど）
-  DEV_SHEET_NAME: process.env.DEV_SHEET_NAME,
 };
+
+// ✅ SDK連携のための昇格処理（本番または開発環境から）
+// 優先順位：GOOGLE_APPLICATION_CREDENTIALS（明示定義） > GOOGLE_CREDENTIALS_PATH（自動昇格）
+if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+  if (config.GOOGLE_APPLICATION_CREDENTIALS) {
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = config.GOOGLE_APPLICATION_CREDENTIALS;
+  } else if (config.GOOGLE_CREDENTIALS_PATH) {
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = config.GOOGLE_CREDENTIALS_PATH;
+  }
+}
 
 module.exports = config;

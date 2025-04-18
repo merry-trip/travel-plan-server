@@ -1,7 +1,6 @@
 // app/domains/spots/completeFullSpotInfo.js
 
-const config = require('../../config'); // ✅ config追加（将来の拡張に備える）
-
+const config = require('../../config');
 const { searchTextSpot } = require('./searchTextSpot.js');
 const { enrichSpotDetails } = require('./enrichSpotDetails.js');
 const { completeWithDeepSeek } = require('./completeWithDeepSeek.js');
@@ -10,13 +9,13 @@ const { getPrimaryCategory, getCategoriesFromTypes } = require('./categorizeSpot
 const { getRegionTagByLatLng } = require('./getRegionTagByLatLng.js');
 const { updateSpotStatus } = require('./updateSpotStatus.js');
 const { updateKeywordStatus } = require('../keywords/updateKeywordStatus.js');
-const { logInfo, logError, logWarn } = require('../../utils/logger.js'); // ✅ logWarn追加
+const { logInfo, logError, logWarn } = require('../../utils/logger.js');
 
 const CONTEXT = 'completeFullSpotInfo';
 
 /**
  * スポット補完フロー（Google + DeepSeek + カテゴリ分類 + 地域タグ）
- * @param {string} keyword - シートから取得した検索キーワード（例: "Akihabara Animate"）
+ * @param {string} keyword - 検索キーワード（例: "Akihabara Animate"）
  */
 async function completeFullSpotInfo(keyword) {
   logInfo(CONTEXT, `🔍 keyword="${keyword}" → Google + DeepSeek 補完を開始`);
@@ -26,8 +25,11 @@ async function completeFullSpotInfo(keyword) {
   try {
     // Step 1: placeId を取得
     const spotFromSearch = await searchTextSpot(keyword);
+
     if (!spotFromSearch || !spotFromSearch.placeId) {
-      throw new Error('❌ placeId が取得できませんでした');
+      logWarn(CONTEXT, `⚠️ placeId を取得できず → failed に設定: "${keyword}"`);
+      await updateKeywordStatus(keyword, 'failed');
+      return; // 補完終了（以降の処理は行わない）
     }
 
     placeIdForLog = spotFromSearch.placeId;
@@ -38,10 +40,10 @@ async function completeFullSpotInfo(keyword) {
     // Step 3: DeepSeek 補完
     const deepSeekResult = await completeWithDeepSeek(enrichedSpot);
     if (!deepSeekResult.description) {
-      logWarn(CONTEXT, `⚠️ DeepSeek description が空（placeId=${placeIdForLog}）`);
+      logWarn(CONTEXT, `⚠️ DeepSeek description が空（placeId=${placeIdForLog}）→ 再補完対象外`);
     }
 
-    // Step 4: カテゴリ
+    // Step 4: カテゴリ分類
     const category = getPrimaryCategory(enrichedSpot.types);
     if (!category || category === 'other') {
       logWarn(CONTEXT, `⚠️ 未分類カテゴリ: types=${JSON.stringify(enrichedSpot.types)} → category="${category}"`);
@@ -70,17 +72,18 @@ async function completeFullSpotInfo(keyword) {
     // Step 7: スプレッドシート保存
     await writeSpot(fullyCompletedSpot);
 
-    // ✅ Step 8a: ステータス更新（両方）
+    // Step 8a: ステータス更新
     await updateSpotStatus(fullyCompletedSpot.placeId, 'done');
     await updateKeywordStatus(keyword, 'done');
 
     logInfo(CONTEXT, `✅ 完了: keyword="${keyword}" → placeId=${fullyCompletedSpot.placeId}`);
   } catch (err) {
-    logError(CONTEXT, `❌ 処理失敗: keyword="${keyword}"`);
+    logError(CONTEXT, `❌ 補完処理失敗: keyword="${keyword}"`);
     logError(CONTEXT, err);
 
+    // Step 8b: ステータス更新（失敗ログに placeId がある場合のみ更新）
     if (placeIdForLog) {
-      await updateSpotStatus(placeIdForLog, 'failed');
+      await updateSpotStatus(placeIdForLog, 'error'); // API・構文系の失敗のみ error
     }
 
     await updateKeywordStatus(keyword, 'error');

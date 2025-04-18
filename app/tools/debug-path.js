@@ -1,16 +1,24 @@
+// app/tools/debug-path.js
+
 const fs = require('fs');
 const path = require('path');
-const logger = require('../utils/logger'); // OK
+const logger = require('../utils/logger'); // ✅ logger統一
 
-// 現在のPATH環境変数を取得してログファイルに出力
-const pathList = process.env.PATH.split(';');
+const context = 'debug-path';
 
-logger.logInfo('debug-path', 'Writing PATH contents to path-log.txt');
+// ✅ 環境変数 PATH を取得（クロスプラットフォーム対応）
+const separator = process.platform === 'win32' ? ';' : ':';
+const pathList = (process.env.PATH || '').split(separator);
 
-fs.writeFileSync(
-  path.join(__dirname, 'path-log.txt'),
-  pathList.join('\n'),
-  'utf8'
-);
+// ✅ ログファイルの保存先（logs ディレクトリ内）
+const outputPath = path.resolve(__dirname, '../logs/path-log.txt');
 
-logger.logInfo('debug-path', '✅ PATHログを書き出しました: path-log.txt');
+try {
+  logger.logInfo(context, `🛠 PATH内容を出力します → ${outputPath}`);
+
+  fs.writeFileSync(outputPath, pathList.join('\n'), 'utf8');
+
+  logger.logInfo(context, '✅ PATHログを書き出しました');
+} catch (err) {
+  logger.logError(context, `❌ PATHログの出力に失敗しました: ${err.message}`);
+}

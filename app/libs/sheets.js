@@ -1,10 +1,20 @@
 // app/libs/sheets.js
 
+const fs = require('fs');
 const { google } = require('googleapis');
 const logger = require('../utils/logger');
 const config = require('../config'); // ✅ config導入
 
 const context = 'sheets';
+
+// 🔍 認証ファイルの存在確認（ログ出力付き）
+if (!config.GOOGLE_CREDENTIALS_PATH) {
+  logger.logError(context, '❌ 認証ファイルパス (GOOGLE_CREDENTIALS_PATH) が config に定義されていません');
+} else if (!fs.existsSync(config.GOOGLE_CREDENTIALS_PATH)) {
+  logger.logError(context, `❌ 認証ファイルが見つかりません: ${config.GOOGLE_CREDENTIALS_PATH}`);
+} else {
+  logger.logInfo(context, `✅ 認証ファイルを確認済: ${config.GOOGLE_CREDENTIALS_PATH}`);
+}
 
 /**
  * Google API 認証クライアントを取得
