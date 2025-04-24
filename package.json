@@ -1,0 +1,15 @@
+{
+  "name": "travel-plan-server",
+  "version": "1.0.0",
+  "description": "訪日外国人向けに「アニメ・マンガ聖地巡礼ルート」を自動生成・地図表示する Node.js ベースの Webアプリケーションです。地図マーカー表示、天気予報の取得・保存、通知メール送信、スプレッドシートログ記録など、運用前提の自動化処理にも対応しています。",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"No test configured\""
+  },
+  "keywords": [],
+  "author": "MerryTrip",
+  "license": "ISC",
+  "dependencies": {
+    "google-spreadsheet": "^4.1.4"
+  }
+}

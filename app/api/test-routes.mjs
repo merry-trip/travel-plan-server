@@ -1,10 +1,10 @@
-// test-scripts/test-routes.js
+// test-scripts/test-routes.mjs
+
+import axios from 'axios';
+import { logInfo, logError } from '../app/utils/logger.mjs';
+import config from '../app/config.mjs';
 
 process.env.APP_ENV = 'test'; // ✅ テスト環境明示（APIキー安全）
-
-const axios = require('axios');
-const { logInfo, logError } = require('../app/utils/logger');
-const config = require('../app/config');
 
 const context = 'getRoute';
 
@@ -16,7 +16,7 @@ async function getUserCountry() {
     return countryCode;
   } catch (error) {
     logError('getUserCountry', `❌ 国コード取得失敗: ${error.message}`);
-    return 'JP';
+    return 'JP'; // デフォルトは日本
   }
 }
 
@@ -72,7 +72,7 @@ async function getRoute() {
     }
   } catch (error) {
     logError(context, `❌ API呼び出し失敗: ${error.message}`);
-    if (error.response) {
+    if (error.response?.data) {
       logError(context, `❗ 応答詳細: ${JSON.stringify(error.response.data, null, 2)}`);
     }
   }

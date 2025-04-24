@@ -1,6 +1,6 @@
-// app/config.js
+// app/config.mjs
 
-require('dotenv').config();
+import 'dotenv/config';
 
 const APP_ENV = process.env.APP_ENV || 'dev';
 
@@ -20,50 +20,24 @@ const config = {
   isTest,
 
   // 🔑 API Keys
-  OPENAI_API_KEY: isProd
-    ? process.env.OPENAI_API_KEY_PROD
-    : process.env.OPENAI_API_KEY_DEV,
-
-  GOOGLE_API_KEY: isProd
-    ? process.env.GOOGLE_API_KEY_PROD
-    : process.env.GOOGLE_API_KEY_DEV,
-
-  OPENWEATHER_API_KEY: isProd
-    ? process.env.OPENWEATHER_API_KEY_PROD
-    : process.env.OPENWEATHER_API_KEY_DEV,
-
-  DEEPSEEK_API_KEY: isProd
-    ? process.env.DEEPSEEK_API_KEY_PROD
-    : process.env.DEEPSEEK_API_KEY_DEV,
+  OPENAI_API_KEY: isProd ? process.env.OPENAI_API_KEY_PROD : process.env.OPENAI_API_KEY_DEV,
+  GOOGLE_API_KEY: isProd ? process.env.GOOGLE_API_KEY_PROD : process.env.GOOGLE_API_KEY_DEV,
+  OPENWEATHER_API_KEY: isProd ? process.env.OPENWEATHER_API_KEY_PROD : process.env.OPENWEATHER_API_KEY_DEV,
+  DEEPSEEK_API_KEY: isProd ? process.env.DEEPSEEK_API_KEY_PROD : process.env.DEEPSEEK_API_KEY_DEV,
 
   // 📊 Sheets: Spot
-  SHEET_ID_SPOT: isProd
-    ? process.env.SHEET_ID_SPOT_PROD
-    : process.env.SHEET_ID_SPOT_DEV,
-
-  SHEET_NAME_SPOT: isProd
-    ? process.env.SHEET_NAME_SPOT_PROD
-    : process.env.SHEET_NAME_SPOT_DEV,
+  SHEET_ID_SPOT: isProd ? process.env.SHEET_ID_SPOT_PROD : process.env.SHEET_ID_SPOT_DEV,
+  SHEET_NAME_SPOT: isProd ? process.env.SHEET_NAME_SPOT_PROD : process.env.SHEET_NAME_SPOT_DEV,
 
   // 📊 Sheets: Keywords
-  SHEET_ID_KEYWORDS: isProd
-    ? process.env.SHEET_ID_KEYWORDS_PROD
-    : process.env.SHEET_ID_KEYWORDS_DEV,
-
-  SHEET_NAME_KEYWORDS: isProd
-    ? process.env.SHEET_NAME_KEYWORDS_PROD
-    : process.env.SHEET_NAME_KEYWORDS_DEV,
+  SHEET_ID_KEYWORDS: isProd ? process.env.SHEET_ID_KEYWORDS_PROD : process.env.SHEET_ID_KEYWORDS_DEV,
+  SHEET_NAME_KEYWORDS: isProd ? process.env.SHEET_NAME_KEYWORDS_PROD : process.env.SHEET_NAME_KEYWORDS_DEV,
 
   // 📊 Sheets: Weather
-  SHEET_ID_WEATHER: isProd
-    ? process.env.SHEET_ID_WEATHER_PROD
-    : process.env.SHEET_ID_WEATHER_DEV,
+  SHEET_ID_WEATHER: isProd ? process.env.SHEET_ID_WEATHER_PROD : process.env.SHEET_ID_WEATHER_DEV,
+  SHEET_NAME_WEATHER: isProd ? process.env.SHEET_NAME_WEATHER_PROD : process.env.SHEET_NAME_WEATHER_DEV,
 
-  SHEET_NAME_WEATHER: isProd
-    ? process.env.SHEET_NAME_WEATHER_PROD
-    : process.env.SHEET_NAME_WEATHER_DEV,
-
-  // 📊 Log（dev用）
+  // 📊 Log（dev/test 用）
   SHEET_NAME_LOGS: process.env.SHEET_NAME_LOGS_DEV,
 
   // 🔐 認証ファイル
@@ -90,11 +64,8 @@ if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
 }
 
 // ✅ getConfig() を明示的に提供
-function getConfig() {
+export function getConfig() {
   return config;
 }
 
-module.exports = {
-  ...config,
-  getConfig,
-};
+export default config;
