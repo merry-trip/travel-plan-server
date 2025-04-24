@@ -537,3 +537,12 @@ cp .env.test.example .env
 `.env` との差分チェックスクリプト（漏れ検知）もすぐご用意できます！
 
 次に進めたい内容があればどうぞ🔥📘
+
+## ✅ v1.1.1 以降の仕様変更
+
+- すべてのNode.jsスクリプトを `.js` → `.mjs` に完全移行
+- `import / export` を使用するES Modules構成
+- 日本時間ログ出力付きの `logger.mjs` を全スクリプトに統一導入
+- ログは `logs/update.log` に保存（`.gitignore` 対象）
+- `.env` はローカル開発専用、GitHub Actions 本番は Secrets 運用
+- `app/weather-write-to-sheet.mjs` を中心に天気データを取得・通知
