@@ -2,8 +2,8 @@ name: Daily Weather Logger
 
 on:
   schedule:
-    - cron: '0 21 * * *' # JST 6:00（UTC 21:00）
-  workflow_dispatch: # ✅ 手動実行も可能
+    - cron: '0 21 * * *'  # JST 6:00（UTC 21:00）
+  workflow_dispatch:      # ✅ 手動実行も可能
 
 jobs:
   log-weather:
@@ -27,7 +27,7 @@ jobs:
         run: |
           echo "${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}" > credentials.prod.json
 
-      - name: ☁️ 天気データをスプレッドシートに記録
+      - name: ☁️ 天気データをスプレッドシートに記録（`.mjs` 実行）
         working-directory: app
         env:
           APP_ENV: prod
@@ -38,5 +38,4 @@ jobs:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           GMAIL_TO: ${{ secrets.GMAIL_TO }}
-        run: node domains/weather/writeToSheet.js
-
+        run: node weather-write-to-sheet.mjs
