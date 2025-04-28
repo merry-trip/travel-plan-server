@@ -1,20 +1,17 @@
 {
   "name": "app",
-  "version": "1.6.14-pro",
+  "version": "1.7.0-pro",
   "description": "アニメ聖地スポット管理 + 天気記録 + バッチ自動化プロジェクト",
   "type": "module",
   "main": "server.mjs",
   "scripts": {
     "dev": "node server.mjs",
-
     "run:weather": "APP_ENV=prod node weather-write-to-sheet.mjs",
-    "test:weather": "APP_ENV=test node test-scripts/test-weather.mjs",
-
-    "test:categorize": "APP_ENV=test node test-scripts/categorizeSpot.test.mjs",
-    "test:batch-spots": "APP_ENV=test node test-scripts/batch-write-spots.test.mjs",
-
-    "test": "vitest",
-    "test:run": "vitest run"
+    "run:batch-spots": "APP_ENV=prod node batch-write-spots.mjs",
+    "test": "vitest run",
+    "test:weather": "vitest run test-scripts/test-weather.test.mjs",
+    "test:categorize": "vitest run test-scripts/categorizeSpot.test.mjs",
+    "test:batch-spots": "vitest run test-scripts/batch-write-spots.test.mjs"
   },
   "keywords": [
     "anime",
@@ -24,7 +21,8 @@
     "openweather",
     "batch",
     "esm",
-    "mjs"
+    "mjs",
+    "vitest"
   ],
   "author": "合同会社MerryTrip",
   "license": "MIT",
@@ -34,7 +32,8 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "googleapis": "^148.0.0",
-    "nodemailer": "^6.10.0"
+    "nodemailer": "^6.10.0",
+    "rotating-file-stream": "^3.2.6"
   },
   "devDependencies": {
     "vitest": "^1.5.0"

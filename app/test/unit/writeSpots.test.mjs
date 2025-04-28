@@ -1,13 +1,15 @@
-// test-scripts/writeSpots.test.mjs
+// app/test/unit/writeSpots.test.mjs
 
-import writeSpots from '../app/domains/spots/writeSpots.mjs';
-import { logInfo, logError } from '../app/utils/logger.mjs';
-import config from '../app/config.mjs';
+import { describe, test, expect, beforeAll, afterAll } from 'vitest';
+import writeSpots from '../../domains/spots/writeSpots.mjs';
+import { logInfo, logError } from '../../utils/logger.mjs';
+import config from '../../config.mjs';
+
+const TEST_CONTEXT = 'writeSpots.test.mjs';
 
 process.env.APP_ENV = 'test'; // ✅ テスト環境を明示
 
-const context = 'test-writeSpots';
-
+// ✅ テスト用スポットデータ（サンプル1件）
 const enrichedSpot = {
   placeId: 'ChIJU9ZPE2-NGGARwiJyx0Id61E',
   name: 'Sunshine City',
@@ -54,10 +56,25 @@ const enrichedSpot = {
   status: 'done'
 };
 
-try {
-  logInfo(context, `🧪 writeSpots テスト開始（env=${config.env}）`);
-  await writeSpots([enrichedSpot]);
-  logInfo(context, `✅ writeSpots テスト成功（1件書き込み）`);
-} catch (err) {
-  logError(context, `❌ writeSpots テスト失敗: ${err.message}`);
-}
+beforeAll(() => {
+  logInfo(TEST_CONTEXT, `✅ テスト開始 (env=${config.env})`);
+});
+
+afterAll(() => {
+  logInfo(TEST_CONTEXT, '✅ テスト終了');
+});
+
+describe('writeSpots() - 複数スポット書き込みテスト', () => {
+  test('✅ enrichedSpotを例外なく書き込める', async () => {
+    try {
+      const result = await writeSpots([enrichedSpot]);
+
+      logInfo(TEST_CONTEXT, '✅ writeSpots 成功（1件書き込み）');
+      expect(result).toBeDefined();
+      expect(typeof result).toBe('object');
+    } catch (err) {
+      logError(TEST_CONTEXT, `❌ writeSpots テスト失敗: ${err.message}`);
+      throw err; // テスト失敗扱い
+    }
+  }, 20_000); // ⏱️ スプレッドシート操作に20秒タイムアウト
+});
