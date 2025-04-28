@@ -546,3 +546,125 @@ cp .env.test.example .env
 - ログは `logs/update.log` に保存（`.gitignore` 対象）
 - `.env` はローカル開発専用、GitHub Actions 本番は Secrets 運用
 - `app/weather-write-to-sheet.mjs` を中心に天気データを取得・通知
+
+# 📘 プロジェクト概要
+
+このリポジトリは、訪日外国人向けのアニメ・マンガ旅行ガイドWebサービスを開発するためのものです。Google Places API（New版）を中心に、スポット情報の収集・補完・保存・表示を自動化し、旅行プランの最適化とユーザー体験の向上を目指しています。
+
+---
+
+# 🗂 ディレクトリ構成
+
+（2025年4月28日時点 最新版）
+
+```
+app/
+├── api/
+├── data/
+├── domains/
+├── logs/
+├── node_modules/（略）
+├── public/
+├── routes/
+├── scripts/
+├── sheets/
+├── test/
+├── tools/
+├── utils/
+├── views/
+├── .gitignore
+├── config.mjs
+├── credentials.dev.json
+├── credentials.prod.json
+├── package.json
+├── package-lock.json
+├── server.mjs
+├── test-index.html
+├── vitest.config.mts
+└── weather-write-to-sheet.mjs
+```
+
+※ 詳細な構成は `app-structure.txt` を参照してください。
+
+---
+
+# 🧪 セットアップ手順
+
+### 必須インストール
+
+- Node.js v20.x
+- npm v10.x
+
+### セットアップコマンド
+
+```bash
+npm install
+```
+
+### 環境変数設定
+
+`.env` ファイルをルートに配置し、以下の変数を設定してください（順序：PROD→DEV）
+
+例：
+```bash
+APP_ENV=dev
+GOOGLE_API_KEY_DEV=xxxxxxx
+GOOGLE_API_KEY_PROD=xxxxxxx
+SHEET_ID_SPOTS_DEV=xxxxxxx
+SHEET_ID_SPOTS_PROD=xxxxxxx
+```
+
+※ テンプレートは `.env.test.example` を複製してください。
+
+---
+
+# 📘 使用APIと運用ルール
+
+- **Places API（New版）SearchText/Detailsのみ使用**
+- **非採用API**：place/details/json（旧版）および非公式placeId取得は禁止
+- **DeepSeek**：スポット情報補完用
+- **OpenWeather API**：天気予報バッチ保存用（天気サービス連携予定）
+
+**運用設計ルール**：
+- placeId取得元は必ずSearchText経由
+- types[]→categoryは`category-map.json`で変換
+- tags_jsonは検索UIフィルター前提で保存
+
+---
+
+# 🪵 ログ出力・エラーハンドリング
+
+- 全モジュールは `utils/logger.mjs` を通してログ記録
+- JST時刻、レベル（info, warn, error）、コンテキスト情報付き
+- ログは `logs/update.log` に出力され、デバッグ／トレーサビリティ確保
+
+---
+
+# 🪜 Step進行表
+
+| ステップ | 内容 |
+|:---|:---|
+| Step 15 | GitHub Actionsによる定期バッチ（スポット補完＋天気保存）本番運用開始 |
+| Step 16 | ステータス（done/failed/skipped）正確反映による冪等性確保 |
+| Step 17 | DeepSeek補完対象拡張（best_time, tags_json, ai_description_status） |
+| Step 18 | 地理・言語情報強化（region_tag, nearest_station, tags_ja一括取得＋マップ連携） |
+| Step 19 | 地域別ピン色分け＋検索フィルター強化（UX改善） |
+
+---
+
+# 🛡 更新ルールとGit運用
+
+- API仕様変更、.env構成変更、ログ設計変更時は必ず `README.md` を更新する
+- 更新後のGit操作：
+
+```bash
+git add README.md
+git commit -m "📘 README更新: 運用方針を追記"
+git push origin main
+```
+
+- 節目ではタグ付与推奨：
+
+```bash
+git tag v1.6.15-readme-update
+git push origin v1.6.15-readme-update
