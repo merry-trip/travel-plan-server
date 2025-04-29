@@ -1,0 +1,14 @@
+[
+    { "category": "anime", "keywords": ["book_store", "movie_rental", "gift_shop"] },
+    { "category": "fashion", "keywords": ["clothing_store"] },
+    { "category": "electronics", "keywords": ["electronics_store", "cell_phone_store"] },
+    { "category": "cafe", "keywords": ["cafe", "dessert_restaurant", "internet_cafe", "cafeteria"] },
+    { "category": "food", "keywords": ["restaurant", "food_store", "food", "japanese_restaurant", "confectionery"] },
+    { "category": "entertainment", "keywords": ["karaoke", "video_arcade", "bowling_alley", "night_club"] },
+    { "category": "art", "keywords": ["art_gallery", "museum"] },
+    { "category": "hotel", "keywords": ["hotel", "lodging"] },
+    { "category": "shopping", "keywords": ["store", "shopping_mall", "discount_store", "home_goods_store"] },
+    { "category": "attraction", "keywords": ["tourist_attraction", "amusement_center", "event_venue", "sports_complex"] },
+    { "category": "other", "keywords": ["establishment", "corporate_office", "point_of_interest"] }
+  ]
+  

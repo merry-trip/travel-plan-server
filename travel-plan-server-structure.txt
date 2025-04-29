@@ -1,0 +1,24 @@
+travel-plan-server/
+├── .git
+├── .github/
+│   └── workflows/
+│       ├── batch-write-spots.yml
+│       ├── debug-directory.yml
+│       └── weather.yml
+├── app/
+│   └── （app内構成は app-structure.txt にて管理）
+├── node_modules/
+├── .env
+├── .env.test.example
+├── .gitignore
+├── app-structure.txt
+├── backup-package.json
+├── config.mjs
+├── credentials.dev.json
+├── credentials.prod.json
+├── package.json
+├── package-lock.json
+├── README.md
+├── server.mjs
+├── travel-plan-server-structure.txt
+└── vitest.config.mts

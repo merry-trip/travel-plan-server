@@ -1,0 +1,38 @@
+name: Monthly Spot Batch Write
+
+on:
+  schedule:
+    - cron: '0 21 1 * *'  # 毎月1日 06:00 JST
+  workflow_dispatch:
+
+jobs:
+  batch-write:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies in app/
+        working-directory: app
+        run: npm install
+
+      - name: 🔐 Google認証ファイル（credentials.prod.json）を生成
+        working-directory: app
+        run: |
+          echo "${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}" > credentials.prod.json
+
+      - name: Run batch spot writer (本番用スクリプトを実行)
+        working-directory: app
+        run: node scripts/batchWriteSpots.js
+        env:
+          APP_ENV: prod
+          GOOGLE_CREDENTIALS_JSON_PROD: ${{ secrets.GOOGLE_CREDENTIALS_JSON_PROD }}
+          GOOGLE_APPLICATION_CREDENTIALS: credentials.prod.json  # ✅ 追加ポイント
+          GOOGLE_SHEET_ID_PROD: ${{ secrets.GOOGLE_SHEET_ID_PROD }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}

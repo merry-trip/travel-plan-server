@@ -1,0 +1,110 @@
+app/
+├── api/
+│   ├── forecast.mjs
+│   ├── get-spots.mjs
+│   ├── log-search.mjs
+│   ├── send-mail.mjs
+│   ├── sheets.mjs
+│   ├── test-autocomplete.mjs
+│   ├── test-getPlaceDetails.mjs
+│   ├── test-nearbySearch.mjs
+│   ├── test-routes.mjs
+│   └── test-searchText.mjs
+├── data/
+│   ├── category-map.json
+│   └── region_map_by_bounds.json
+├── domains/
+│   ├── keywords/
+│   │   └── updateKeywordStatus.mjs
+│   ├── spots/
+│   │   ├── batchCompleteFullSpots.mjs
+│   │   ├── categorizeSpot.mjs
+│   │   ├── columnOrder.mjs
+│   │   ├── completeFullSpotInfo.mjs
+│   │   ├── completeSpotInfo.mjs
+│   │   ├── completeWithDeepSeek.mjs
+│   │   ├── enrichSpotDetails.mjs
+│   │   ├── fieldsToUpdate.mjs
+│   │   ├── getBasicPlaceDetails.mjs
+│   │   ├── getKeywordsFromSheet.mjs
+│   │   ├── getRegionTagByLatLng.mjs
+│   │   ├── rowMapper.mjs
+│   │   ├── searchTextSpot.mjs
+│   │   ├── updateSpotDetails.mjs
+│   │   ├── updateSpotRow.mjs
+│   │   ├── updateSpotStatus.mjs
+│   │   ├── validateSpot.mjs
+│   │   ├── writeSpot.mjs
+│   │   └── writeSpots.mjs
+│   └── weather/
+│       ├── fetchForecast.mjs
+│       ├── sendMail.mjs
+│       ├── sheetsWeather.mjs
+│       └── writeToSheet.mjs
+├── logs/
+│   └── update.log
+├── public/
+│   ├── js/
+│   ├── wordpress-backup
+│   ├── wp-admin/
+│   ├── wp-content/
+│   ├── wp-includes/
+│   ├── .htaccess
+│   ├── index.php
+│   ├── license.txt
+│   ├── local-phpinfo.php
+│   ├── local-xdebuginfo.php
+│   ├── readme.html
+│   ├── test-index.html
+│   └── test-map.html
+├── routes/
+│   └── log-search.mjs
+├── scripts/
+│   ├── batchCompleteReadySpots.mjs
+│   ├── batchWriteSpots.mjs
+│   ├── run-batchCompleteFullSpots.mjs
+│   ├── test-env.mjs
+│   ├── test-searchText-types.mjs
+│   ├── test-sheet-get.mjs
+│   ├── updateRatingsBatch.mjs
+│   ├── weather-write-to-sheet.mjs
+│   └── writeWithDeepSeek.mjs
+├── sheets/
+│   └── sheet-id-list.txt
+├── test/
+│   └── unit/
+│       ├── batchCompleteFullSpots.test.mjs
+│       ├── batchCompleteReadySpots.test.mjs
+│       ├── batchwritespots.test.mjs
+│       ├── categorizeSpot.test.mjs
+│       ├── completeFullSpotInfo.test.mjs
+│       ├── completeSpotInfo.test.mjs
+│       ├── deepSeek.test.mjs
+│       ├── enrichSpotDetails.test.mjs
+│       ├── logger.test.mjs
+│       ├── searchTextSpot.test.mjs
+│       ├── test-completeFullSpotInfo.test.mjs
+│       ├── test-get-keywords.test.mjs
+│       ├── test-getRegionTag.test.mjs
+│       ├── test-updateKeywordStatus.test.mjs
+│       ├── writeSpot.test.mjs
+│       ├── writeSpots.test.mjs
+│       └── writeWithDeepSeek.test.mjs
+├── tools/
+│   ├── archive/
+│   ├── debug-path.mjs
+│   ├── update-category.mjs
+│   └── update-readme-modules.mjs
+├── utils/
+│   ├── appendRow.mjs
+│   ├── appendRows.mjs
+│   ├── auth.mjs
+│   ├── getStoredPlaceIds.mjs
+│   ├── logger.mjs
+│   ├── sheets.mjs
+│   └── updateSheetRow.mjs
+├── views/
+│   └── map.ejs
+│
+└── package-lock.json
+
