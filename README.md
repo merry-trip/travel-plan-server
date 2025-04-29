@@ -668,3 +668,25 @@ git push origin main
 ```bash
 git tag v1.6.15-readme-update
 git push origin v1.6.15-readme-update
+
+---
+
+## 🪜 開発ステップ進行表（v1系）
+
+| フェーズ | バージョン | 内容 | 状態 |
+|----------|------------|------|------|
+| Phase 0  | v1.0.0     | Google Sheets API + OpenWeather API の自動記録バッチ処理 | ✅ 完了 |
+| Phase 1  | v1.1.0     | ロードマップ整理 / スプレッドシート構成整理 / API鍵管理 | ✅ 完了 |
+| Phase 2  | v1.1.1     | 駅すぱあとAPI方針決定（後半へ移行） | ✅ 完了 |
+| Phase 3  | v1.2.0     | 地図表示（Google Maps JavaScript API / test-map.html） | ✅ 完了 |
+| Phase 4  | v1.3.0     | 検索ログ保存API＋為替表示＋構成再整理 | ✅ 完了（v1.3.0-restore） |
+| Phase 5  | v1.4.0     | Nearby Search バッチ処理とスポットDB整理 | ⏳ 実装予定 |
+| Phase 6  | v1.5.0     | 検索ログ学習・提案UI（OpenAI API 連携） | ⏳ 実装予定 |
+| Phase 7  | v1.6.0     | 駅すぱあとAPI連携（徒歩＋鉄道ルート対応） | ⏳ 実装予定 |
+| Phase 8  | v1.7.0     | UI・多言語化・翻訳 / i18n 対応 | ⏳ 実装予定 |
+| Phase 9  | v1.8.0     | 公開用本番デプロイ・Railway構築・最終タグ付け | ⏳ 実装予定 |
+
+---
+
+📌 各フェーズは、実装→テスト→GitHubタグで管理  
+✅ 完了済み / ⏳ 未着手 / 🔧 開発中 の3段階で進捗を明示
