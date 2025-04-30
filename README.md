@@ -690,3 +690,8 @@ git push origin v1.6.15-readme-update
 
 📌 各フェーズは、実装→テスト→GitHubタグで管理  
 ✅ 完了済み / ⏳ 未着手 / 🔧 開発中 の3段階で進捗を明示
+
+📌 プロジェクト概要 に「アニメ聖地スポットの管理と天気記録、自動バッチ処理を行うNode.jsアプリ」と明記
+📘 使用API に「Places API v1 / OpenWeather / Sheets API / OpenAI / DeepSeek」など列挙
+.env.testの構造、APP_ENVによる切り替えルール、logger設計を明記
+Step進行表は Spot Data Summary の内容をそのまま引用
