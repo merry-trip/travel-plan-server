@@ -695,3 +695,10 @@ git push origin v1.6.15-readme-update
 📘 使用API に「Places API v1 / OpenWeather / Sheets API / OpenAI / DeepSeek」など列挙
 .env.testの構造、APP_ENVによる切り替えルール、logger設計を明記
 Step進行表は Spot Data Summary の内容をそのまま引用
+
+🪜 開発ステップ（v1.7.1まで）
+
+バージョン	内容
+v1.6.x	logger統一 / DeepSeek補完 / バッチ実装 / Spot保存構造整備
+v1.7.0	相対パス統一・プロジェクト構成見直し・tools導入
+✅ v1.7.1	project-knowledge.json 生成、/api/project-status 検索API実装
