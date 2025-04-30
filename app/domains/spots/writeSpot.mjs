@@ -34,6 +34,9 @@ export async function writeSpot(spot) {
 
     // ✅ 5. ログ出力（placeIdとstatusも追跡に重要）
     logInfo(context, `✅ Spot written: ${spot.name} / placeId=${spot.placeId} / status=${spot.status}`);
+
+    return { success: true, placeId: spot.placeId };
+    
   } catch (err) {
     logError(context, `❌ Failed to write spot: ${err.message}`);
     throw err;

@@ -46,6 +46,13 @@ export default async function writeSpots(spots) {
     if (failedSpots.length > 0) {
       logWarn(context, `⚠️ Skipped ${failedSpots.length} invalid spot(s): ${failedSpots.join(', ')}`);
     }
+    return {
+      success: true,
+      writtenCount: validRows.length,
+      failedCount: failedSpots.length,
+      failedLabels: failedSpots,
+    };
+    
   } catch (err) {
     logError(context, `❌ Failed to write spots: ${err.message}`);
     throw err;

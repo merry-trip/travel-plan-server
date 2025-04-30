@@ -13,7 +13,7 @@ const spreadsheetId = config.SHEET_ID_SPOT;
  * @param {string} sheetName - 対象シート名（例: "spots"）
  */
 export default async function appendRows(rows, sheetName) {
-  const auth = getAuthClient();
+  const auth = await getAuthClient();
   const sheets = google.sheets({ version: 'v4', auth });
 
   await sheets.spreadsheets.values.append({

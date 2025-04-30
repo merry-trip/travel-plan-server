@@ -56,8 +56,7 @@ const googleCredentialsPathRaw = isProd
     ? process.env.GOOGLE_CREDENTIALS_PATH_DEV
     : process.env.GOOGLE_CREDENTIALS_PATH_TEST;
 
-// ここでプロジェクトルート基準でパスを直す
-const googleCredentialsPath = path.resolve(__dirname, '../', googleCredentialsPathRaw);
+const googleCredentialsPath = path.resolve(__dirname, googleCredentialsPathRaw);
 
 if (!fs.existsSync(googleCredentialsPath)) {
   logError('config', `[Config Error] Credentials file not found at ${googleCredentialsPath}`);

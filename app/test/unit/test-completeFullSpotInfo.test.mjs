@@ -21,32 +21,23 @@ describe('completeFullSpotInfo() - スポット補完テスト', () => {
     const validKeyword = 'Akihabara Animate';
     logInfo(TEST_CONTEXT, `🧪 正常系テスト → keyword="${validKeyword}"`);
 
-    try {
-      const result = await completeFullSpotInfo(validKeyword);
+    const result = await completeFullSpotInfo(validKeyword);
 
-      logInfo(TEST_CONTEXT, `✅ 正常完了: ${JSON.stringify(result, null, 2)}`);
-      expect(result).toBeDefined();
-      expect(typeof result).toBe('object');
-    } catch (err) {
-      logError(TEST_CONTEXT, `❌ 正常系テスト中にエラー発生: ${err.message}`);
-      throw err; // 正常系なのでエラーなら即失敗
-    }
-  }, 30_000); // ⏱️ タイムアウト30秒
+    logInfo(TEST_CONTEXT, `✅ 正常完了: ${JSON.stringify(result, null, 2)}`);
+    expect(result).toBeDefined();
+    expect(typeof result).toBe('object');
+    expect(result.success).toBe(true);
+  }, 30_000);
 
-  test('❌ 異常系：存在しないキーワードはエラーとして捕捉される', async () => {
-    const invalidKeyword = 'アニメイト存在しない場所XYZ';
+  test('❌ 異常系：存在しないキーワードは補完されず、success=false で返る', async () => {
+    const invalidKeyword = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz';
     logInfo(TEST_CONTEXT, `🧪 異常系テスト → keyword="${invalidKeyword}"`);
 
-    let errorCaught = false;
+    const result = await completeFullSpotInfo(invalidKeyword);
 
-    try {
-      await completeFullSpotInfo(invalidKeyword);
-      logInfo(TEST_CONTEXT, '⚠️ 想定外: 補完成功してしまった');
-    } catch (err) {
-      logInfo(TEST_CONTEXT, '✅ 異常系: エラーを正しく捕捉');
-      errorCaught = true;
-    }
-
-    expect(errorCaught).toBe(true); // 捕捉できなければテスト失敗
-  }, 20_000); // ⏱️ タイムアウト20秒
+    expect(result).toBeDefined();
+    expect(result.success).toBe(false);
+    expect(result.reason).toMatch(/placeId not found|already exists|error/i);
+    logInfo(TEST_CONTEXT, `✅ 異常系補完結果: ${JSON.stringify(result, null, 2)}`);
+  }, 20_000);
 });
