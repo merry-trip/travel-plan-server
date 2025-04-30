@@ -24,6 +24,7 @@ credentials.prod.json
 
 # 開発用の手動生成ファイル
 credentials.dev.json
+credentials.test.json
 
 # ========================================
 # ✅ Node.js診断系・一時ファイル

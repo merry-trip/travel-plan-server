@@ -7,12 +7,13 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import config from '@/config.mjs';
-import getSpotList from './api/get-spots.mjs';
-import logSearchRouter from './routes/log-search.mjs';
-import { logInfo, logError } from './utils/logger.mjs';
+import config from './config.mjs';
+import getSpotList from './app/api/get-spots.mjs';
+import { handler as projectStatusHandler } from './app/api/project-status.mjs';
+import logSearchRouter from './app/routes/log-search.mjs';
+import { logInfo, logError } from './app/utils/logger.mjs';
 
-// ✅ __dirname 再現
+// ✅ __dirname 再現（ESM用）
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -44,6 +45,9 @@ app.get('/api/spots', async (req, res) => {
     res.status(500).json({ error: 'Failed to retrieve spot list' });
   }
 });
+
+// ✅ /api/project-status：ナレッジ検索用
+app.get('/api/project-status', projectStatusHandler);
 
 // ✅ /api/log-search：検索ログの記録
 app.use('/api', express.json(), logSearchRouter);

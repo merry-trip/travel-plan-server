@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { logInfo, logError } from '../app/utils/logger.mjs';
-import config from '@/config.mjs';
+import config from '../config.mjs';
 
 process.env.APP_ENV = 'test'; // ✅ テスト環境を明示
 

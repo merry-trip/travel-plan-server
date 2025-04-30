@@ -4,7 +4,7 @@ import { getKeywordsFromSheet } from '../domains/spots/getKeywordsFromSheet.mjs'
 import { completeWithDeepSeek } from '../domains/spots/completeWithDeepSeek.mjs';
 import { updateSpotDetails } from '../domains/spots/updateSpotDetails.mjs';
 import { logInfo, logError } from '../utils/logger.mjs';
-import config from '@/config.mjs';
+import config from '../../config.mjs';
 
 const CONTEXT = 'writeWithDeepSeek';
 

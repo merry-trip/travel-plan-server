@@ -1,0 +1,406 @@
+{
+  "version": "v1.7.0",
+  "generated_at": "2025-04-30T12:40:06.933Z",
+  "files": [
+    {
+      "path": "app/api/forecast.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/get-spots.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/log-search.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/project-status.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/send-mail.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/sheets.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-autocomplete.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-getPlaceDetails.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-nearbySearch.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-routes.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-searchText.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/keywords/updateKeywordStatus.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/batchCompleteFullSpots.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/categorizeSpot.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/columnOrder.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/completeFullSpotInfo.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/completeSpotInfo.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/completeWithDeepSeek.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/enrichSpotDetails.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/fieldsToUpdate.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/getBasicPlaceDetails.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/getKeywordsFromSheet.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/getRegionTagByLatLng.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/rowMapper.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/searchTextSpot.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/updateSpotDetails.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/updateSpotRow.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/updateSpotStatus.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/validateSpot.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/writeSpot.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/writeSpots.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/weather/fetchForecast.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/weather/sendMail.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/weather/sheetsWeather.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/domains/weather/writeToSheet.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/routes/log-search.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/batchCompleteReadySpots.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/batchWriteSpots.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/run-batchCompleteFullSpots.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/test-env.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/test-searchText-types.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/test-sheet-get.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/updateRatingsBatch.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/weather-write-to-sheet.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/writeWithDeepSeek.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/batchCompleteFullSpots.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/batchCompleteReadySpots.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/batchwritespots.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/categorizeSpot.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/completeFullSpotInfo.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/completeSpotInfo.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/deepSeek.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/enrichSpotDetails.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/logger.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/searchTextSpot.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/test-completeFullSpotInfo.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/test-get-keywords.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/test-getRegionTag.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/test-updateKeywordStatus.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/writeSpot.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/writeSpots.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/writeWithDeepSeek.test.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-cmd.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-getPlaceDetails.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-npm-list.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-searchNearby.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-searchText-v2.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-searchText.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/debug-path.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/update-category.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/update-knowledge-json.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/update-readme-modules.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/tools/update-structure-json.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/utils/appendRow.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/utils/appendRows.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/utils/auth.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/utils/getStoredPlaceIds.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/utils/logger.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/utils/sheets.mjs",
+      "category": "unknown",
+      "description": ""
+    },
+    {
+      "path": "app/utils/updateSheetRow.mjs",
+      "category": "unknown",
+      "description": ""
+    }
+  ]
+}

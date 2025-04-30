@@ -1,7 +1,7 @@
 // app/domains/spots/updateSpotRow.mjs
 
 import updateSheetRow from '../../utils/updateSheetRow.mjs';
-import config from '@/config.mjs';
+import config from '../../../config.mjs';
 import columnOrder from './columnOrder.mjs';
 
 /**

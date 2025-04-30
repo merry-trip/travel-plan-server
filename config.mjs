@@ -6,7 +6,7 @@ import path from 'path';
 dotenv.config({ path: path.resolve(process.cwd(), '.env.test') });
 
 import fs from 'fs';
-import { logError } from '@/app/utils/logger.mjs'; // ✅ ここを修正（名前付きimport）
+import { logError } from './app/utils/logger.mjs'; // ✅ ここを修正（名前付きimport）
 
 // 環境設定
 const APP_ENV = process.env.APP_ENV || 'dev';

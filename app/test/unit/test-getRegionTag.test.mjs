@@ -2,7 +2,7 @@
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import axios from 'axios';
-import config from '@/config.mjs';
+import config from '../../../config.mjs';
 import { logInfo, logError, logDebug } from '../../utils/logger.mjs';
 
 process.env.APP_ENV = 'test'; // ✅ テスト環境明示

@@ -2,7 +2,7 @@
 
 import { getSheetClient } from '../../utils/sheets.mjs'; // 認証＆API操作
 import columnOrder from './columnOrder.mjs';
-import config from '@/config.mjs';
+import config from '../../../config.mjs';
 import { logInfo, logError } from '../../utils/logger.mjs';
 
 const SHEET_NAME = config.SHEET_NAME_SPOT;

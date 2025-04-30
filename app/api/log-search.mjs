@@ -3,7 +3,7 @@
 import { google } from 'googleapis';
 import { logInfo, logError } from '../utils/logger.mjs';
 import dayjs from 'dayjs';
-import config from '@/config.mjs';
+import config from '../../config.mjs';
 
 const context = 'log-search';
 

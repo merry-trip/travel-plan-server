@@ -7,7 +7,7 @@ import {
   appendWeatherRows,
 } from './sheetsWeather.mjs';
 import { sendMail } from './sendMail.mjs';
-import config from '@/config.mjs';
+import config from '../../../config.mjs';
 
 const context = 'domains/weather/writeToSheet';
 

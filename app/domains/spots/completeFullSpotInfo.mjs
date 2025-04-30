@@ -1,6 +1,6 @@
 // app/domains/spots/completeFullSpotInfo.mjs
 
-import config from '@/config.mjs';
+import config from '../../../config.mjs';
 import { searchTextSpot } from './searchTextSpot.mjs';
 import { enrichSpotDetails } from './enrichSpotDetails.mjs';
 import { completeWithDeepSeek } from './completeWithDeepSeek.mjs';

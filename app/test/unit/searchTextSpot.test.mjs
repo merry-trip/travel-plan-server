@@ -2,7 +2,7 @@
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { logInfo, logError } from '../../utils/logger.mjs';
-import config from '@/config.mjs';
+import config from '../../../config.mjs';
 import { searchTextSpot } from '../../domains/spots/searchTextSpot.mjs';
 
 const TEST_CONTEXT = 'searchTextSpot.test.mjs';

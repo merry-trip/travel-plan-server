@@ -1,6 +1,6 @@
 // app/domains/spots/searchTextSpot.mjs
 
-import config from '@/config.mjs'; // ✅ APIキー管理
+import config from '../../../config.mjs'; // ✅ APIキー管理
 import { logInfo, logError, logDebug, logWarn } from '../../utils/logger.mjs';
 
 const API_KEY = config.GOOGLE_API_KEY;

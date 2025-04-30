@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import axios from 'axios';
 import { logInfo, logError } from '../utils/logger.mjs';
 import { writeRowToSheet } from './write-spot-to-sheet.mjs';
-import config from '@/config.mjs';
+import config from '../../config.mjs';
 
 process.env.APP_ENV = 'test'; // ✅ テスト環境フラグを明示
 dotenv.config(); // .env 読み込み

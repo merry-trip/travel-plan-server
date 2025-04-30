@@ -3,7 +3,7 @@
 import { describe, test, expect, beforeAll, afterAll } from 'vitest';
 import { getKeywordsFromSheet } from '../../domains/spots/getKeywordsFromSheet.mjs';
 import { logInfo, logError } from '../../utils/logger.mjs';
-import config from '@/config.mjs';
+import config from '../../../config.mjs';
 
 const TEST_CONTEXT = 'test-get-keywords.test.mjs';
 

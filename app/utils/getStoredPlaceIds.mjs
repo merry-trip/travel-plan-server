@@ -1,7 +1,7 @@
 // app/utils/getStoredPlaceIds.mjs
 
 import { getSheetClient } from '../utils/sheets.mjs';
-import config from '@/config.mjs';
+import config from '../../config.mjs';
 import { logInfo, logWarn, logError } from './logger.mjs';
 
 const CONTEXT = 'getStoredPlaceIds';
