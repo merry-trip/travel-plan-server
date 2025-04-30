@@ -4,7 +4,7 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { completeWithDeepSeek } from '../../domains/spots/completeWithDeepSeek.mjs';
 import { updateSpotDetails } from '../../domains/spots/updateSpotDetails.mjs';
 import { logInfo, logError } from '../../utils/logger.mjs';
-import config from '../../config.mjs';
+import config from '@/config.mjs';
 
 process.env.APP_ENV = 'test'; // ✅ テスト環境を明示
 

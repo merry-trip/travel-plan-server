@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { logInfo, logError } from './logger.mjs';
-import config from '../config.mjs';
+import config from '@/config.mjs';
 
 const context = 'auth';
 

@@ -1,7 +1,7 @@
 // app/domains/spots/completeWithDeepSeek.mjs
 
 import { logInfo, logError } from '../../utils/logger.mjs'; // ✅ 正しいimport方法
-import config from '../../config.mjs'; // ✅ config導入
+import config from '@/config.mjs'; // ✅ config導入
 
 const context = 'completeWithDeepSeek';
 

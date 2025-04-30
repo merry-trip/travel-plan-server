@@ -1,12 +1,12 @@
-// app/config.mjs
+// config.mjs
 
 // ルート直下の .env を必ず読み込む設定
 import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config({ path: path.resolve(process.cwd(), '../.env') });
+dotenv.config({ path: path.resolve(process.cwd(), '.env.test') });
 
 import fs from 'fs';
-import { logError } from './utils/logger.mjs'; // ✅ ここを修正（名前付きimport）
+import { logError } from '@/app/utils/logger.mjs'; // ✅ ここを修正（名前付きimport）
 
 // 環境設定
 const APP_ENV = process.env.APP_ENV || 'dev';
@@ -32,7 +32,9 @@ const requiredEnvVars = [
   'SHEET_NAME_LOGS_DEV',
   'GMAIL_USER', 'GMAIL_APP_PASSWORD', 'GMAIL_TO',
   'EXCHANGE_RATE_USD', 'EXCHANGE_TIMESTAMP',
-  isProd ? 'GOOGLE_CREDENTIALS_PATH_PROD' : 'GOOGLE_CREDENTIALS_PATH_DEV'
+  isProd ? 'GOOGLE_CREDENTIALS_PATH_PROD'
+   : isDev ? 'GOOGLE_CREDENTIALS_PATH_DEV'
+   : 'GOOGLE_CREDENTIALS_PATH_TEST'
 ];
 
 // 必須環境変数の存在確認

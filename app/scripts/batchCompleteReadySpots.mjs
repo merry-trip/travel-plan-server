@@ -3,7 +3,7 @@
 import { getSheetClient } from '../utils/sheets.mjs';
 import { completeFullSpotInfo } from '../domains/spots/completeFullSpotInfo.mjs';
 import { logInfo, logWarn, logError } from '../utils/logger.mjs';
-import config from '../config.mjs';
+import config from '@/config.mjs';
 
 const SPREADSHEET_ID = config.SHEET_ID_KEYWORDS;
 const SHEET_NAME = config.SHEET_NAME_KEYWORDS;

@@ -5,7 +5,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { logInfo, logError } from '../utils/logger.mjs';
-import config from '../config.mjs';
+import config from '@/config.mjs';
 
 const context = 'sheets';
 

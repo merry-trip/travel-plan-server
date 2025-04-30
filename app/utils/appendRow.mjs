@@ -3,7 +3,7 @@
 import { google } from 'googleapis';
 import { getAuthClient } from './auth.mjs';
 import { logInfo, logError } from './logger.mjs';
-import config from '../config.mjs';
+import config from '@/config.mjs';
 
 const context = 'appendRow';
 const spreadsheetId = config.SHEET_ID_SPOT;

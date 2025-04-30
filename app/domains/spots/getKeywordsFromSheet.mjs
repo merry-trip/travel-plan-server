@@ -1,6 +1,6 @@
 // app/domains/spots/getKeywordsFromSheet.mjs
 
-import config from '../../config.mjs'; // ✅ 環境変数一元管理
+import config from '@/config.mjs'; // ✅ 環境変数一元管理
 import { getRowsFromSheet } from '../../utils/sheets.mjs';
 import { logInfo, logError } from '../../utils/logger.mjs'; // ✅ 正しいimport方法
 

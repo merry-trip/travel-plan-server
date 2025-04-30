@@ -2,7 +2,7 @@
 
 import nodemailer from 'nodemailer';
 import { logInfo, logError } from '../../utils/logger.mjs';
-import config from '../../config.mjs';
+import config from '@/config.mjs';
 
 const context = 'domains/weather/sendMail';
 

@@ -2,7 +2,7 @@
 
 import completeSpotInfo from '../domains/spots/completeSpotInfo.mjs';
 import { logInfo, logError } from '../utils/logger.mjs';
-import config from '../config.mjs';
+import config from '@/config.mjs';
 
 const CONTEXT = 'batchWriteSpots';
 

@@ -13,6 +13,7 @@ lerna-debug.log*
 # ✅ 認証情報・Secretsファイル（本番/開発）
 # ========================================
 .env
+.env.test
 .env.local
 .env.development.local
 .env.test.local

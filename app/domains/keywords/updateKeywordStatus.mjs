@@ -2,7 +2,7 @@
 
 import { getSheetClient } from '../../utils/sheets.mjs';
 import { logInfo, logError, logWarn } from '../../utils/logger.mjs';
-import config from '../../config.mjs';
+import config from '@/config.mjs';
 
 const SHEET_NAME = config.SHEET_NAME_KEYWORDS;
 const SPREADSHEET_ID = config.SHEET_ID_KEYWORDS;

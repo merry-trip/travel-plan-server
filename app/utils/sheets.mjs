@@ -2,7 +2,7 @@
 
 import fs from 'fs';
 import { google } from 'googleapis';
-import config from '../config.mjs';
+import config from '@/config.mjs';
 import { logInfo, logError } from '../utils/logger.mjs';
 
 const context = 'sheets';

@@ -1,7 +1,7 @@
 // app/domains/spots/enrichSpotDetails.mjs
 
 import { logInfo, logWarn, logError } from '../../utils/logger.mjs'; // ✅ 正しいimport
-import config from '../../config.mjs'; // ✅ APIキー取得
+import config from '@/config.mjs'; // ✅ APIキー取得
 
 const context = 'enrichSpotDetails';
 

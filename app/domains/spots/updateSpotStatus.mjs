@@ -1,7 +1,7 @@
 // app/domains/spots/updateSpotStatus.mjs
 
 import { getSheetClient } from '../../utils/sheets.mjs';
-import config from '../../config.mjs';
+import config from '@/config.mjs';
 import { logInfo, logError, logWarn } from '../../utils/logger.mjs';
 
 const SHEET_NAME = config.SHEET_NAME_SPOT;

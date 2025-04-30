@@ -1,4 +1,4 @@
-// app/server.mjs
+// server.mjs
 
 process.env.APP_ENV = process.env.APP_ENV || 'dev'; // ✅ 安全のため環境明示
 
@@ -7,7 +7,7 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import config from './config.mjs';
+import config from '@/config.mjs';
 import getSpotList from './api/get-spots.mjs';
 import logSearchRouter from './routes/log-search.mjs';
 import { logInfo, logError } from './utils/logger.mjs';

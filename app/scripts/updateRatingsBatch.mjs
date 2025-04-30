@@ -1,6 +1,6 @@
 // app/scripts/updateRatingsBatch.mjs
 
-import config from '../config.mjs';
+import config from '@/config.mjs';
 import { logInfo, logDebug, logWarn, logError } from '../utils/logger.mjs'; // ✅ 正しいimport
 import { getSheetClient } from '../utils/auth.mjs';
 

@@ -3,7 +3,7 @@
 import { describe, test, expect, beforeAll, afterAll } from 'vitest';
 import { updateKeywordStatus } from '../../domains/keywords/updateKeywordStatus.mjs';
 import { logInfo, logError } from '../../utils/logger.mjs';
-import config from '../../config.mjs';
+import config from '@/config.mjs';
 
 const TEST_CONTEXT = 'test-updateKeywordStatus.test.mjs';
 

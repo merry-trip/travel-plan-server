@@ -4,7 +4,7 @@ import { google } from 'googleapis';
 import path from 'path';
 import fs from 'fs';
 import { logInfo, logError } from '../utils/logger.mjs';
-import config from '../config.mjs';
+import config from '@/config.mjs';
 
 const context = 'get-spots';
 

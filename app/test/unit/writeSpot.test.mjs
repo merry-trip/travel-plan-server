@@ -3,7 +3,7 @@
 import { describe, test, expect, beforeAll, afterAll } from 'vitest';
 import { writeSpot } from '../../domains/spots/writeSpot.mjs';
 import { logInfo, logError } from '../../utils/logger.mjs';
-import config from '../../config.mjs';
+import config from '@/config.mjs';
 
 const TEST_CONTEXT = 'writeSpot.test.mjs';
 

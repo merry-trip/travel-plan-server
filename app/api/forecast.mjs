@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { logInfo, logError } from '../utils/logger.mjs';
-import config from '../config.mjs';
+import config from '@/config.mjs';
 
 const context = 'api/forecast';
 

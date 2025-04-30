@@ -8,6 +8,7 @@
     "dev": "node server.mjs",
     "run:weather": "APP_ENV=prod node weather-write-to-sheet.mjs",
     "run:batch-spots": "APP_ENV=prod node batch-write-spots.mjs",
+    "test:unit": "cross-env APP_ENV=test vitest run",
     "test": "vitest run",
     "test:weather": "vitest run test-scripts/test-weather.test.mjs",
     "test:categorize": "vitest run test-scripts/categorizeSpot.test.mjs",
@@ -36,6 +37,7 @@
     "rotating-file-stream": "^3.2.6"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "vitest": "^1.6.1"
   }
 }

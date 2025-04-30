@@ -4,7 +4,7 @@ import validateSpot from './validateSpot.mjs';
 import { mapSpotToRow } from './rowMapper.mjs';
 import appendRow from '../../utils/appendRow.mjs';
 import { logInfo, logError } from '../../utils/logger.mjs';
-import config from '../../config.mjs';
+import config from '@/config.mjs';
 
 const SHEET_NAME = config.SHEET_NAME_SPOT;
 const context = 'writeSpot';

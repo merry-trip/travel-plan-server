@@ -1,7 +1,7 @@
 // app/domains/spots/getBasicPlaceDetails.mjs
 
 import { logInfo, logError } from '../../utils/logger.mjs'; // ✅ 正しいimport
-import config from '../../config.mjs';
+import config from '@/config.mjs';
 
 const context = 'getBasicPlaceDetails';
 const API_KEY = config.GOOGLE_API_KEY;

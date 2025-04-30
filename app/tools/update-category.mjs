@@ -2,7 +2,7 @@
 
 import { google } from 'googleapis';
 import { logInfo, logError } from '../utils/logger.mjs';
-import config from '../config.mjs';
+import config from '@/config.mjs';
 
 const SPREADSHEET_ID = config.SHEET_ID_SPOT;
 const SHEET_NAME = config.SHEET_NAME_SPOT;

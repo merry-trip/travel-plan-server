@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { logInfo, logError } from '../../utils/logger.mjs';
-import config from '../../config.mjs'; // ✅ .mjs対応のconfig
+import config from '@/config.mjs'; // ✅ .mjs対応のconfig
 
 const context = 'domains/weather/fetchForecast';
 logInfo(context, `現在の環境: ${config.env}`);
