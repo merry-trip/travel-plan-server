@@ -1,4 +1,4 @@
-// app/tools/debug-path.mjs
+// app/tools/archive/debug-path.mjs
 
 import fs from 'fs';
 import path from 'path';

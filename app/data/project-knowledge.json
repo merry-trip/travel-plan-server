@@ -4,403 +4,403 @@
   "files": [
     {
       "path": "app/api/forecast.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "api",
+      "description": "緯度・経度を指定して OpenWeather API から5日間3時間ごとの天気予報を取得するAPI処理"
     },
     {
       "path": "app/api/get-spots.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "api",
+      "description": "Google Sheets（anime_spot_db）からスポット一覧を取得し、整形して返すAPI処理。取得項目には緯度・経度・placeId・説明などが含まれ、取得件数と先頭行のログ出力も行う。"
     },
     {
       "path": "app/api/log-search.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "api",
+      "description": "検索条件（search_params）と為替情報をまとめてスプレッドシートに記録するAPI処理。JSTタイムスタンプ付きでログ行を追加し、Google Sheets APIを用いてログ専用シートに追記する。"
     },
     {
       "path": "app/api/project-status.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "api",
+      "description": "project-knowledge.json を読み込み、queryに応じたファイル情報を返す検索用API"
     },
     {
       "path": "app/api/send-mail.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "api",
+      "description": "Gmailアカウントを使って指定された件名と本文のメールを送信するユーティリティ関数。nodemailerを用いてGmail認証を行い、処理状況をログに記録する。"
     },
     {
       "path": "app/api/sheets.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "api",
+      "description": "天気ログ用スプレッドシートのデータ操作用API処理。既存データ行（A2以降）の一括削除と、新たな天気データ行の追記に対応し、環境別認証方式にも柔軟に対応する。"
     },
     {
       "path": "app/api/test-autocomplete.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "Google Places API（Autocomplete）にキーワードを POST し、補完候補を取得してログ出力するテストスクリプト。X-Goog-FieldMask に * を指定してすべてのフィールドを取得する。"
     },
     {
       "path": "app/api/test-getPlaceDetails.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "Google Places API（GetPlaceDetails）を使って、placeId に対応するスポットの詳細情報を取得・出力するテストスクリプト。フィールドマスクは * を使用。"
     },
     {
       "path": "app/api/test-nearbySearch.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "Google Places API（NearbySearch）に対し、指定地点・半径・type を指定して観光スポットを検索するテストスクリプト。最大3件の結果を取得してログ出力する。"
     },
     {
       "path": "app/api/test-routes.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "Google Maps Routes API（v2）を使い、新宿駅から池袋駅への公共交通ルートを取得するテストスクリプト。単位や国コードを自動検出し、リクエスト条件に反映する。"
     },
     {
       "path": "app/api/test-searchText.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "Google Places API（SearchText）に 'Nintendo TOKYO' を送信し、上位3件のスポット情報を取得してログに出力するテストスクリプト。"
     },
     {
       "path": "app/domains/keywords/updateKeywordStatus.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "指定されたキーワードに対応する行の status セルを更新する処理。SHEET_NAME_KEYWORDS 上の 'keyword' 列をもとに対象行を検索し、status を 'done' や 'failed' などに更新する。"
     },
     {
       "path": "app/domains/spots/batchCompleteFullSpots.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "スプレッドシートからキーワード一覧を取得し、completeFullSpotInfo を使って全件補完を試みるバッチ処理。成功・失敗の件数をログに記録する。"
     },
     {
       "path": "app/domains/spots/categorizeSpot.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "Google Places API の types 配列に基づいて、スポットのカテゴリ（category_for_map）とタグ配列（tags_json）を分類・抽出する処理。category-map.json を参照。"
     },
     {
       "path": "app/domains/spots/columnOrder.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "スプレッドシート出力時に使用する列順を定義した配列。writeSpot や mapSpotToRow によって参照され、列の整合性を維持するための共通基準となる。"
     },
     {
       "path": "app/domains/spots/completeFullSpotInfo.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "スポット補完の統合処理。検索キーワードから placeId を取得し、DeepSeek による説明文生成、カテゴリ分類、地域タグ付与を行った上でスプレッドシートに保存する。処理結果に応じてステータス更新も行う。"
     },
     {
       "path": "app/domains/spots/completeSpotInfo.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "指定文字列からスポット情報を検索・補完し、スプレッドシートに書き込む簡易処理。SearchText API, PlaceDetails API を順に呼び出し、placeId が得られれば書き込みまで行う。"
     },
     {
       "path": "app/domains/spots/completeWithDeepSeek.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "DeepSeek API を用いてアニメスポットの英語説明文と旅行ヒント（short_tip_en）を自動生成する補完処理"
     },
     {
       "path": "app/domains/spots/enrichSpotDetails.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "Google Places API (New) を用いて、placeId をもとにスポット情報を詳細補完する処理。評価・営業時間・住所・URL・説明文などを取得し、元の spot オブジェクトに追記して返却する。"
     },
     {
       "path": "app/domains/spots/fieldsToUpdate.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "レビューや営業情報の更新時に対象とするフィールド（rating, ratings_count, open_now, opening_hours）を定義した配列。更新系スクリプトで使用される。"
     },
     {
       "path": "app/domains/spots/getBasicPlaceDetails.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "Google Places API から rating / ratings_count / open_now / opening_hours を取得し、スポットの基本情報として返す処理。APIのレスポンスをシンプルに整形する。"
     },
     {
       "path": "app/domains/spots/getKeywordsFromSheet.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "キーワード用スプレッドシートから status=ready の行を抽出し、キーワードリストとして返す処理。rowIndexも含めて返却し、補完処理などに使用する。"
     },
     {
       "path": "app/domains/spots/getRegionTagByLatLng.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "緯度・経度をもとに定義済みの地域境界リストから地域タグ（region_tag）を判定する処理。該当範囲がない場合は空文字を返す。"
     },
     {
       "path": "app/domains/spots/rowMapper.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "スポットオブジェクトをスプレッドシート1行分の配列に変換する関数。出力順は columnOrder.mjs に準拠し、整合性を担保する。"
     },
     {
       "path": "app/domains/spots/searchTextSpot.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "Google Places API（SearchText）を使ってキーワードからスポット情報を検索し、placeId・名前・住所・位置情報・types を取得する処理。最初のヒットのみを返す。"
     },
     {
       "path": "app/domains/spots/updateSpotDetails.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "既存のスポット行（placeId一致）に対して、description / tip / ai_description_status などの補完項目をスプレッドシート上に上書き保存する処理。"
     },
     {
       "path": "app/domains/spots/updateSpotRow.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "SpotDB におけるplaceId指定の汎用更新処理。必要なフィールドのみを上書きするためのユーティリティで、updateSheetRow を内部的に利用している。"
     },
     {
       "path": "app/domains/spots/updateSpotStatus.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "スプレッドシート上のスポット行を placeId で特定し、status と last_updated_at の列を更新する処理"
     },
     {
       "path": "app/domains/spots/validateSpot.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "スポットオブジェクトに対して、必須フィールド（placeId・name・lat・lng）の存在と型を検証する処理。問題があればエラーをスローし、通過すれば true を返す。"
     },
     {
       "path": "app/domains/spots/writeSpot.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "スポットオブジェクトをバリデーション後、1行のスプレッドシートデータとして変換し、appendRow によりシートへ追加する処理。ログ記録も含む。"
     },
     {
       "path": "app/domains/spots/writeSpots.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "複数のスポットオブジェクトを一括でバリデーション・変換し、スプレッドシートに一括追加する処理。無効なデータはスキップし、ログ出力で記録する。"
     },
     {
       "path": "app/domains/weather/fetchForecast.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "OpenWeather API を使って、指定された緯度・経度に対する5日間（3時間ごと）の天気予報データを取得する処理。取得結果はオリジナルのAPIレスポンス形式で返す。"
     },
     {
       "path": "app/domains/weather/sendMail.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "Gmailアカウントを使って通知メールを送信する処理。件名と本文を受け取り、nodemailerを用いて送信を行う。天気処理の成功・失敗通知で使用される。"
     },
     {
       "path": "app/domains/weather/sheetsWeather.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "天気ログ用スプレッドシートの操作に関する処理群。A2以降の既存データ削除と、取得済み天気データの追記を提供する。Google Sheets API を使用。"
     },
     {
       "path": "app/domains/weather/writeToSheet.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "domains",
+      "description": "東京の天気予報を OpenWeather API から取得し、スプレッドシートに追記する一連の処理。前処理で既存行を削除し、完了後に Gmail で通知メールを送信する。"
     },
     {
       "path": "app/routes/log-search.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "routes",
+      "description": "POSTリクエスト `/api/log-search` を受け取り、検索ログをスプレッドシートに記録するAPI（logSearch）を実行するExpressルーティング定義。"
     },
     {
       "path": "app/scripts/batchCompleteReadySpots.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "scripts",
+      "description": "スプレッドシートから status=ready のキーワードを抽出し、それぞれに対してスポット補完処理（completeFullSpotInfo）を実行するCLIバッチスクリプト。"
     },
     {
       "path": "app/scripts/batchWriteSpots.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "scripts",
+      "description": "completeSpotInfo を使ってスポット情報を取得・補完し、スプレッドシートに書き込む簡易バッチ処理スクリプト。APP_ENV=test 時は実行されない。"
     },
     {
       "path": "app/scripts/run-batchCompleteFullSpots.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "scripts",
+      "description": "domains/spots/batchCompleteFullSpots を起動するだけの実行用スクリプト。本番・開発環境でのみ実行される設計。"
     },
     {
       "path": "app/scripts/test-env.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": ".env ファイルの読み込みと、GOOGLE_APPLICATION_CREDENTIALS が存在するかを確認するテストスクリプト。環境構成の確認に使用。"
     },
     {
       "path": "app/scripts/test-searchText-types.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "SearchText API を使って複数のクエリを実行し、返ってくる types を集計するスクリプト。スポット分類設計の参考用に types 一覧を収集。"
     },
     {
       "path": "app/scripts/test-sheet-get.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "getAuthClient() の動作確認用スクリプト。Google Sheets API 認証が正しく行えるか、CLI実行でテストする。"
     },
     {
       "path": "app/scripts/updateRatingsBatch.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "scripts",
+      "description": "全スポットの placeId に対して getBasicPlaceDetails を実行し、rating や open_now などの更新対象フィールドをスプレッドシートに反映するバッチ処理。"
     },
     {
       "path": "app/scripts/weather-write-to-sheet.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "scripts",
+      "description": "OpenWeather API で東京の天気予報を取得し、スプレッドシートに記録した上で、処理結果を Gmail 通知するバッチ処理"
     },
     {
       "path": "app/scripts/writeWithDeepSeek.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "scripts",
+      "description": "スプレッドシートから取得したキーワードに対し DeepSeek API を使って説明文と旅行ヒントを補完し、スポット情報に保存するバッチ処理"
     },
     {
       "path": "app/test/unit/batchCompleteFullSpots.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "batchCompleteFullSpots 関数のログ出力と動作を確認するユニットテスト。logInfo が複数回呼び出され、補完バッチが正常に進行することを検証する。"
     },
     {
       "path": "app/test/unit/batchCompleteReadySpots.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "runBatchComplete バッチ関数が例外なく完了し、成功・失敗・失敗キーワード情報を含む結果オブジェクトが返ることを検証する。"
     },
     {
       "path": "app/test/unit/batchwritespots.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "batch-write-spots.mjs スクリプトが例外なく import → 実行されることを確認するテスト。起動エラーの検知を目的とする。"
     },
     {
       "path": "app/test/unit/categorizeSpot.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "getPrimaryCategory および getCategoriesFromTypes のカテゴリ分類ロジックを types 配列ごとに検証するユニットテスト。"
     },
     {
       "path": "app/test/unit/completeFullSpotInfo.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "completeFullSpotInfo 関数が指定キーワードに対して補完処理を行い、status='done' または 'failed' を含む結果を返すことを検証するユニットテスト。"
     },
     {
       "path": "app/test/unit/completeSpotInfo.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "completeSpotInfo 関数が指定キーワードに対して補完・保存を行い、placeId と name を含む結果を返すことを検証する。"
     },
     {
       "path": "app/test/unit/deepSeek.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "completeWithDeepSeek により description, short_tip_en を補完し、ステータスに応じて updateSpotDetails を実行できるかを検証するユニットテスト。"
     },
     {
       "path": "app/test/unit/enrichSpotDetails.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "enrichSpotDetails 関数が placeId をもとにスポット情報（name, lat, lngなど）を補完できることを確認するユニットテスト。"
     },
     {
       "path": "app/test/unit/logger.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "logInfo / logError の出力が正しく行えるかを確認するユニットテスト。例外処理やログメッセージの記録も含む。"
     },
     {
       "path": "app/test/unit/searchTextSpot.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "searchTextSpot 関数がキーワードに対してスポット検索を行い、結果として name / placeId を取得できるかを確認するユニットテスト。"
     },
     {
       "path": "app/test/unit/test-completeFullSpotInfo.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "completeFullSpotInfo 関数が有効なキーワードで status='done' を返し、無効なキーワードで error や skipped を返すことを確認する正常系・異常系テスト。"
     },
     {
       "path": "app/test/unit/test-get-keywords.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "getKeywordsFromSheet 関数が status=ready のキーワードを正しく抽出し、rowIndex / keyword を含むオブジェクト配列で返すことを確認するユニットテスト。"
     },
     {
       "path": "app/test/unit/test-getRegionTag.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "指定座標（秋葉原）から Google Geocoding API を使って sublocality_level_1 を取得し、region_tag として取得できるかを確認するテスト。"
     },
     {
       "path": "app/test/unit/test-updateKeywordStatus.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "updateKeywordStatus 関数を使用して、指定したキーワードのステータスを 'done' に正常更新できることを検証するユニットテスト。"
     },
     {
       "path": "app/test/unit/writeSpot.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "writeSpot 関数を使って、テスト用スポット情報をスプレッドシートに正常に書き込めることを検証するユニットテスト。"
     },
     {
       "path": "app/test/unit/writeSpots.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "writeSpots 関数を使って、補完済みスポットデータを1件以上まとめて正常に書き込めることを確認するユニットテスト。"
     },
     {
       "path": "app/test/unit/writeWithDeepSeek.test.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "writeWithDeepSeek.mjs スクリプトをインポートし、default関数を実行して例外なく処理が完了することを検証するバッチスクリプトのユニットテスト。"
     },
     {
       "path": "app/tools/archive/test-cmd.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "Windows 環境で cmd.exe を使用したコマンド実行（echo）の動作確認を行うテストスクリプト。"
     },
     {
       "path": "app/tools/archive/test-getPlaceDetails.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "Google Places API で取得した詳細データに対し、DeepSeek でレビュー要約とタグを生成し、スプレッドシートに書き込む統合検証スクリプト。"
     },
     {
       "path": "app/tools/archive/test-npm-list.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "npm list --json コマンドを実行し、現在の依存関係一覧を標準出力に表示するテストスクリプト。"
     },
     {
       "path": "app/tools/archive/test-searchNearby.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "Google Maps Places API（Nearby Search）を使って、秋葉原・池袋・中野周辺のスポット情報を取得し、未登録のものだけをスプレッドシートに保存するスクリプト。"
     },
     {
       "path": "app/tools/archive/test-searchText-v2.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "複数のアニメ関連クエリで SearchText API を実行し、取得スポット情報を重複確認後スプレッドシートに保存するバッチテストスクリプト。"
     },
     {
       "path": "app/tools/archive/test-searchText.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "test",
+      "description": "SearchText API を使って 'Animate Akihabara' を検索し、取得したスポット情報を JSON 出力する簡易テストスクリプト。"
     },
     {
       "path": "app/tools/debug-path.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "tools",
+      "description": "環境変数 PATH を取得し、内容をファイルに出力してパス設定の確認を行うデバッグ用スクリプト。"
     },
     {
       "path": "app/tools/update-category.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "tools",
+      "description": "types 配列からカテゴリを自動判定し、スプレッドシート上のスポットにカテゴリ（列H）を書き込む一括更新スクリプト。"
     },
     {
       "path": "app/tools/update-knowledge-json.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "tools",
+      "description": "app/ 以下の .mjs ファイルを再帰的に走査し、path / category / description を含む project-knowledge.json を自動生成するスクリプト"
     },
     {
       "path": "app/tools/update-readme-modules.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "tools",
+      "description": "npm list の出力から依存モジュール一覧を取得し、README.md の対応セクションを自動更新するドキュメント補助ツール。"
     },
     {
       "path": "app/tools/update-structure-json.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "tools",
+      "description": ".mjs や .json ファイルを再帰的に探索し、プロジェクト構造情報を project-structure.json に自動生成・保存するスクリプト。"
     },
     {
       "path": "app/utils/appendRow.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "utils",
+      "description": "1行の配列データを指定シートに追記する処理。Google Sheets API v4 を使用し、ログ付きで記録。"
     },
     {
       "path": "app/utils/appendRows.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "utils",
+      "description": "複数行の配列データをまとめて指定シートに追記する処理。appendRow のバルク処理版。"
     },
     {
       "path": "app/utils/auth.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "utils",
+      "description": "Google Sheets API 用のサービスアカウント認証クライアント（JWT）を作成し、認証済みの Sheets クライアントを返す共通処理"
     },
     {
       "path": "app/utils/getStoredPlaceIds.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "utils",
+      "description": "スプレッドシート上から全 placeId を取得し、配列として返す。重複チェックや存在判定に使用。"
     },
     {
       "path": "app/utils/logger.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "utils",
+      "description": "JST形式・ログレベル（INFO/ERROR等）別に標準出力とローテーションファイルに記録する共通ロガー。gzip圧縮・7日保持対応"
     },
     {
       "path": "app/utils/sheets.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "utils",
+      "description": "Google Sheets API の認証・クライアント生成・データ取得（全行オブジェクト配列化）を行う共通ユーティリティ。"
     },
     {
       "path": "app/utils/updateSheetRow.mjs",
-      "category": "unknown",
-      "description": ""
+      "category": "utils",
+      "description": "指定された placeId に一致する行を探し、与えられたフィールドのみを上書き保存する処理。行単位の部分更新に対応。"
     }
   ]
 }

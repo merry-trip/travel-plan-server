@@ -1,4 +1,4 @@
-// app/tools/test-searchText.mjs
+// app/tools/archive/test-searchText.mjs
 
 import path from 'path';
 import { fileURLToPath } from 'url';

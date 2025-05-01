@@ -39,6 +39,17 @@ export async function handler(req, res) {
 
   logInfo('project-status', `query=${query} → ${matched.length}件ヒット`);
 
+  const formatted = matched.map((file, i) => ({
+    index: i + 1,
+    category: file.category || 'unknown',
+    path: file.path,
+    description: file.description?.trim() || '(説明なし)',
+  }));
+  
   res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify({ query, matched }));
+  res.end(JSON.stringify({
+    query,
+    count: formatted.length,
+    files: formatted,
+  }));  
 }

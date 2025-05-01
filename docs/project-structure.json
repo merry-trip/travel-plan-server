@@ -1,0 +1,2766 @@
+{
+  "generated_at": "2025-05-01T02:45:42.726Z",
+  "version": "v1.7.0",
+  "files": [
+    {
+      "path": "app/api/forecast.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/get-spots.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/log-search.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/project-status.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/send-mail.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/sheets.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-autocomplete.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-getPlaceDetails.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-nearbySearch.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-routes.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/api/test-searchText.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/data/category-map.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/data/functions.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/data/project-knowledge.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/data/region_map_by_bounds.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/domains/keywords/updateKeywordStatus.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/batchCompleteFullSpots.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/categorizeSpot.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/columnOrder.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/completeFullSpotInfo.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/completeSpotInfo.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/completeWithDeepSeek.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/enrichSpotDetails.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/fieldsToUpdate.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/getBasicPlaceDetails.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/getKeywordsFromSheet.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/getRegionTagByLatLng.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/rowMapper.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/searchTextSpot.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/updateSpotDetails.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/updateSpotRow.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/updateSpotStatus.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/validateSpot.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/writeSpot.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/spots/writeSpots.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/weather/fetchForecast.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/weather/sendMail.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/weather/sheetsWeather.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/domains/weather/writeToSheet.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/package-lock.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/license.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/ai1wm-backups/robots.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-0cc31205f20441b3df1d1b46100f6b8d.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-0ce75ad2f775d1cac9696967d484808c.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-0eebe503220d4a00341eb011b92769b4.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-17179a5f2930647c89151e365f843b6e.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-1780a2033cf98d69ce13c2e5c8510004.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-1a0cd6a7128913b15c1a10dd68951869.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-1bba9045bb07c89671c88a3f328548e8.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-1c4303f02ff93b290e9faad991eeb06f.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-1d17475f620f63a92e2c5d2681c51ee8.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-2617ce121227a46077ede6c69aa9fcb5.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-270d72d1cff17227d37f3244759cbecb.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-28b3c3d595952907e08d98287077426c.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-2a60fb9605efeab98825d6b2f781090a.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-2b390f85a3048c5b4255fb45960b6514.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-2c5d274ea625dd91556554ad82901529.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-320f4ad9792aaa6dedb1e71cbdf85d57.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-440127dd25bde48a531ded36f33e927b.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-49c6d4acf36cf3aca9f0b2a77617304f.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-4a38fe1c0c45989e44682ba6109d9f46.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-4bfa11da57ff2600004bb500368247f4.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-50278328b502f4eb3f2b8b7ab49324a1.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-5251f7623766a714c8207c7edb938628.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-529362903a5a05b34b06b5e793fb4cf8.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-569e85ef168299eb8c8f24d8ef8c8a78.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-6025add6bde16aaeb12787d250f9b414.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-60d06fac6f98e8e8f0ec5a945738b660.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-68f2cec7514bf8563c723a4d675fcfe6.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-7233008897033de5ee0d14f86a42a65a.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-7289286ed59e90a8f36ae797df62220b.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-7436b7ee9e4f11ac0d618d8cc886eb66.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-77fdfadaf2e1ca3a027d1956b910bc50.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-7b74c8457eaa7fcc50db41b431f8a003.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-7c90cd4398ee2d9d3628c387a87a70e5.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-7d5ca435e60d92f024d46c9257aaa0f7.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-7f13c36c641b114bf18cd0bcc9ecc7e0.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-803bf1ce2131e13efc590c1bc47851fc.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-81c889563f09dd13de1701135dc62941.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-81d6f084cb273e02e15b01bd9ece87f7.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-8240df461220d1d3a028a9a4c5652a5b.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-8860e58c20c6a2ab5876a0f07be43bd9.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-93882e8f9976382d7f724ac595ed7151.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-947c76bb5095da30e16668eec15406b2.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-9b256ea9cd54df92095e04c76758ceb0.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-9c3519f4870fac83dc0dbf18cb6bd4c4.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-9d47a87c240c1d10701cd6a02b28aa1b.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-a25d1cc7bf7ca0b4e114f6bea64943f4.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-a2796e57f680e25d84c4b352ee6d7280.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-a9dc201dcd011fe71849743133052619.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-aabfce98c410957228848dc581e3c420.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-ac23eee47530ac63a1178c827db28087.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-bf0f094965d3d4a95b47babcb35fc136.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-bf23b24175490c2e46aaf92ff6a0c70f.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-c31d5f185753910c14afebc6deb2ce24.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-ca28138671823450e87dfd354f7afc6b.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-daeb084aab42199d26393a56c3465bc0.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-e2791ba830489d23043be8650a22a22b.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-e2e4c4b80f3adf2c70b431bfdb1b4872.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-e53526243551a102928735ec9eed4edf.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-f575f481034e90e21d832e415fd95fcf.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-f70806bf0c7d62f2908bd5a1c3fe4efc.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/languages/ja-f8f49d9fc4a9cf7d78ec99285417bd9c.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/akismet/changelog.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/akismet/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/akismet/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/all-in-one-wp-migration/changelog.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/all-in-one-wp-migration/lib/view/assets/javascript/backups.min.js.LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/all-in-one-wp-migration/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/backwpup/changelog.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/backwpup/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/backwpup/vendor/composer/installed.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/backwpup/vendor/mikemccabe/json-patch-php/local_tests.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/backwpup/vendor/mikemccabe/json-patch-php/simplexml_tests.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/backwpup/vendor/paragonie/constant_time_encoding/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/google-captcha/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/siteguard/license.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/siteguard/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/siteguard/really-simple-captcha/gentium/FONTLOG.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/siteguard/really-simple-captcha/gentium/GENTIUM-FAQ.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/siteguard/really-simple-captcha/gentium/OFL-FAQ.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/siteguard/really-simple-captcha/gentium/OFL.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/travel-plan-generator-7/memory-bank/activeContext.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/travel-plan-generator-7/memory-bank/productContext.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/travel-plan-generator-7/memory-bank/progress.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/travel-plan-generator-7/memory-bank/projectbrief.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/travel-plan-generator-7/memory-bank/systemPatterns.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/travel-plan-generator-7/memory-bank/techContext.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/ts-webfonts-for-conoha/inc/assets/json/data.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/ts-webfonts-for-conoha/inc/font.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/ts-webfonts-for-conoha/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/wordpress-importer/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/wp-members/changelog.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/wp-members/includes/vendor/rocketgeek-utilities/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/wp-members/license.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/wp-members/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/wp-multibyte-patch/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/plugins/wp-sitemap-page/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/1046169134.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/1163486627.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/1234641584.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/1245928164.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/1282268088.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/139578653.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/162720637.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/163554709.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/1643572723.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/172446187.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/1930319368.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/2037599808.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/2055857984.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/2074525581.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/2097868618.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/228117124.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/344769483.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/361036158.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/37608817.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/383020460.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/388500400.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/586127436.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/597362622.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/686126214.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/737049688.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/747903475.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/791651217.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/888158071.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/900623478.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/972068717.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/siteguard/980582125.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-child-master/skins/skin-template/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/.vscode/extensions.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/.vscode/launch.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/.vscode/settings.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/.vscode/tasks.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/package.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/ad/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/balloon/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/blank-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/blogcard/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/box-menu/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/button/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/button-wrap/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/comparison-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/cta/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/faq/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/icon-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/icon-list/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/info-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/info-list/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/navicard/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/new-list/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/popular-list/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/profile/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/radar/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/ranking/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/search-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/sticky-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/tab/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/tab-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/tab-item/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/template/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/timeline/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/timeline-item/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block/toggle-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block-universal/caption-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block-universal/label-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/block-universal/tab-caption-box/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/micro/micro-balloon/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/blocks/src/micro/micro-text/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/languages/cocoon-de_DE-cocoon-blocks-js.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/languages/cocoon-en_US-cocoon-blocks-js.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/languages/cocoon-es_ES-cocoon-blocks-js.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/languages/cocoon-fr_FR-cocoon-blocks-js.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/languages/cocoon-ko_KR-cocoon-blocks-js.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/languages/cocoon-pt_PT-cocoon-blocks-js.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/languages/cocoon-zh_CN-cocoon-blocks-js.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/languages/cocoon-zh_TW-cocoon-blocks-js.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/lib/dashboard-message.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/lib/plugin-update-checker/composer.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/lib/plugin-update-checker/examples/plugin.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/lib/plugin-update-checker/examples/theme.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/lib/plugin-update-checker/license.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/lib/plugin-update-checker/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/package-lock.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/package.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/baguettebox/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/clingify/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/clipboard.js-master/readme.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/highlight-js/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/lightbox2/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/lity/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/lozad.js-master/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/minify/minify-master/composer.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/minify/minify-master/data/js/keywords_after.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/minify/minify-master/data/js/keywords_before.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/minify/minify-master/data/js/keywords_reserved.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/minify/minify-master/data/js/operators.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/minify/minify-master/data/js/operators_after.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/minify/minify-master/data/js/operators_before.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/minify/path-converter-master/composer.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/scroll-hint-master/readme.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/slicknav/MIT-LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/slicknav/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/spotlight-master/CHANGELOG.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/spotlight-master/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/plugins/stickyfill/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/readme.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/hygiene/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/maple-alice/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/maple-cheshire-cat/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/maple-citrus/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/maple-rose/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/maple-unicorn/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/maple-white-rabbit/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/nagi/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/nagi/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/one/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/one/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/raku-add-fadein/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/silk/option.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/simple-darkmode/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/simple-darkmode/package-lock.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/simple-darkmode/package.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/simple-darkmode/readme.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/simple-darkmode/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/simple-darkmode-always/package-lock.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/simple-darkmode-always/package.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/simple-darkmode-always/readme.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-colors-black/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-colors-blue/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-colors-green/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-colors-pink/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-colors-red/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-colors-yellow/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-demo-csv/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-demo-json/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-demo-json/option.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-demo-php/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-demo-php/option.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-made-in-heaven/assets/pattern/compare-box.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-metal/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-mixblue/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-mixgreen/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-mixred/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-samuraiblue/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-season-autumn/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-season-spring/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-season-summer/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-season-winter/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-simplicity/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-tecurio-earth/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-tecurio-grape/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-tecurio-lime/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-tecurio-mango/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-tecurio-moon/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-tecurio-peach/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-tecurio-sky/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-tecurio-soil/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-tecurio-sunset/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-template/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-test/images/empty.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/skins/skin-test/option.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/theme.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/update-info.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/webfonts/fontawesome5/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/webfonts/fontawesome5/metadata/icons.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/webfonts/fontawesome5/metadata/shims.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/webfonts/googlefonts/OFL.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/webfonts/googlefonts/README.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/webfonts/icomoon/Read Me.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/cocoon-master/webfonts/icomoon/selection.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/01-evening.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/02-noon.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/03-dusk.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/04-afternoon.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/05-twilight.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/06-morning.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/07-sunrise.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/08-midnight.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/blocks/01-display.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/blocks/02-subtitle.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/blocks/03-annotation.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/blocks/post-terms-1.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/colors/01-evening.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/colors/02-noon.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/colors/03-dusk.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/colors/04-afternoon.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/colors/05-twilight.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/colors/06-morning.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/colors/07-sunrise.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/colors/08-midnight.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/sections/section-1.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/sections/section-2.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/sections/section-3.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/sections/section-4.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/sections/section-5.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/typography/typography-preset-1.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/typography/typography-preset-2.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/typography/typography-preset-3.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/typography/typography-preset-4.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/typography/typography-preset-5.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/typography/typography-preset-6.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/styles/typography/typography-preset-7.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfive/theme.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/assets/fonts/cardo/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/assets/fonts/instrument-sans/OFL.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/assets/fonts/inter/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/assets/fonts/jost/OFL.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/styles/ember.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/styles/fossil.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/styles/ice.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/styles/maelstrom.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/styles/mint.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/styles/onyx.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/styles/rust.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentyfour/theme.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/assets/fonts/dm-sans/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/assets/fonts/ibm-plex-mono/OFL.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/assets/fonts/inter/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/assets/fonts/source-serif-pro/LICENSE.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/aubergine.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/block-out.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/canary.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/electric.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/grapes.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/marigold.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/pilgrimage.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/pitch.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/sherbet.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/styles/whisper.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentythree/theme.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentytwo/assets/fonts/dm-sans/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentytwo/assets/fonts/ibm-plex/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentytwo/assets/fonts/inter/LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentytwo/assets/fonts/source-serif-pro/LICENSE.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentytwo/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentytwo/styles/blue.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentytwo/styles/pink.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentytwo/styles/swiss.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-content/themes/twentytwentytwo/theme.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/block-i18n.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/archives/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/audio/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/avatar/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/block/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/button/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/buttons/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/calendar/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/categories/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/code/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/column/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/columns/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comment-author-name/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comment-content/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comment-date/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comment-edit-link/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comment-reply-link/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comment-template/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comments/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comments-pagination/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comments-pagination-next/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comments-pagination-numbers/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comments-pagination-previous/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/comments-title/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/cover/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/details/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/embed/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/file/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/footnotes/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/freeform/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/gallery/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/group/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/heading/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/home-link/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/html/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/image/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/latest-comments/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/latest-posts/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/legacy-widget/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/list/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/list-item/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/loginout/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/media-text/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/missing/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/more/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/navigation/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/navigation-link/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/navigation-submenu/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/nextpage/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/page-list/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/page-list-item/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/paragraph/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/pattern/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-author/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-author-biography/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-author-name/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-comments-form/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-content/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-date/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-excerpt/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-featured-image/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-navigation-link/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-template/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-terms/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/post-title/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/preformatted/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/pullquote/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/query/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/query-no-results/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/query-pagination/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/query-pagination-next/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/query-pagination-numbers/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/query-pagination-previous/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/query-title/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/quote/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/read-more/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/rss/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/search/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/separator/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/shortcode/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/site-logo/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/site-tagline/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/site-title/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/social-link/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/social-links/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/spacer/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/table/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/tag-cloud/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/template-part/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/term-description/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/text-columns/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/verse/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/video/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/blocks/widget-group/block.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/ID3/license.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/ID3/readme.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/images/crystal/license.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/js/dist/vendor/react-jsx-runtime.min.js.LICENSE.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/js/plupload/license.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/js/swfupload/license.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/js/tinymce/license.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/sodium_compat/composer.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/sodium_compat/src/Core/Curve25519/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/sodium_compat/src/Core32/Curve25519/README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/theme-i18n.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/public/wp-includes/theme.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "app/routes/log-search.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/batchCompleteReadySpots.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/batchWriteSpots.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/run-batchCompleteFullSpots.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/test-env.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/test-searchText-types.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/test-sheet-get.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/updateRatingsBatch.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/weather-write-to-sheet.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/scripts/writeWithDeepSeek.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/sheets/sheet-id-list.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/batchCompleteFullSpots.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/batchCompleteReadySpots.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/batchwritespots.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/categorizeSpot.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/completeFullSpotInfo.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/completeSpotInfo.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/deepSeek.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/enrichSpotDetails.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/logger.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/searchTextSpot.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/test-completeFullSpotInfo.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/test-get-keywords.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/test-getRegionTag.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/test-updateKeywordStatus.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/writeSpot.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/writeSpots.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/test/unit/writeWithDeepSeek.test.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-cmd.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-getPlaceDetails.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-npm-list.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-searchNearby.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-searchText-v2.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/archive/test-searchText.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/debug-path.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/export-knowledge-md.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/export-structure-md.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/path-log.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "app/tools/test-function-calling.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/update-category.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/update-knowledge-json.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/update-readme-modules.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/tools/update-structure-json.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/utils/appendRow.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/utils/appendRows.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/utils/auth.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/utils/getStoredPlaceIds.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/utils/logger.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/utils/sheets.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app/utils/updateSheetRow.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "app-structure.txt",
+      "type": "note",
+      "description": ""
+    },
+    {
+      "path": "backup-package.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "config.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "credentials.prod.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "credentials.test.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "docs/file-roles.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "docs/project-knowledge.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "package-lock.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "package.json",
+      "type": "config",
+      "description": ""
+    },
+    {
+      "path": "README.md",
+      "type": "doc",
+      "description": ""
+    },
+    {
+      "path": "server.mjs",
+      "type": "code",
+      "description": ""
+    },
+    {
+      "path": "travel-plan-server-structure.txt",
+      "type": "note",
+      "description": ""
+    }
+  ]
+}

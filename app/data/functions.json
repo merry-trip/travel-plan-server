@@ -1,0 +1,17 @@
+[
+    {
+      "name": "search_project_knowledge",
+      "description": "プロジェクトのナレッジベースを検索し、関連ファイルの情報を取得する。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "検索したいキーワード（例：logger, batch, deepseek など）"
+          }
+        },
+        "required": ["query"]
+      }
+    }
+  ]
+  

@@ -1,4 +1,4 @@
-// app/tools/test-getPlaceDetails.mjs
+// app/tools/archive/test-getPlaceDetails.mjs
 
 import dotenv from 'dotenv';
 import axios from 'axios';

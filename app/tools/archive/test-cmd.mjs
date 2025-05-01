@@ -1,4 +1,4 @@
-// app/tools/test-cmd.mjs
+// app/tools/archive/test-cmd.mjs
 
 import { execSync } from 'child_process';
 

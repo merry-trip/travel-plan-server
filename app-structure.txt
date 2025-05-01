@@ -3,6 +3,7 @@ app/
 │   ├── forecast.mjs
 │   ├── get-spots.mjs
 │   ├── log-search.mjs
+│   ├── project-status.mjs
 │   ├── send-mail.mjs
 │   ├── sheets.mjs
 │   ├── test-autocomplete.mjs
@@ -12,6 +13,7 @@ app/
 │   └── test-searchText.mjs
 ├── data/
 │   ├── category-map.json
+│   ├── project-knowledge.json
 │   └── region_map_by_bounds.json
 ├── domains/
 │   ├── keywords/
@@ -94,7 +96,9 @@ app/
 │   ├── archive/
 │   ├── debug-path.mjs
 │   ├── update-category.mjs
-│   └── update-readme-modules.mjs
+│   ├── update-knowledge-json.mjs
+│   ├── update-readme-modules.mjs
+│   └── update-structure-json.mjs
 ├── utils/
 │   ├── appendRow.mjs
 │   ├── appendRows.mjs
